@@ -1,0 +1,288 @@
+{
+  "common": {
+    "appName": "Evhora",
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "create": "Criar",
+    "update": "Atualizar",
+    "close": "Fechar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "submit": "Enviar",
+    "required": "Obrigatório",
+    "logout": "Sair"
+  },
+  "metadata": {
+    "title": "Evhora - Realize seus sonhos",
+    "description": "Acompanhe seus sonhos, veja sua jornada e alcance seus objetivos"
+  },
+  "pages": {
+    "auth": {
+      "login": {
+        "title": "Bem-vindo(a) de volta!",
+        "email": "E-mail",
+        "emailPlaceholder": "m@exemplo.com",
+        "password": "Senha",
+        "forgotPassword": "Esqueceu a senha?",
+        "signIn": "Entrar",
+        "dontHaveAccount": "Não tem uma conta?",
+        "signUp": "Cadastre-se",
+        "enterEmailBelow": "Digite seu e-mail abaixo para entrar na sua conta",
+        "termsOfService": "Ao entrar, você concorda com os <terms>Termos de Serviço</terms> e a <privacy>Política de Privacidade</privacy>."
+      },
+      "signUp": {
+        "title": "Criar conta",
+        "enterEmailBelow": "Digite seu e-mail abaixo para criar uma conta",
+        "fullName": "Nome completo",
+        "fullNamePlaceholder": "João Silva",
+        "email": "E-mail",
+        "emailPlaceholder": "m@exemplo.com",
+        "password": "Senha",
+        "confirmPassword": "Confirmar senha",
+        "passwordRequirements": "A senha deve ter pelo menos 8 caracteres",
+        "createAccount": "Criar conta",
+        "alreadyHaveAccount": "Já tem uma conta? <signIn>Clique aqui</signIn> para entrar",
+        "signIn": "Entrar",
+        "termsOfService": "Ao criar uma conta, você concorda com os <terms>Termos de Serviço</terms> e a <privacy>Política de Privacidade</privacy>."
+      },
+      "signUpSuccess": {
+        "title": "Conta criada com sucesso!",
+        "description": "Verifique seu e-mail para ativar sua conta.",
+        "message": "Verifique seu e-mail para ativar sua conta.",
+        "accessAccount": "Acessar conta"
+      },
+      "forgotPassword": {
+        "title": "Recuperar senha",
+        "email": "E-mail",
+        "emailPlaceholder": "m@exemplo.com",
+        "sendResetLink": "Enviar link de recuperação",
+        "backToLogin": "Voltar para login",
+        "checkEmail": "Verifique seu e-mail",
+        "instructionsSent": "Instruções de recuperação de senha enviadas",
+        "emailSentMessage": "Se você se registrou usando seu e-mail e senha, receberá um e-mail de recuperação de senha.",
+        "description": "Digite seu e-mail e enviaremos um link para redefinir sua senha"
+      },
+      "updatePassword": {
+        "title": "Atualizar senha",
+        "newPassword": "Nova senha",
+        "confirmPassword": "Confirmar nova senha",
+        "update": "Atualizar senha",
+        "description": "Digite sua nova senha abaixo."
+      }
+    },
+    "dashboard": {
+      "greeting": {
+        "hello": "Olá, {username}",
+        "defaultMotivational": "Todos os dias são uma nova oportunidade para fazer progresso em direção aos seus sonhos!"
+      },
+      "progress": {
+        "general": "Progresso Geral",
+        "activeDreams": "Sonhos Ativos",
+        "todayActions": "Ações de Hoje",
+        "booksDream": "Sonho de Livros",
+        "progressByArea": "Progresso por Área de Vida",
+        "ongoing": "{progress}% em andamento",
+        "completed": "{completed} de {total} concluídas",
+        "annualDream": "Sonho anual",
+        "description": "Acompanhe seu progresso geral e conquistas aqui."
+      },
+      "sidebar": {
+        "title": "Evhora",
+        "subtitle": "Realize seus sonhos",
+        "routes": {
+          "dashboard": "Dashboard",
+          "dreamBoard": "Mural dos Sonhos",
+          "dreams": "Sonhos",
+          "actions": "Ações",
+          "progress": "Progresso"
+        },
+        "userNavigation": {
+          "account": "Minha conta",
+          "billing": "Faturamento",
+          "settings": "Configurações",
+          "logout": "Sair"
+        }
+      }
+    },
+    "dreams": {
+      "title": "Meus sonhos",
+      "description": "Gerencie e acompanhe seus sonhos aqui.",
+      "newDream": "Novo Sonho",
+      "loading": "Carregando sonhos...",
+      "empty": {
+        "title": "Nenhum sonho ainda.",
+        "message": "Crie seu primeiro sonho para começar!"
+      },
+      "form": {
+        "title": "Novo Sonho",
+        "description": "Crie um novo sonho para alcançar seus objetivos.",
+        "areaOfLife": "Área de Vida",
+        "selectAreaOfLife": "Selecione uma área de vida",
+        "dreamTitle": "Título",
+        "enterDreamTitle": "Digite o título do sonho",
+        "deadline": "Data Limite",
+        "deadlineDate": "Data Limite",
+        "actionPlan": "Plano de Ação",
+        "describeActionPlan": "Descreva seu plano de ação para alcançar este sonho...",
+        "create": "Criar Sonho",
+        "creating": "Criando...",
+        "untitled": "Sonho Sem Título",
+        "deadlineLabel": "Prazo:"
+      },
+      "status": {
+        "inProgress": "Em Progresso",
+        "completed": "Concluído",
+        "paused": "Pausado",
+        "unspecified": "Não especificado"
+      },
+      "stats": {
+        "totalDreams": "Todos os sonhos",
+        "completedDreams": "Sonhos concluídos",
+        "progressPercent": "Progresso"
+      },
+      "list": {
+        "title": "Título",
+        "area": "Área",
+        "status": "Status",
+        "progress": "Progresso",
+        "deadline": "Prazo",
+        "actions": "Ações"
+      },
+      "deleteConfirm": "Tem certeza que deseja excluir este sonho?",
+      "delete": "Excluir"
+    },
+    "actions": {
+      "title": "Ações",
+      "description": "Visualize e gerencie suas ações diárias aqui.",
+      "loading": "Carregando ações...",
+      "empty": {
+        "message": "Você ainda não tem ações. Crie ações a partir dos seus sonhos."
+      },
+      "dueDate": "Data",
+      "status": "Status",
+      "recurrence": "Recorrência",
+      "newAction": "Nova ação",
+      "deleteConfirm": "Excluir esta ação? Esta ação não poderá ser desfeita.",
+      "delete": "Excluir",
+      "stats": {
+        "totalActions": "Todas as ações",
+        "completedActions": "Ações concluídas",
+        "progressPercent": "Progresso"
+      },
+      "list": {
+        "title": "Título",
+        "status": "Status",
+        "recurrence": "Recorrência",
+        "area": "Área",
+        "dueDate": "Data",
+        "actions": "Ações"
+      },
+      "form": {
+        "title": "Nova Ação",
+        "actionTitle": "Título",
+        "actionTitlePlaceholder": "Ex.: Ler 30 minutos",
+        "dueDate": "Data",
+        "dueDatePlaceholder": "Data de conclusão",
+        "recurrence": "Recorrência",
+        "selectRecurrence": "Selecione a recorrência",
+        "dream": "Vincular a um sonho",
+        "selectDream": "Nenhum (ação avulsa)",
+        "create": "Criar ação",
+        "creating": "Criando..."
+      }
+    },
+    "settings": {
+      "title": "Configurações",
+      "description": "Gerencie suas configurações de conta e preferências aqui.",
+      "changePassword": {
+        "title": "Alterar Senha",
+        "currentPassword": "Senha Atual",
+        "newPassword": "Nova Senha",
+        "confirmPassword": "Confirmar Nova Senha",
+        "update": "Atualizar Senha",
+        "updating": "Atualizando...",
+        "success": "Senha atualizada com sucesso!",
+        "error": "Erro ao atualizar senha",
+        "description": "Atualize a senha da sua conta. Certifique-se de que tenha pelo menos 6 caracteres.",
+        "passwordMinLength": "A senha deve ter pelo menos 6 caracteres"
+      },
+      "changeName": {
+        "title": "Alterar Nome",
+        "firstName": "Nome",
+        "lastName": "Sobrenome",
+        "update": "Atualizar Nome",
+        "updating": "Atualizando...",
+        "success": "Nome atualizado com sucesso!",
+        "error": "Erro ao atualizar nome",
+        "description": "Atualize seu nome e sobrenome."
+      },
+      "changePhone": {
+        "title": "Alterar Telefone",
+        "phoneNumber": "Número de Telefone",
+        "update": "Atualizar Telefone",
+        "updating": "Atualizando...",
+        "success": "Telefone atualizado com sucesso!",
+        "error": "Erro ao atualizar telefone",
+        "description": "Atualize seu número de telefone. Deixe vazio para removê-lo."
+      }
+    },
+    "dreamBoard": {
+      "title": "Mural dos Sonhos",
+      "description": "Escolha até dois sonhos por área. Uma imagem será gerada por IA para cada um e você pode baixar seu mural como uma única imagem.",
+      "selectDream": "Sonho {slot}",
+      "noDream": "Nenhum",
+      "loadingImage": "Carregando imagem...",
+      "downloadImage": "Baixar mural",
+      "noImagesYet": "Selecione sonhos nas áreas abaixo para montar seu mural.",
+      "addOpenAIKey": "Configure GEMINI_API_KEY no .env.local para gerar imagens com IA."
+    },
+    "home": {
+      "title": "Evhora",
+      "subtitle": "Acompanhe seus sonhos, veja sua jornada e alcance seus objetivos",
+      "shortDescription": "Realize seus sonhos",
+      "description": "Uma plataforma onde você pode colocar seus sonhos de qualquer tipo e área. Veja sua jornada e progresso enquanto trabalha para tornar seus sonhos realidade.",
+      "getStarted": "Começar",
+      "signIn": "Entrar"
+    }
+  },
+  "enums": {
+    "action": {
+      "status": {
+        "UNSPECIFIED": "Não especificado",
+        "NOT_STARTED": "Não iniciado",
+        "IN_PROGRESS": "Em progresso",
+        "COMPLETED": "Concluído"
+      },
+      "recurrence": {
+        "UNSPECIFIED": "Não especificado",
+        "ONCE": "Uma vez",
+        "DAILY": "Diário",
+        "WEEKDAYS": "Dias da semana",
+        "WEEKENDS": "Fins de semana",
+        "SPECIAL_DAYS": "Dias especiais"
+      }
+    },
+    "dream": {
+      "status": {
+        "UNSPECIFIED": "Não especificado",
+        "IN_PROGRESS": "Em progresso",
+        "COMPLETED": "Concluído",
+        "PAUSED": "Pausado"
+      },
+      "areaOfLife": {
+        "UNSPECIFIED": "Não especificado",
+        "FAMILY_AND_RELANTIONSHIP": "Família e Relacionamentos",
+        "HEALTH_AND_WELL_BEING": "Saúde e Bem-estar",
+        "BUSINESS_AND_FINANCE": "Negócios e Finanças",
+        "SPIRITUALITY": "Espiritualidade",
+        "LIFESTYLE": "Estilo de Vida"
+      }
+    }
+  }
+}
