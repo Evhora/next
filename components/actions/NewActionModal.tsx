@@ -52,6 +52,7 @@ export function NewActionModal({
   onSuccess,
 }: NewActionModalProps) {
   const t = useTranslations();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [dreams, setDreams] = useState<DreamOption[]>([]);
@@ -175,10 +176,10 @@ export function NewActionModal({
             </Label>
             <Select
               value={String(formData.recurrence)}
-              onValueChange={(v) =>
+              onValueChange={(value) =>
                 setFormData({
                   ...formData,
-                  recurrence: Number(v) as ActionRecurrence,
+                  recurrence: Number(value),
                 })
               }
             >
@@ -200,8 +201,13 @@ export function NewActionModal({
           <div className="grid gap-2">
             <Label htmlFor="dream_id">{t("pages.actions.form.dream")}</Label>
             <Select
-              value={formData.dream_id || ""}
-              onValueChange={(v) => setFormData({ ...formData, dream_id: v })}
+              value={formData.dream_id}
+              onValueChange={(value) =>
+                setFormData({
+                  ...formData,
+                  dream_id: value,
+                })
+              }
             >
               <SelectTrigger id="dream_id" className="w-full">
                 <SelectValue
@@ -209,9 +215,6 @@ export function NewActionModal({
                 />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">
-                  {t("pages.actions.form.selectDream")}
-                </SelectItem>
                 {dreams.map((dream) => (
                   <SelectItem key={dream.id} value={dream.id}>
                     {dream.title || t("pages.dreams.form.untitled")}
