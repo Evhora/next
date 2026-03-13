@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, CreditCard, LogOut, Settings, User } from "lucide-react";
+import { ChevronRight, CreditCard, LogOut, User } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -29,11 +29,6 @@ const navigation = [
     nameKey: "pages.dashboard.sidebar.userNavigation.billing",
     href: "/dashboard/account/billing",
     icon: <CreditCard />,
-  },
-  {
-    nameKey: "pages.dashboard.sidebar.userNavigation.settings",
-    href: "/dashboard/account/settings",
-    icon: <Settings />,
   },
 ];
 
