@@ -185,9 +185,9 @@ export function NewDreamModal({
               disabled={
                 loading ||
                 !formData.title ||
-                !formData.area_of_life ||
+                !formData.areaOfLife ||
                 !formData.deadline ||
-                !formData.action_plan
+                !formData.actionPlan
               }
             >
               {loading
