@@ -1,5 +1,5 @@
-import { DashboardShell } from "@/components/layout/dashboard-shell";
-import { createClient } from "@/lib/supabase/server";
+import { DashboardShell } from "@/shared/layout/dashboard-shell";
+import { createClient } from "@/shared/supabase/server";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
