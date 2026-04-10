@@ -5,6 +5,6 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
 };
 
-const withNextIntl = createNextIntlPlugin("./lib/i18n.ts");
+const withNextIntl = createNextIntlPlugin("./src/shared/i18n/config.ts");
 
 export default withNextIntl(nextConfig);
