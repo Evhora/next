@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package modules.dreams.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// The Dream entity.
+message Dream {
+  // The unique identifier for the Dream.
+  string id = 1;
+  // The user ID of the owner of the Dream.
+  string user_id = 2;
+  // The title of the Dream.
+  string title = 3;
+  // The status of the Dream.
+  DreamStatus status = 4;
+  // The area of life the Dream is related to.
+  DreamAreaOfLife area_of_life = 5;
+  // ISO date (YYYY-MM-DD). Date-only, not a Timestamp.
+  string deadline = 6;
+  // The action plan for the Dream.
+  string action_plan = 7;
+  // The version of the Dream.
+  int64 version = 8;
+  // The timestamp when the Dream was created.
+  google.protobuf.Timestamp created_at = 20;
+  // The timestamp when the Dream was last updated.
+  google.protobuf.Timestamp updated_at = 21;
+  // The timestamp when the Dream was deleted.
+  optional google.protobuf.Timestamp deleted_at = 22;
+
+  // Lifecycle states a Dream moves through.
+  enum DreamStatus {
+    // The Dream is not specified.
+    DREAM_STATUS_UNSPECIFIED = 0;
+    // The Dream is in progress.
+    DREAM_STATUS_IN_PROGRESS = 1;
+    // The Dream is completed.
+    DREAM_STATUS_COMPLETED = 2;
+    // The Dream is paused.
+    DREAM_STATUS_PAUSED = 3;
+  }
+
+  // The five life-areas a Dream is grouped under.
+  enum DreamAreaOfLife {
+    // The Dream is not related to any life-area.
+    DREAM_AREA_OF_LIFE_UNSPECIFIED = 0;
+    // The Dream is related to the family and relationships.
+    DREAM_AREA_OF_LIFE_FAMILY_AND_RELANTIONSHIP = 1;
+    // The Dream is related to the health and well-being.
+    DREAM_AREA_OF_LIFE_HEALTH_AND_WELL_BEING = 2;
+    // The Dream is related to the business and finance.
+    DREAM_AREA_OF_LIFE_BUSINESS_AND_FINANCE = 3;
+    // The Dream is related to the spirituality.
+    DREAM_AREA_OF_LIFE_SPIRITUALITY = 4;
+    // The Dream is related to the lifestyle.
+    DREAM_AREA_OF_LIFE_LIFESTYLE = 5;
+  }
+}

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package modules.dashboard.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// The Sentence entity.
+message Sentence {
+  // The unique identifier for the Sentence.
+  string id = 1;
+  // The text of the Sentence.
+  string text = 2;
+  // The timestamp when the Sentence was last used.
+  optional google.protobuf.Timestamp last_used_at = 3;
+  // The version of the Sentence.
+  int64 version = 4;
+  // The timestamp when the Sentence was created.
+  google.protobuf.Timestamp created_at = 20;
+  // The timestamp when the Sentence was last updated.
+  google.protobuf.Timestamp updated_at = 21;
+  // The timestamp when the Sentence was deleted.
+  optional google.protobuf.Timestamp deleted_at = 22;
+}

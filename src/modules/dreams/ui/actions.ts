@@ -5,15 +5,15 @@ import { revalidatePath } from "next/cache";
 import { buildCtx } from "@/shared/context";
 import { failFromError, ok, type ActionResult } from "@/shared/result";
 
-import { createDream } from "../application/createDream";
-import { deleteDream } from "../application/deleteDream";
-import { updateDreamStatus } from "../application/updateDreamStatus";
+import { createDream } from "../application/create-dream";
+import { deleteDream } from "../application/delete-dream";
+import { updateDreamStatus } from "../application/update-dream-status";
 
 /**
  * Server actions for the Dreams module. Each action is a thin shell:
  *
  *   1. build the request context (auth + repos)
- *   2. parse the form payload into the use-case input
+ *   2. parse the form payload into the use-case command
  *   3. invoke the use case
  *   4. revalidate the affected pages
  *   5. return a typed `ActionResult` so the client can render errors
@@ -42,7 +42,7 @@ export async function createDreamAction(
     );
     revalidatePath(DREAMS_PATH);
     revalidatePath("/dashboard");
-    return ok({ id: dream.props.id });
+    return ok({ id: dream.id });
   } catch (error) {
     return failFromError(error);
   }

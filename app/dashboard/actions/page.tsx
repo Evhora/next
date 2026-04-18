@@ -1,3 +1,3 @@
-import { ActionsPage } from "@/modules/actions/ui/ActionsPage";
+import { ActionsPage } from "@/modules/actions/ui/actions-page";
 
 export default ActionsPage;

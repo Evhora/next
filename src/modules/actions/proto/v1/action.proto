@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package modules.actions.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+import "modules/dreams/proto/v1/dream.proto";
+
+// The Action entity.
+message Action {
+  // The unique identifier for the Action.
+  string id = 1;
+  // The unique identifier for the user the Action is related to.
+  string user_id = 2;
+  // The unique identifier for the Dream the Action is related to.
+  optional string dream_id = 3;
+  // The unique identifier for the parent Action.
+  optional string parent_action_id = 4;
+  // The title of the Action.
+  string title = 5;
+  // The status of the Action.
+  ActionStatus status = 6;
+  // Snapshot of the parent Dream's area of life. `UNSPECIFIED` = not linked.
+  modules.dreams.proto.v1.Dream.DreamAreaOfLife dream_area_of_life = 7;
+  // The recurrence of the Action.
+  ActionRecurrence recurrence = 8;
+  // The due date of the Action.
+  // ISO date (YYYY-MM-DD). Empty string == unset.
+  optional string due_date = 9;
+  // The version of the Action.
+  int64 version = 10;
+  // The timestamp when the Action was created.
+  google.protobuf.Timestamp created_at = 20;
+  // The timestamp when the Action was last updated.
+  google.protobuf.Timestamp updated_at = 21;
+  // The timestamp when the Action was deleted.
+  optional google.protobuf.Timestamp deleted_at = 22;
+
+  // Lifecycle states for an Action.
+  enum ActionStatus {
+    // The Action is not specified.
+    ACTION_STATUS_UNSPECIFIED = 0;
+    // The Action is not started.
+    ACTION_STATUS_NOT_STARTED = 1;
+    // The Action is in progress.
+    ACTION_STATUS_IN_PROGRESS = 2;
+    // The Action is completed.
+    ACTION_STATUS_COMPLETED = 3;
+  }
+
+  // How often an Action repeats.
+  enum ActionRecurrence {
+    // The Action is not specified.
+    ACTION_RECURRENCE_UNSPECIFIED = 0;
+    // The Action repeats once.
+    ACTION_RECURRENCE_ONCE = 1;
+    // The Action repeats daily.
+    ACTION_RECURRENCE_DAILY = 2;
+    // The Action repeats on weekdays.
+    ACTION_RECURRENCE_WEEKDAYS = 3;
+    // The Action repeats on weekends.
+    ACTION_RECURRENCE_WEEKENDS = 4;
+    // The Action repeats on special days.
+    ACTION_RECURRENCE_SPECIAL_DAYS = 5;
+  }
+}

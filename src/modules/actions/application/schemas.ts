@@ -1,9 +1,11 @@
 import { z } from "zod";
 
-import { SELECTABLE_DREAM_AREAS_OF_LIFE } from "@/modules/dreams/domain/DreamAreaOfLife";
+import { SELECTABLE_DREAM_AREAS_OF_LIFE } from "@/modules/dreams/domain/labels";
 
-import { SELECTABLE_ACTION_RECURRENCES } from "../domain/ActionRecurrence";
-import { SELECTABLE_ACTION_STATUSES } from "../domain/ActionStatus";
+import {
+  SELECTABLE_ACTION_RECURRENCES,
+  SELECTABLE_ACTION_STATUSES,
+} from "../domain/labels";
 
 const recurrenceSchema = z
   .number()
@@ -51,6 +53,6 @@ export const deleteActionSchema = z.object({
   id: z.string().uuid(),
 });
 
-export type CreateActionInput = z.infer<typeof createActionSchema>;
-export type UpdateActionStatusInput = z.infer<typeof updateActionStatusSchema>;
-export type DeleteActionInput = z.infer<typeof deleteActionSchema>;
+export type CreateActionCmd = z.infer<typeof createActionSchema>;
+export type UpdateActionStatusCmd = z.infer<typeof updateActionStatusSchema>;
+export type DeleteActionCmd = z.infer<typeof deleteActionSchema>;

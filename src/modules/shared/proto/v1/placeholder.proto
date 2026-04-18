@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package modules.shared.proto.v1;
+
+// Placeholder file so buf has a valid module. Replace with real shared types
+// (common wrapper messages, shared enums) as they emerge.
+message Placeholder {}

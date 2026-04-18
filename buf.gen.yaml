@@ -1,0 +1,8 @@
+version: v2
+plugins:
+  - local: protoc-gen-es
+    out: .
+    opt:
+      - target=ts
+      - import_extension=none
+      - json_types=true

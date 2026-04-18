@@ -12,12 +12,12 @@
 
 import { cache } from "react";
 
-import { ActionRepository } from "@/modules/actions/domain/ActionRepository";
-import { SupabaseActionRepository } from "@/modules/actions/infrastructure/SupabaseActionRepository";
-import { DreamRepository } from "@/modules/dreams/domain/DreamRepository";
-import { SupabaseDreamRepository } from "@/modules/dreams/infrastructure/SupabaseDreamRepository";
-import { SentenceRepository } from "@/modules/dashboard/domain/SentenceRepository";
-import { SupabaseSentenceRepository } from "@/modules/dashboard/infrastructure/SupabaseSentenceRepository";
+import { ActionRepository } from "@/modules/actions/domain/action-repository";
+import { SupabaseActionRepository } from "@/modules/actions/infrastructure/supabase-action-repository";
+import { SentenceRepository } from "@/modules/dashboard/domain/sentence-repository";
+import { SupabaseSentenceRepository } from "@/modules/dashboard/infrastructure/supabase-sentence-repository";
+import { DreamRepository } from "@/modules/dreams/domain/dream-repository";
+import { SupabaseDreamRepository } from "@/modules/dreams/infrastructure/supabase-dream-repository";
 
 import { UnauthorizedError } from "./errors";
 import { createClient } from "./supabase/server";
