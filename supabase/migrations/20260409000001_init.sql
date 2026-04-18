@@ -1,51 +1,38 @@
--- ---------- sentences (shared motivational library) ----------
+-- ---------- Tables ----------
 CREATE TABLE IF NOT EXISTS sentences (
   id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   last_used_at TIMESTAMPTZ,
-  version      BIGINT NOT NULL,
   data         JSONB NOT NULL,
-  created_at   TIMESTAMPTZ DEFAULT NOW(),
-  updated_at   TIMESTAMPTZ DEFAULT NOW(),
-  deleted_at   TIMESTAMPTZ DEFAULT NULL
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at   TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  deleted_at   TIMESTAMPTZ
 );
 
--- ---------- dreams ----------
 CREATE TABLE IF NOT EXISTS dreams (
-  id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id           UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  status            SMALLINT NOT NULL,
-  status_name       TEXT NOT NULL,
-  area_of_life      SMALLINT NOT NULL,
-  area_of_life_name TEXT NOT NULL,
-  version           BIGINT NOT NULL,
-  sequence          BIGSERIAL,
-  data              JSONB NOT NULL,
-  created_at        TIMESTAMPTZ DEFAULT NOW(),
-  updated_at        TIMESTAMPTZ DEFAULT NOW(),
-  deleted_at        TIMESTAMPTZ DEFAULT NULL
+  id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id    UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  data       JSONB NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  deleted_at TIMESTAMPTZ
 );
 
 CREATE INDEX IF NOT EXISTS dreams_user_active_idx
   ON dreams (user_id, created_at DESC) WHERE deleted_at IS NULL;
 CREATE INDEX IF NOT EXISTS dreams_user_status_idx
-  ON dreams (user_id, status) WHERE deleted_at IS NULL;
+  ON dreams (user_id, (data->>'status')) WHERE deleted_at IS NULL;
 CREATE INDEX IF NOT EXISTS dreams_user_area_idx
-  ON dreams (user_id, area_of_life) WHERE deleted_at IS NULL;
+  ON dreams (user_id, (data->>'areaOfLife')) WHERE deleted_at IS NULL;
 
--- ---------- actions ----------
 CREATE TABLE IF NOT EXISTS actions (
   id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id          UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   dream_id         UUID REFERENCES dreams(id) ON DELETE SET NULL,
   parent_action_id UUID REFERENCES actions(id) ON DELETE SET NULL,
-  status           SMALLINT NOT NULL,
-  status_name      TEXT NOT NULL,
-  version          BIGINT NOT NULL,
-  sequence         BIGSERIAL,
   data             JSONB NOT NULL,
-  created_at       TIMESTAMPTZ DEFAULT NOW(),
-  updated_at       TIMESTAMPTZ DEFAULT NOW(),
-  deleted_at       TIMESTAMPTZ DEFAULT NULL
+  created_at       TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at       TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  deleted_at       TIMESTAMPTZ
 );
 
 CREATE INDEX IF NOT EXISTS actions_user_active_idx
@@ -53,7 +40,7 @@ CREATE INDEX IF NOT EXISTS actions_user_active_idx
 CREATE INDEX IF NOT EXISTS actions_user_dream_idx
   ON actions (user_id, dream_id) WHERE deleted_at IS NULL;
 CREATE INDEX IF NOT EXISTS actions_user_status_idx
-  ON actions (user_id, status) WHERE deleted_at IS NULL;
+  ON actions (user_id, (data->>'status')) WHERE deleted_at IS NULL;
 
 -- ---------- Row Level Security ----------
 ALTER TABLE dreams    ENABLE ROW LEVEL SECURITY;

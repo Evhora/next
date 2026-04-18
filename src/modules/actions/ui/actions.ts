@@ -5,13 +5,15 @@ import { revalidatePath } from "next/cache";
 import { buildCtx } from "@/shared/context";
 import { failFromError, ok, type ActionResult } from "@/shared/result";
 
-import { createAction } from "../application/createAction";
-import { deleteAction } from "../application/deleteAction";
-import { updateActionStatus } from "../application/updateActionStatus";
+import { createAction } from "../application/create-action";
+import { deleteAction } from "../application/delete-action";
+import { updateActionStatus } from "../application/update-action-status";
 
 const ACTIONS_PATH = "/dashboard/actions";
 
-const parseNullableString = (value: FormDataEntryValue | null): string | null => {
+const parseNullableString = (
+  value: FormDataEntryValue | null,
+): string | null => {
   const s = value == null ? "" : String(value).trim();
   return s.length === 0 ? null : s;
 };
@@ -38,7 +40,7 @@ export async function createActionAction(
     revalidatePath(ACTIONS_PATH);
     revalidatePath("/dashboard/dreams");
     revalidatePath("/dashboard");
-    return ok({ id: action.props.id });
+    return ok({ id: action.id });
   } catch (error) {
     return failFromError(error);
   }

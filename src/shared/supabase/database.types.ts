@@ -1,10 +1,11 @@
 /**
- * Hand-written shape of the public schema after the 20260409000001_restructure
- * migration. Mirror of `supabase gen types typescript --local` output.
+ * Hand-written shape of the public schema after the 20260409000001 migration.
  *
- * The contract: only filter/sort/group columns are typed at the row level;
- * everything else lives inside `data` (JSONB). Mappers in each module's
- * infrastructure layer are the only place that touches both halves.
+ * The contract: every entity table has only the promoted columns needed for
+ * RLS / foreign keys / ordering (id, user_id, *_at). Everything else lives
+ * inside `data` (JSONB) and is decoded by the module's repository via
+ * `fromJson(<Schema>, row.data)` from `@bufbuild/protobuf`. The proto message
+ * IS the row — no mapper layer.
  */
 
 export type Json =
@@ -25,7 +26,6 @@ export interface Database {
         Row: {
           id: string;
           last_used_at: string | null;
-          version: number;
           data: Json;
           created_at: string;
           updated_at: string;
@@ -34,8 +34,7 @@ export interface Database {
         Insert: {
           id?: string;
           last_used_at?: string | null;
-          version?: number;
-          data?: Json;
+          data: Json;
           created_at?: string;
           updated_at?: string;
           deleted_at?: string | null;
@@ -43,7 +42,6 @@ export interface Database {
         Update: {
           id?: string;
           last_used_at?: string | null;
-          version?: number;
           data?: Json;
           created_at?: string;
           updated_at?: string;
@@ -55,12 +53,6 @@ export interface Database {
         Row: {
           id: string;
           user_id: string;
-          status: number;
-          status_name: string;
-          area_of_life: number;
-          area_of_life_name: string;
-          version: number;
-          sequence: number;
           data: Json;
           created_at: string;
           updated_at: string;
@@ -69,12 +61,6 @@ export interface Database {
         Insert: {
           id?: string;
           user_id: string;
-          status: number;
-          status_name: string;
-          area_of_life: number;
-          area_of_life_name: string;
-          version?: number;
-          sequence?: never;
           data: Json;
           created_at?: string;
           updated_at?: string;
@@ -83,12 +69,6 @@ export interface Database {
         Update: {
           id?: string;
           user_id?: string;
-          status?: number;
-          status_name?: string;
-          area_of_life?: number;
-          area_of_life_name?: string;
-          version?: number;
-          sequence?: never;
           data?: Json;
           created_at?: string;
           updated_at?: string;
@@ -102,10 +82,6 @@ export interface Database {
           user_id: string;
           dream_id: string | null;
           parent_action_id: string | null;
-          status: number;
-          status_name: string;
-          version: number;
-          sequence: number;
           data: Json;
           created_at: string;
           updated_at: string;
@@ -116,10 +92,6 @@ export interface Database {
           user_id: string;
           dream_id?: string | null;
           parent_action_id?: string | null;
-          status: number;
-          status_name: string;
-          version?: number;
-          sequence?: never;
           data: Json;
           created_at?: string;
           updated_at?: string;
@@ -130,10 +102,6 @@ export interface Database {
           user_id?: string;
           dream_id?: string | null;
           parent_action_id?: string | null;
-          status?: number;
-          status_name?: string;
-          version?: number;
-          sequence?: never;
           data?: Json;
           created_at?: string;
           updated_at?: string;

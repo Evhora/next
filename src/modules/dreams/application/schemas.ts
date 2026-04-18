@@ -1,10 +1,12 @@
 import { z } from "zod";
 
-import { SELECTABLE_DREAM_AREAS_OF_LIFE } from "../domain/DreamAreaOfLife";
-import { SELECTABLE_DREAM_STATUSES } from "../domain/DreamStatus";
+import {
+  SELECTABLE_DREAM_AREAS_OF_LIFE,
+  SELECTABLE_DREAM_STATUSES,
+} from "../domain/labels";
 
 /**
- * Input schemas for the Dreams use cases. The application layer never trusts
+ * Command schemas for the Dreams use cases. The application layer never trusts
  * its caller (UI form, action, test) — every entry point parses through one of
  * these. Types are inferred from the schemas so a field can never go out of
  * sync with its validation.
@@ -42,6 +44,6 @@ export const deleteDreamSchema = z.object({
   id: z.string().uuid(),
 });
 
-export type CreateDreamInput = z.infer<typeof createDreamSchema>;
-export type UpdateDreamStatusInput = z.infer<typeof updateDreamStatusSchema>;
-export type DeleteDreamInput = z.infer<typeof deleteDreamSchema>;
+export type CreateDreamCmd = z.infer<typeof createDreamSchema>;
+export type UpdateDreamStatusCmd = z.infer<typeof updateDreamStatusSchema>;
+export type DeleteDreamCmd = z.infer<typeof deleteDreamSchema>;

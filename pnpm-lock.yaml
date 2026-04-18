@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^2.11.0
+        version: 2.11.0
       '@radix-ui/react-avatar':
         specifier: ^1.1.11
         version: 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.9))(@types/react@19.2.9)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -87,6 +90,12 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6
     devDependencies:
+      '@bufbuild/buf':
+        specifier: ^1.68.2
+        version: 1.68.2
+      '@bufbuild/protoc-gen-es':
+        specifier: ^2.11.0
+        version: 2.11.0(@bufbuild/protobuf@2.11.0)
       '@eslint/eslintrc':
         specifier: ^3
         version: 3.3.3
@@ -129,6 +138,69 @@ packages:
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+
+  '@bufbuild/buf-darwin-arm64@1.68.2':
+    resolution: {integrity: sha512-OCO5/2Rwif8BSB+iTZstYoWP+U3Shof32s9GDh8Q0U0KGOnGsifnrFUZCcmsJw65p3ekOMmlRk5rN0I7QhPCoQ==}
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@bufbuild/buf-darwin-x64@1.68.2':
+    resolution: {integrity: sha512-iGhapuptpH2bOxjLkIhbU9zyf81MWo96Q7jvNzsiZsFsE4PPwE02fWoP8Z49YlqS31/sPH5dzpj2DaExgTRQVQ==}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@bufbuild/buf-linux-aarch64@1.68.2':
+    resolution: {integrity: sha512-cSvVYySP/6n6CQhj9x29u1tlnDXLgxhqk4459l/GoMymk7v2NyRbfg90q4Ed2A5kc4UE71jWP6wp7xOseYTOZA==}
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@bufbuild/buf-linux-armv7@1.68.2':
+    resolution: {integrity: sha512-0diz/+EoBd3s6jPbjYu2y6Umyg0wVvzT8LNKo6HlJ+Q5rU4ZfVrMT+tJALpWmE1nQb7evFD2cadaoVXLaFiw9A==}
+    engines: {node: '>=12'}
+    cpu: [arm]
+    os: [linux]
+
+  '@bufbuild/buf-linux-x64@1.68.2':
+    resolution: {integrity: sha512-Lqhpy+pW0CPrCb341zGnRhjadMT3LDZto7Bwx7Ivik4S0IUUKhFbmZqLkA21Xr2HucKiogUqaDIkINsll1AuFA==}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [linux]
+
+  '@bufbuild/buf-win32-arm64@1.68.2':
+    resolution: {integrity: sha512-p6+kYldQd6xsKTbqFsnMtt9QHFc6SlREB49rS4s4z/gMiEXMx9z2kDT5RLCPOyJK9xZImWSCuNdTQOAiFcHBtg==}
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@bufbuild/buf-win32-x64@1.68.2':
+    resolution: {integrity: sha512-RRroPdgMr73TpZvaM9BZDmoBAd4lgwN6exmE7hH7E8KvDh15McDsQ1Ft9GKWZW/tBY8FTetpI+YkBTRlKih91g==}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [win32]
+
+  '@bufbuild/buf@1.68.2':
+    resolution: {integrity: sha512-kUyc03x0EEubQGA93k4mJFmnybQZtgoMxZeMPoTHxur/XpwweZTe4XCbYA9qDL2DKrC/FnNV7ybGMMmlAvQoBg==}
+    engines: {node: '>=12'}
+    hasBin: true
+
+  '@bufbuild/protobuf@2.11.0':
+    resolution: {integrity: sha512-sBXGT13cpmPR5BMgHE6UEEfEaShh5Ror6rfN3yEK5si7QVrtZg8LEPQb0VVhiLRUslD2yLnXtnRzG035J/mZXQ==}
+
+  '@bufbuild/protoc-gen-es@2.11.0':
+    resolution: {integrity: sha512-VzQuwEQDXipbZ1soWUuAWm1Z0C3B/IDWGeysnbX6ogJ6As91C2mdvAND/ekQ4YIWgen4d5nqLfIBOWLqCCjYUA==}
+    engines: {node: '>=20'}
+    hasBin: true
+    peerDependencies:
+      '@bufbuild/protobuf': 2.11.0
+    peerDependenciesMeta:
+      '@bufbuild/protobuf':
+        optional: true
+
+  '@bufbuild/protoplugin@2.11.0':
+    resolution: {integrity: sha512-lyZVNFUHArIOt4W0+dwYBe5GBwbKzbOy8ObaloEqsw9Mmiwv2O48TwddDoHN4itylC+BaEGqFdI1W8WQt2vWJQ==}
 
   '@date-fns/tz@1.4.1':
     resolution: {integrity: sha512-P5LUNhtbj6YfI3iJjw5EL9eUAG6OitD0W3fWQcpQjDRc/QIsL0tRNuO1PcDvPccWL1fSTXXdE1ds+l95DV/OFA==}
@@ -1501,6 +1573,11 @@ packages:
   '@typescript-eslint/visitor-keys@8.53.1':
     resolution: {integrity: sha512-oy+wV7xDKFPRyNggmXuZQSBzvoLnpmJs+GhzRhPjrxl2b/jIlyjVokzm47CZCDUdXKr2zd7ZLodPfOBpOPyPlg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript/vfs@1.6.4':
+    resolution: {integrity: sha512-PJFXFS4ZJKiJ9Qiuix6Dz/OwEIqHD7Dme1UwZhTK11vR+5dqW2ACbdndWQexBzCx+CPuMe5WBYQWCsFyGlQLlQ==}
+    peerDependencies:
+      typescript: '*'
 
   '@unrs/resolver-binding-android-arm-eabi@1.11.1':
     resolution: {integrity: sha512-ppLRUgHVaGRWUx0R0Ut06Mjo9gBaBkg3v/8AxusGLhsIotbBLuRk51rAzqLC8gq6NyyAojEXglNjzf6R948DNw==}
@@ -3002,6 +3079,11 @@ packages:
     resolution: {integrity: sha512-3KS2b+kL7fsuk/eJZ7EQdnEmQoaho/r6KUef7hxvltNA5DR8NAUM+8wJMbJyZ4G9/7i3v5zPBIMN5aybAh2/Jg==}
     engines: {node: '>= 0.4'}
 
+  typescript@5.4.5:
+    resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
@@ -3118,6 +3200,55 @@ packages:
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
+
+  '@bufbuild/buf-darwin-arm64@1.68.2':
+    optional: true
+
+  '@bufbuild/buf-darwin-x64@1.68.2':
+    optional: true
+
+  '@bufbuild/buf-linux-aarch64@1.68.2':
+    optional: true
+
+  '@bufbuild/buf-linux-armv7@1.68.2':
+    optional: true
+
+  '@bufbuild/buf-linux-x64@1.68.2':
+    optional: true
+
+  '@bufbuild/buf-win32-arm64@1.68.2':
+    optional: true
+
+  '@bufbuild/buf-win32-x64@1.68.2':
+    optional: true
+
+  '@bufbuild/buf@1.68.2':
+    optionalDependencies:
+      '@bufbuild/buf-darwin-arm64': 1.68.2
+      '@bufbuild/buf-darwin-x64': 1.68.2
+      '@bufbuild/buf-linux-aarch64': 1.68.2
+      '@bufbuild/buf-linux-armv7': 1.68.2
+      '@bufbuild/buf-linux-x64': 1.68.2
+      '@bufbuild/buf-win32-arm64': 1.68.2
+      '@bufbuild/buf-win32-x64': 1.68.2
+
+  '@bufbuild/protobuf@2.11.0': {}
+
+  '@bufbuild/protoc-gen-es@2.11.0(@bufbuild/protobuf@2.11.0)':
+    dependencies:
+      '@bufbuild/protoplugin': 2.11.0
+    optionalDependencies:
+      '@bufbuild/protobuf': 2.11.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@bufbuild/protoplugin@2.11.0':
+    dependencies:
+      '@bufbuild/protobuf': 2.11.0
+      '@typescript/vfs': 1.6.4(typescript@5.4.5)
+      typescript: 5.4.5
+    transitivePeerDependencies:
+      - supports-color
 
   '@date-fns/tz@1.4.1': {}
 
@@ -4491,6 +4622,13 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.53.1
       eslint-visitor-keys: 4.2.1
+
+  '@typescript/vfs@1.6.4(typescript@5.4.5)':
+    dependencies:
+      debug: 4.4.3
+      typescript: 5.4.5
+    transitivePeerDependencies:
+      - supports-color
 
   '@unrs/resolver-binding-android-arm-eabi@1.11.1':
     optional: true
@@ -6262,6 +6400,8 @@ snapshots:
       is-typed-array: 1.1.15
       possible-typed-array-names: 1.1.0
       reflect.getprototypeof: 1.0.10
+
+  typescript@5.4.5: {}
 
   typescript@5.9.3: {}
 

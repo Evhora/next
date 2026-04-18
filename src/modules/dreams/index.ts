@@ -4,31 +4,38 @@
  * `infrastructure/` directly.
  */
 
-export { Dream, type DreamProps, type NewDreamInput } from "./domain/Dream";
 export {
-  DreamStatus,
-  DREAM_STATUS_LABELS,
-  SELECTABLE_DREAM_STATUSES,
-} from "./domain/DreamStatus";
-export {
-  DreamAreaOfLife,
-  DREAM_AREA_OF_LIFE_LABELS,
-  SELECTABLE_DREAM_AREAS_OF_LIFE,
-} from "./domain/DreamAreaOfLife";
+  Dream_DreamAreaOfLife,
+  Dream_DreamStatus,
+  DreamSchema,
+  dreamWithStatus,
+  newDream,
+  softDeleteDream,
+  type Dream,
+  type NewDreamCmd,
+} from "./domain/dream";
+export type { DreamRepository } from "./domain/dream-repository";
 export { DreamNotFoundError } from "./domain/errors";
-export type { DreamRepository } from "./domain/DreamRepository";
+export {
+  DREAM_AREA_OF_LIFE_LABELS,
+  DREAM_STATUS_LABELS,
+  isDreamAreaOfLife,
+  isDreamStatus,
+  SELECTABLE_DREAM_AREAS_OF_LIFE,
+  SELECTABLE_DREAM_STATUSES,
+} from "./domain/labels";
 
-export { createDream } from "./application/createDream";
-export { listDreamsForUser } from "./application/listDreamsForUser";
-export { updateDreamStatus } from "./application/updateDreamStatus";
-export { deleteDream } from "./application/deleteDream";
+export { createDream } from "./application/create-dream";
+export { deleteDream } from "./application/delete-dream";
+export { listDreamsForUser } from "./application/list-dreams-for-user";
 export {
   createDreamSchema,
-  updateDreamStatusSchema,
   deleteDreamSchema,
-  type CreateDreamInput,
-  type UpdateDreamStatusInput,
-  type DeleteDreamInput,
+  updateDreamStatusSchema,
+  type CreateDreamCmd,
+  type DeleteDreamCmd,
+  type UpdateDreamStatusCmd,
 } from "./application/schemas";
+export { updateDreamStatus } from "./application/update-dream-status";
 
-export { SupabaseDreamRepository } from "./infrastructure/SupabaseDreamRepository";
+export { SupabaseDreamRepository } from "./infrastructure/supabase-dream-repository";

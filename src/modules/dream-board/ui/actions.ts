@@ -4,7 +4,7 @@ import { buildCtx } from "@/shared/context";
 import { ValidationError } from "@/shared/errors";
 import { failFromError, ok, type ActionResult } from "@/shared/result";
 
-import { generateDreamImage } from "../infrastructure/geminiImageClient";
+import { generateDreamImage } from "../infrastructure/gemini-image-client";
 
 /**
  * Server action: generate an inspirational image for a dream title. Auth is

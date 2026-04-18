@@ -1,0 +1,13 @@
+version: v2
+modules:
+  # Single module rooted at `src/` so imports can use the full path from the
+  # project's source root (e.g. `modules/dreams/proto/v1/dream.proto`). Each
+  # proto's package (`modules.<ctx>.proto.v1`) mirrors its directory — the
+  # directory-match lint rule is satisfied naturally, no exceptions needed.
+  - path: src
+lint:
+  use:
+    - STANDARD
+breaking:
+  use:
+    - FILE

@@ -1,0 +1,8 @@
+{
+  // zxh404.vscode-proto3 does not read buf.yaml. Our buf workspace is rooted at
+  // `src/` (see buf.yaml), so imports like `modules/dreams/proto/v1/dream.proto`
+  // must resolve from there. Point the extension's protoc at the same root.
+  "protoc": {
+    "options": ["--proto_path=${workspaceFolder}/src"]
+  }
+}

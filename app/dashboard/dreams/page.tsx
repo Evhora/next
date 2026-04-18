@@ -1,3 +1,3 @@
-import { DreamsPage } from "@/modules/dreams/ui/DreamsPage";
+import { DreamsPage } from "@/modules/dreams/ui/dreams-page";
 
 export default DreamsPage;
