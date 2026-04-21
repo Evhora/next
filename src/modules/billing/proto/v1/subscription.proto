@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package modules.billing.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+import "modules/shared/proto/v1/billing-provider.proto";
+
+// A user's recurring subscription.
+message Subscription {
+  // Provider-issued subscription id.
+  string id = 1;
+  // Supabase auth user id.
+  string user_id = 2;
+  // Payment provider.
+  BillingProvider provider = 3;
+  // Id of the Price the user is subscribed to.
+  string price_id = 4;
+  // Current status. Domain-level lifecycle, independent of provider
+  // vocabulary — the raw Stripe status is preserved inside `data` (JSONB).
+  SubscriptionStatus status = 5;
+  // When the trial ends (if any).
+  optional google.protobuf.Timestamp trial_end = 6;
+  // End of the current billing period (if any).
+  optional google.protobuf.Timestamp current_period_end = 7;
+  // Whether the subscription will end at the current period end.
+  bool cancel_at_period_end = 8;
+  // When the subscription row was created.
+  google.protobuf.Timestamp created_at = 20;
+  // When the subscription row was last updated.
+  google.protobuf.Timestamp updated_at = 21;
+  // Chronological log of status transitions. The last entry always matches
+  // `status`. Stored only inside the JSONB `data` blob — never promoted to a
+  // column — because it's diagnostic history, not a query key.
+  repeated StatusChange status_history = 22;
+
+  // Lifecycle states of a Subscription. Provider-agnostic: Stripe's
+  // past_due / canceled / unpaid / incomplete / incomplete_expired / paused
+  // all fold into ACTIVE (past_due with grace) or INACTIVE (terminal).
+  enum SubscriptionStatus {
+    // The status is not specified.
+    SUBSCRIPTION_STATUS_UNSPECIFIED = 0;
+    // The subscription is in a trial period — access granted.
+    SUBSCRIPTION_STATUS_TRIALING = 1;
+    // The subscription is paid and in good standing — access granted.
+    // Includes the grace period during a failed-payment retry window.
+    SUBSCRIPTION_STATUS_ACTIVE = 2;
+    // The subscription has lapsed (canceled / dunning exhausted / trial
+    // ended without payment). Row kept for audit; access dropped to free.
+    SUBSCRIPTION_STATUS_INACTIVE = 3;
+  }
+
+  // One entry in the status history log.
+  message StatusChange {
+    // The status the subscription transitioned *to* at this point.
+    SubscriptionStatus status = 1;
+    // When the transition happened.
+    google.protobuf.Timestamp changed_at = 2;
+  }
+}

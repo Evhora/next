@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronRight, CreditCard, LogOut, User } from "lucide-react";
+import Link from "next/link";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import {
@@ -73,12 +74,11 @@ export function SidebarUser({ user }: SidebarUserProps) {
           >
             <DropdownMenuGroup>
               {navigation.map((item) => (
-                <DropdownMenuItem
-                  key={item.nameKey}
-                  className="flex items-center gap-2"
-                >
-                  {item.icon}
-                  {t(item.nameKey)}
+                <DropdownMenuItem key={item.nameKey} asChild>
+                  <Link href={item.href} className="flex items-center gap-2">
+                    {item.icon}
+                    {t(item.nameKey)}
+                  </Link>
                 </DropdownMenuItem>
               ))}
               <DropdownMenuSeparator />

@@ -197,6 +197,91 @@
         "creating": "Criando..."
       }
     },
+    "pricing": {
+      "title": "Escolha seu plano",
+      "subtitle": "Comece com 30 dias grátis. Cancele quando quiser.",
+      "empty": "Nenhum plano disponível no momento.",
+      "subscribe": "Assinar",
+      "subscribeCta": "Começar agora",
+      "signUpToSubscribe": "Criar conta para assinar",
+      "perMonth": "por mês",
+      "perYear": "por ano",
+      "billedMonthly": "Cobrança mensal",
+      "billedYearly": "Cobrança anual",
+      "trialInfo": "{days} dias grátis",
+      "recommended": "Recomendado",
+      "savingsBadge": "Economize {percent}%",
+      "monthlyEquivalent": "Equivale a {price}/mês",
+      "trustTrial": "30 dias grátis, sem cartão",
+      "trustCancel": "Cancele quando quiser",
+      "checkoutError": "Não foi possível iniciar o checkout"
+    },
+    "billing": {
+      "title": "Plano e cobrança",
+      "description": "Gerencie sua assinatura, forma de pagamento e faturas.",
+      "price": "Preço",
+      "month": "mês",
+      "year": "ano",
+      "freePlan": "Plano gratuito",
+      "trialEnds": "Período de teste termina em",
+      "nextBilling": "Próxima cobrança",
+      "endsOn": "Termina em",
+      "subscribeCta": "Ver planos",
+      "status": {
+        "trialing": "Período de teste",
+        "active": "Ativa",
+        "inactive": "Inativa"
+      },
+      "noSubscription": {
+        "title": "Você está no plano gratuito",
+        "description": "Assine um plano para liberar acesso completo ao Evhora.",
+        "cta": "Ver planos"
+      },
+      "inactiveBanner": {
+        "title": "Assinatura inativa",
+        "description": "Sua assinatura terminou — você voltou para o plano gratuito. Reative a qualquer momento para recuperar o acesso completo."
+      },
+      "cancel": {
+        "button": "Cancelar assinatura",
+        "title": "Cancelar assinatura?",
+        "description": "Sua assinatura permanecerá ativa até o fim do período atual e não será renovada.",
+        "confirm": "Sim, cancelar",
+        "success": "Assinatura cancelada. Você terá acesso até o fim do período.",
+        "error": "Não foi possível cancelar a assinatura"
+      },
+      "resume": {
+        "button": "Retomar assinatura",
+        "success": "Assinatura retomada com sucesso",
+        "error": "Não foi possível retomar a assinatura"
+      },
+      "changePlan": {
+        "button": "Trocar de plano",
+        "title": "Trocar de plano",
+        "description": "A diferença será cobrada ou creditada proporcionalmente ao tempo restante do período atual.",
+        "choose": "Selecionar",
+        "success": "Plano alterado com sucesso",
+        "error": "Não foi possível trocar de plano"
+      },
+      "updatePayment": {
+        "button": "Atualizar forma de pagamento",
+        "title": "Atualizar forma de pagamento",
+        "description": "Adicione um novo cartão para futuras cobranças.",
+        "submit": "Salvar cartão",
+        "success": "Cartão atualizado com sucesso",
+        "error": "Não foi possível atualizar a forma de pagamento"
+      },
+      "invoices": {
+        "title": "Faturas",
+        "date": "Data",
+        "number": "Número",
+        "status": "Status",
+        "amount": "Valor",
+        "download": "Baixar",
+        "view": "Ver",
+        "empty": "Nenhuma fatura ainda.",
+        "error": "Não foi possível carregar as faturas"
+      }
+    },
     "settings": {
       "title": "Configurações",
       "description": "Gerencie suas configurações de conta e preferências aqui.",

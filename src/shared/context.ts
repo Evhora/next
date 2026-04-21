@@ -14,6 +14,10 @@ import { cache } from "react";
 
 import { ActionRepository } from "@/modules/actions/domain/action-repository";
 import { SupabaseActionRepository } from "@/modules/actions/infrastructure/supabase-action-repository";
+import { BillingRepository } from "@/modules/billing/domain/billing-repository";
+import { PaymentProvider } from "@/modules/billing/domain/payment-provider";
+import { StripePaymentProvider } from "@/modules/billing/infrastructure/stripe-payment-provider";
+import { SupabaseBillingRepository } from "@/modules/billing/infrastructure/supabase-billing-repository";
 import { SentenceRepository } from "@/modules/dashboard/domain/sentence-repository";
 import { SupabaseSentenceRepository } from "@/modules/dashboard/infrastructure/supabase-sentence-repository";
 import { DreamRepository } from "@/modules/dreams/domain/dream-repository";
@@ -35,6 +39,8 @@ export interface AppContext {
   dreams: DreamRepository;
   actions: ActionRepository;
   sentences: SentenceRepository;
+  billing: BillingRepository;
+  payments: PaymentProvider;
 }
 
 /**
@@ -67,6 +73,8 @@ export const buildCtx = cache(async (): Promise<AppContext> => {
     dreams: new SupabaseDreamRepository(supabase),
     actions: new SupabaseActionRepository(supabase),
     sentences: new SupabaseSentenceRepository(supabase),
+    billing: new SupabaseBillingRepository(supabase),
+    payments: new StripePaymentProvider(),
   };
 });
 

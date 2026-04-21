@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package modules.billing.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+import "modules/shared/proto/v1/billing-provider.proto";
+
+// A billing invoice.
+message Invoice {
+  // Provider-issued invoice id.
+  string id = 1;
+  // Payment provider.
+  BillingProvider provider = 2;
+  // Supabase auth user id.
+  string user_id = 3;
+  // Subscription the invoice belongs to (if any).
+  string subscription_id = 4;
+  // Lifecycle status.
+  InvoiceStatus status = 5;
+  // Amount due in cents.
+  int64 amount_due = 6;
+  // Amount paid in cents.
+  int64 amount_paid = 7;
+  // ISO 4217 currency code, lowercase.
+  string currency = 8;
+  // Human-readable invoice number (provider-issued).
+  string number = 9;
+  // URL for the provider-hosted invoice page.
+  string hosted_invoice_url = 10;
+  // URL for the PDF version of the invoice.
+  string invoice_pdf = 11;
+  // When the invoice was created.
+  google.protobuf.Timestamp created_at = 20;
+  // When the invoice row was last updated.
+  google.protobuf.Timestamp updated_at = 21;
+  // Chronological log of status transitions. The last entry always matches
+  // `status`. Stored only inside the JSONB `data` blob — never promoted to
+  // a column — because it's diagnostic history, not a query key.
+  repeated StatusChange status_history = 22;
+
+  // Lifecycle states of an Invoice.
+  enum InvoiceStatus {
+    // The invoice is not specified.
+    INVOICE_STATUS_UNSPECIFIED = 0;
+    // The invoice is a draft.
+    INVOICE_STATUS_DRAFT = 1;
+    // The invoice is open.
+    INVOICE_STATUS_OPEN = 2;
+    // The invoice is paid.
+    INVOICE_STATUS_PAID = 3;
+    // The invoice is uncollectible.
+    INVOICE_STATUS_UNCOLLECTIBLE = 4;
+    // The invoice is void.
+    INVOICE_STATUS_VOID = 5;
+  }
+
+  // One entry in the status history log.
+  message StatusChange {
+    // The status the invoice transitioned *to* at this point.
+    InvoiceStatus status = 1;
+    // When the transition happened.
+    google.protobuf.Timestamp changed_at = 2;
+  }
+}

@@ -45,13 +45,18 @@ export async function updateSession(request: NextRequest) {
     request.nextUrl.pathname !== "/" &&
     !request.nextUrl.pathname.startsWith("/auth/login") &&
     !request.nextUrl.pathname.startsWith("/auth/sign-up") &&
-    !request.nextUrl.pathname.startsWith("/auth/")
+    !request.nextUrl.pathname.startsWith("/auth/") &&
+    !request.nextUrl.pathname.startsWith("/pricing")
   ) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
     url.pathname = "/auth/login";
     return NextResponse.redirect(url);
   }
+
+  // No paywall at the edge — authenticated users always reach /dashboard.
+  // Free-tier limits (3 dreams, 5 actions/dream) are enforced at the use-case
+  // layer via `hasActiveAccess(subscription)`.
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is.
   // If you're creating a new response object with NextResponse.next() make sure to:

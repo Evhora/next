@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package modules.billing.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+import "modules/shared/proto/v1/billing-provider.proto";
+
+// A specific price point for a Product (e.g. monthly R$29).
+message Price {
+  // Provider-issued price id.
+  string id = 1;
+  // Payment provider.
+  BillingProvider provider = 2;
+  // Id of the owning Product.
+  string product_id = 3;
+  // Whether the price is currently for sale.
+  bool active = 4;
+  // ISO 4217 currency code, lowercase (e.g. "brl").
+  string currency = 5;
+  // Unit amount in the smallest currency unit (cents). Null if not set.
+  optional int64 unit_amount = 6;
+  // Billing interval ("month", "year"). Null if not recurring.
+  optional string interval = 7;
+  // Optional user allowlist. When empty, the price is public (anyone can see
+  // and check out with it). When non-empty, only Supabase auth user ids in
+  // this list are allowed to see the price or start a checkout against it —
+  // used for one-off deals, comps, or private bundles. Enforced at the
+  // application layer (listings + checkout), not in Stripe.
+  repeated string allowed_user_ids = 8;
+  // When the price row was created.
+  google.protobuf.Timestamp created_at = 20;
+  // When the price row was last updated.
+  google.protobuf.Timestamp updated_at = 21;
+}

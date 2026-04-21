@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package modules.billing.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+import "modules/shared/proto/v1/billing-provider.proto";
+
+// Ties a Supabase auth user to an external payment provider customer
+// (e.g. a Stripe customer id).
+message Customer {
+  // Internal row id (uuid).
+  string id = 1;
+  // Supabase auth user id.
+  string user_id = 2;
+  // Payment provider.
+  BillingProvider provider = 3;
+  // The id issued by the provider for this customer.
+  string provider_customer_id = 4;
+  // When the customer row was created.
+  google.protobuf.Timestamp created_at = 20;
+  // When the customer row was last updated.
+  google.protobuf.Timestamp updated_at = 21;
+}
