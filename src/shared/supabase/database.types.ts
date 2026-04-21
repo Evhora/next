@@ -109,6 +109,207 @@ export interface Database {
         };
         Relationships: [];
       };
+      billing_customers: {
+        Row: {
+          id: string;
+          user_id: string;
+          provider: string;
+          provider_name: string;
+          provider_customer_id: string;
+          data: Json;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          provider: string;
+          provider_name: string;
+          provider_customer_id: string;
+          data?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          provider?: string;
+          provider_name?: string;
+          provider_customer_id?: string;
+          data?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      billing_products: {
+        Row: {
+          id: string;
+          provider: string;
+          provider_name: string;
+          active: boolean;
+          data: Json;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          provider: string;
+          provider_name: string;
+          active?: boolean;
+          data: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          provider?: string;
+          provider_name?: string;
+          active?: boolean;
+          data?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      billing_prices: {
+        Row: {
+          id: string;
+          provider: string;
+          provider_name: string;
+          product_id: string;
+          active: boolean;
+          currency: string;
+          unit_amount: number | null;
+          interval: string | null;
+          data: Json;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          provider: string;
+          provider_name: string;
+          product_id: string;
+          active?: boolean;
+          currency: string;
+          unit_amount?: number | null;
+          interval?: string | null;
+          data: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          provider?: string;
+          provider_name?: string;
+          product_id?: string;
+          active?: boolean;
+          currency?: string;
+          unit_amount?: number | null;
+          interval?: string | null;
+          data?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      billing_subscriptions: {
+        Row: {
+          id: string;
+          user_id: string;
+          provider: string;
+          provider_name: string;
+          price_id: string | null;
+          status: string;
+          status_name: string;
+          trial_end: string | null;
+          current_period_end: string | null;
+          data: Json;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          user_id: string;
+          provider: string;
+          provider_name: string;
+          price_id?: string | null;
+          status: string;
+          status_name: string;
+          trial_end?: string | null;
+          current_period_end?: string | null;
+          data: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          provider?: string;
+          provider_name?: string;
+          price_id?: string | null;
+          status?: string;
+          status_name?: string;
+          trial_end?: string | null;
+          current_period_end?: string | null;
+          data?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      billing_invoices: {
+        Row: {
+          id: string;
+          user_id: string;
+          provider: string;
+          provider_name: string;
+          subscription_id: string | null;
+          status: string;
+          status_name: string;
+          amount_due: number;
+          amount_paid: number;
+          currency: string;
+          number: string;
+          data: Json;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          user_id: string;
+          provider: string;
+          provider_name: string;
+          subscription_id?: string | null;
+          status: string;
+          status_name: string;
+          amount_due?: number;
+          amount_paid?: number;
+          currency: string;
+          number?: string;
+          data: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          provider?: string;
+          provider_name?: string;
+          subscription_id?: string | null;
+          status?: string;
+          status_name?: string;
+          amount_due?: number;
+          amount_paid?: number;
+          currency?: string;
+          number?: string;
+          data?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: { [_ in never]: never };
     Functions: { [_ in never]: never };

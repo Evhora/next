@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package modules.billing.proto.v1;
+
+// Payment provider a billing entity (customer/product/price/subscription/invoice) belongs to.
+enum BillingProvider {
+  // The provider is not specified.
+  BILLING_PROVIDER_UNSPECIFIED = 0;
+  // The provider is Stripe.
+  BILLING_PROVIDER_STRIPE = 1;
+}

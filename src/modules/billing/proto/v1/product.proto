@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package modules.billing.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+import "modules/shared/proto/v1/billing-provider.proto";
+
+// A sellable product in the payment provider's catalog.
+message Product {
+  // Provider-issued product id.
+  string id = 1;
+  // Payment provider.
+  BillingProvider provider = 2;
+  // Whether the product is currently for sale.
+  bool active = 3;
+  // Display name.
+  string name = 4;
+  // Display description (may be empty).
+  string description = 5;
+  // Bullet-point features for the pricing card.
+  repeated string features = 6;
+  // Arbitrary provider metadata (e.g. tier_order, highlighted).
+  map<string, string> metadata = 7;
+  // When the product row was created.
+  google.protobuf.Timestamp created_at = 20;
+  // When the product row was last updated.
+  google.protobuf.Timestamp updated_at = 21;
+}
