@@ -3,6 +3,7 @@ import type { User } from "@supabase/supabase-js";
 import type { BillingRepository } from "../domain/billing-repository";
 import { CheckoutError } from "../domain/errors";
 import type { PaymentProvider } from "../domain/payment-provider";
+import { isPriceVisibleToUser } from "../domain/price";
 
 import { startCheckoutSchema, type StartCheckoutCmd } from "./schemas";
 
@@ -21,6 +22,16 @@ export const startCheckout = async (
 
   if (!parsed.priceId) {
     throw new CheckoutError("Missing priceId");
+  }
+
+  // Defence in depth: the UI already filters restricted prices via
+  // `isPriceVisibleToUser`, but a crafted form POST must not bypass the gate.
+  const price = await ctx.billing.getPriceById(parsed.priceId);
+  if (!price || !price.active) {
+    throw new CheckoutError("Price not available");
+  }
+  if (!isPriceVisibleToUser(price, user.id)) {
+    throw new CheckoutError("Price not available");
   }
 
   const trialEnd = Math.floor(

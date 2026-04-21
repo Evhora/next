@@ -17,15 +17,19 @@ export { updatePaymentMethod } from "./application/update-payment-method";
 // Domain types
 export type { BillingRepository } from "./domain/billing-repository";
 export type { Customer } from "./domain/customer";
-export { invoiceStatusToString } from "./domain/invoice";
-export type { Invoice } from "./domain/invoice";
+export {
+  invoiceStatusToString,
+  mergeInvoiceHistory,
+} from "./domain/invoice";
+export type { Invoice, Invoice_StatusChange } from "./domain/invoice";
 export { SUBSCRIPTION_STATUS_TRANSLATION_KEYS } from "./domain/labels";
 export type { PaymentProvider } from "./domain/payment-provider";
+export { isPriceVisibleToUser } from "./domain/price";
 export type { Price } from "./domain/price";
 export { productHighlighted, productTierOrder } from "./domain/product";
 export type { Product } from "./domain/product";
 export {
-  PaymentProvider as BillingProvider,
+  BillingProvider,
   providerFromString,
   providerToName,
   providerToString,
@@ -33,11 +37,15 @@ export {
 export {
   hasActiveAccess,
   isTrialing,
+  mergeSubscriptionHistory,
   Subscription_SubscriptionStatus,
   subscriptionStatusToName,
   subscriptionStatusToString,
 } from "./domain/subscription";
-export type { Subscription } from "./domain/subscription";
+export type {
+  Subscription,
+  Subscription_StatusChange,
+} from "./domain/subscription";
 
 // Errors
 export {
