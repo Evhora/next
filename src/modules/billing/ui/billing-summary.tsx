@@ -18,7 +18,6 @@ export type BillingSummaryData = {
   currency: string;
   interval: string | null;
   currentPeriodEnd: string | null;
-  trialEnd: string | null;
 };
 
 function formatDate(iso: string | null) {
@@ -43,8 +42,6 @@ export async function BillingSummary({ data }: { data: BillingSummaryData }) {
 
   const statusLabelKey = (() => {
     switch (data.status) {
-      case "trialing":
-        return "pages.billing.status.trialing";
       case "active":
         return "pages.billing.status.active";
       case "inactive":
@@ -86,14 +83,6 @@ export async function BillingSummary({ data }: { data: BillingSummaryData }) {
               : ""}
           </span>
         </div>
-        {data.status === "trialing" && data.trialEnd ? (
-          <div className="flex items-center justify-between">
-            <span className="text-muted-foreground">
-              {t("pages.billing.trialEnds")}
-            </span>
-            <span className="font-medium">{formatDate(data.trialEnd)}</span>
-          </div>
-        ) : null}
         <div className="flex items-center justify-between">
           <span className="text-muted-foreground">
             {data.cancelAtPeriodEnd

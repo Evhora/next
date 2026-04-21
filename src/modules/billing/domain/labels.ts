@@ -11,7 +11,10 @@ export const SUBSCRIPTION_STATUS_TRANSLATION_KEYS: Record<
   string
 > = {
   [Subscription_SubscriptionStatus.UNSPECIFIED]: "inactive",
-  [Subscription_SubscriptionStatus.TRIALING]: "trialing",
+  // Trial terminology is retired from the UI — any TRIALING row (e.g. a
+  // legacy sub or a Stripe edge-case like a coupon-driven trial) still
+  // displays as "active" since access is equivalent.
+  [Subscription_SubscriptionStatus.TRIALING]: "active",
   [Subscription_SubscriptionStatus.ACTIVE]: "active",
   [Subscription_SubscriptionStatus.INACTIVE]: "inactive",
 };

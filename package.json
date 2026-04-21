@@ -13,7 +13,7 @@
     "proto:gen": "bash scripts/proto-gen.sh",
     "proto:breaking": "buf breaking --against '.git#branch=main'",
     "proto:format": "buf format -w",
-    "seed:stripe": "tsx --env-file=.env.local scripts/seed-stripe-plans.ts"
+    "sync:stripe": "tsx --env-file=.env.local scripts/sync-stripe-catalog.ts"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^2.11.0",

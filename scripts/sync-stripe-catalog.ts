@@ -98,10 +98,7 @@ async function main() {
       `[sync] product: ${stripeProduct.id} (${stripeProduct.name}) — active=${stripeProduct.active}`,
     );
 
-    for await (const stripePrice of iterateAllPrices(
-      stripe,
-      stripeProduct.id,
-    )) {
+    for await (const stripePrice of iterateAllPrices(stripe, stripeProduct.id)) {
       await billing.upsertPrice(
         newPrice({
           id: stripePrice.id,

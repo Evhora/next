@@ -18,7 +18,6 @@ export interface PaymentProvider {
     customerId: string;
     userId: string;
     priceId: string;
-    trialEnd?: number;
   }): Promise<CheckoutSessionResult>;
   cancelSubscription(subscriptionId: string): Promise<void>;
   /** Cancel immediately (no period-end grace). Used when a refund is issued. */

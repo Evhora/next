@@ -48,7 +48,6 @@ type Props = {
   perYearLabel: string;
   billedYearlyLabel: string;
   billedMonthlyLabel: string;
-  trialLabel: string;
   recommendedLabel?: string;
   savingsBadge?: string;
   monthlyEquivalentLabel?: string;
@@ -63,7 +62,6 @@ export function PricingCard({
   perYearLabel,
   billedYearlyLabel,
   billedMonthlyLabel,
-  trialLabel,
   recommendedLabel,
   savingsBadge,
   monthlyEquivalentLabel,
@@ -140,11 +138,6 @@ export function PricingCard({
         </CardHeader>
 
         <CardContent className="flex-1 pb-6">
-          <div className="mb-5 flex items-center gap-2 rounded-lg bg-muted/60 px-3 py-2.5">
-            <span className="text-base">🎁</span>
-            <span className="text-sm font-medium">{trialLabel}</span>
-          </div>
-
           {plan.features.length > 0 ? (
             <ul className="space-y-3">
               {plan.features.map((feature) => (

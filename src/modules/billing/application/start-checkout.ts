@@ -7,11 +7,10 @@ import { isPriceVisibleToUser } from "../domain/price";
 
 import { startCheckoutSchema, type StartCheckoutCmd } from "./schemas";
 
-const TRIAL_DAYS = 15;
-
 /**
- * Begin a Stripe checkout session for the caller. A 15-day trial is carried
- * over to Stripe so the card is not charged until the trial window ends.
+ * Begin a Stripe checkout session for the caller. The subscription is charged
+ * immediately on checkout — no trial period — so access is granted the moment
+ * the customer completes payment.
  */
 export const startCheckout = async (
   cmd: StartCheckoutCmd & { user: User },
@@ -34,17 +33,12 @@ export const startCheckout = async (
     throw new CheckoutError("Price not available");
   }
 
-  const trialEnd = Math.floor(
-    (Date.now() + TRIAL_DAYS * 24 * 60 * 60 * 1000) / 1000,
-  );
-
   const customerId = await ctx.payments.getOrCreateCustomer(user);
 
   const session = await ctx.payments.createCheckoutSession({
     customerId,
     userId: user.id,
     priceId: parsed.priceId,
-    trialEnd,
   });
 
   return { url: session.url };

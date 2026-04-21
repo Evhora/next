@@ -52,6 +52,12 @@ export async function startCheckoutAction(
     );
     return ok(result);
   } catch (error) {
+    // Surface the full error to the dev server log — `failFromError` only
+    // forwards `error.message` to the client, and Stripe errors carry their
+    // real cause in `.raw` / `.code` / `.param` which are otherwise silently
+    // dropped. Without this, a failed checkout shows only "loading stopped"
+    // on the client with no server-side trail.
+    console.error("[startCheckoutAction] failed:", error);
     return failFromError(error);
   }
 }

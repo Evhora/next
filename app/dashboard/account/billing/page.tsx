@@ -79,9 +79,6 @@ export default async function BillingPage() {
     currentPeriodEnd: subscription.currentPeriodEnd
       ? timestampDate(subscription.currentPeriodEnd).toISOString()
       : null,
-    trialEnd: subscription.trialEnd
-      ? timestampDate(subscription.trialEnd).toISOString()
-      : null,
   };
 
   // Hide prices restricted to other users from the change-plan dropdown. The

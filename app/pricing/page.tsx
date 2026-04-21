@@ -1,4 +1,3 @@
-import { Sparkles } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -19,11 +18,6 @@ export default async function PricingPage() {
     <main className="flex h-screen flex-col overflow-hidden px-6">
       <section className="flex flex-col items-center justify-center py-8 text-center">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border bg-muted/60 px-4 py-1.5 text-xs font-medium text-muted-foreground">
-            <Sparkles className="size-3.5 text-primary" />
-            {t("pages.pricing.trialInfo", { days: 30 })} — sem cartão de crédito
-          </div>
-
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
             {t("pages.pricing.title")}
           </h1>
@@ -145,7 +139,6 @@ async function PricingPlans() {
             perYearLabel={t("pages.pricing.perYear")}
             billedYearlyLabel={t("pages.pricing.billedYearly")}
             billedMonthlyLabel={t("pages.pricing.billedMonthly")}
-            trialLabel={t("pages.pricing.trialInfo", { days: 30 })}
             recommendedLabel={
               plan.highlighted ? t("pages.pricing.recommended") : undefined
             }
@@ -175,8 +168,6 @@ async function TrustBar() {
 
   return (
     <div className="mx-auto mt-6 flex max-w-xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
-      <TrustItem emoji="🎁" label={t("pages.pricing.trustTrial")} />
-      <Divider />
       <TrustItem emoji="✓" label={t("pages.pricing.trustCancel")} />
     </div>
   );
@@ -189,8 +180,4 @@ function TrustItem({ emoji, label }: { emoji: string; label: string }) {
       <span>{label}</span>
     </div>
   );
-}
-
-function Divider() {
-  return <span className="hidden text-muted-foreground/30 sm:block">|</span>;
 }

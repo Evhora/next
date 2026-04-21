@@ -1,7 +1,10 @@
 import type { User } from "@supabase/supabase-js";
 
+import { toProtoJson } from "@/shared/proto/json";
 import { createAdminClient } from "@/shared/supabase/admin";
+import type { Json } from "@/shared/supabase/database.types";
 
+import { CustomerSchema, newCustomer } from "../domain/customer";
 import type {
   CheckoutSessionResult,
   PaymentProvider,
@@ -62,11 +65,23 @@ export class StripePaymentProvider implements PaymentProvider {
       metadata: { supabase_user_id: user.id },
     });
 
+    // The `data` column is NOT NULL — it's the proto-JSON source of truth for
+    // the customer entity, with the promoted columns mirrored off it for
+    // indexing. Omit it and the INSERT hits a 23502. Build a domain `Customer`
+    // via the factory and serialise it here so this row matches what the
+    // webhook-driven `upsertCustomer` path would write.
+    const domainCustomer = newCustomer({
+      userId: user.id,
+      provider: BillingProvider.STRIPE,
+      providerCustomerId: customer.id,
+    });
+
     const { error: insertErr } = await admin.from("billing_customers").insert({
       user_id: user.id,
       provider: STRIPE_PROVIDER_LABEL,
       provider_name: STRIPE_PROVIDER_NAME,
       provider_customer_id: customer.id,
+      data: toProtoJson(CustomerSchema, domainCustomer) as Json,
     });
     if (insertErr) throw insertErr;
 
@@ -77,10 +92,15 @@ export class StripePaymentProvider implements PaymentProvider {
     customerId: string;
     userId: string;
     priceId: string;
-    trialEnd?: number;
   }): Promise<CheckoutSessionResult> {
     const stripe = getStripe();
 
+    // No trial — Checkout in `subscription` mode charges the first invoice
+    // immediately by default, so access is granted the moment payment
+    // completes. We intentionally omit `subscription_data.trial_end` because
+    // Checkout's API accepts only a Unix timestamp there (the string `"now"`
+    // is valid on `subscriptions.create` but NOT on Checkout Sessions — it
+    // silently rejects the whole request).
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       customer: params.customerId,
@@ -89,15 +109,6 @@ export class StripePaymentProvider implements PaymentProvider {
       success_url: getCheckoutSuccessUrl(),
       cancel_url: getCheckoutCancelUrl(),
       allow_promotion_codes: false,
-      // Carry the remaining trial period into Stripe so the card is not
-      // charged until the trial window ends.
-      ...(params.trialEnd
-        ? {
-            subscription_data: {
-              trial_end: params.trialEnd,
-            },
-          }
-        : {}),
     });
 
     if (!session.url) {

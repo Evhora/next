@@ -12,7 +12,6 @@ import { newPrice } from "../domain/price";
 import { newProduct } from "../domain/product";
 import { BillingProvider } from "../domain/provider";
 import {
-  isTrialing,
   mergeSubscriptionHistory,
   newSubscription,
   subscriptionStatusFromProvider,
@@ -251,17 +250,6 @@ async function handleInvoiceEvent(
         "")
       : ((stripeInvoice as unknown as { subscription?: { id?: string } | null })
           .subscription?.id ?? "");
-
-  // Trial invoices are $0 placeholders Stripe emits for bookkeeping — they're
-  // never "payable" from the user's perspective, so we skip persisting them.
-  // We gate on our own subscription status (not the Stripe event) so the
-  // answer is consistent with what `hasActiveAccess` sees.
-  const currentSub = await billing.getActiveSubscriptionForUser(
-    customer.userId,
-  );
-  if (currentSub && isTrialing(currentSub)) {
-    return;
-  }
 
   const next = newInvoice({
     id: stripeInvoice.id,

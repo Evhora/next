@@ -199,7 +199,7 @@
     },
     "pricing": {
       "title": "Escolha seu plano",
-      "subtitle": "Comece com 30 dias grátis. Cancele quando quiser.",
+      "subtitle": "Assine e tenha acesso imediato. Cancele quando quiser.",
       "empty": "Nenhum plano disponível no momento.",
       "subscribe": "Assinar",
       "subscribeCta": "Começar agora",
@@ -208,11 +208,9 @@
       "perYear": "por ano",
       "billedMonthly": "Cobrança mensal",
       "billedYearly": "Cobrança anual",
-      "trialInfo": "{days} dias grátis",
       "recommended": "Recomendado",
       "savingsBadge": "Economize {percent}%",
       "monthlyEquivalent": "Equivale a {price}/mês",
-      "trustTrial": "30 dias grátis, sem cartão",
       "trustCancel": "Cancele quando quiser",
       "checkoutError": "Não foi possível iniciar o checkout"
     },
@@ -223,12 +221,10 @@
       "month": "mês",
       "year": "ano",
       "freePlan": "Plano gratuito",
-      "trialEnds": "Período de teste termina em",
       "nextBilling": "Próxima cobrança",
       "endsOn": "Termina em",
       "subscribeCta": "Ver planos",
       "status": {
-        "trialing": "Período de teste",
         "active": "Ativa",
         "inactive": "Inativa"
       },
