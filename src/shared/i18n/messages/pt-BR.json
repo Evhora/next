@@ -162,7 +162,7 @@
       "description": "Visualize e gerencie suas ações diárias aqui.",
       "loading": "Carregando ações...",
       "empty": {
-        "message": "Você ainda não tem ações. Crie ações a partir dos seus sonhos."
+        "message": "Crie ações a partir dos seus sonhos."
       },
       "dueDate": "Data",
       "status": "Status",

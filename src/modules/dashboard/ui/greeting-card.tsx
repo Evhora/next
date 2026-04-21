@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 
 interface GreetingCardProps {
@@ -14,18 +16,16 @@ export function GreetingCard({
   const t = useTranslations();
 
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-      <div className="flex items-start justify-between">
-        <div className="space-y-2">
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">{date}</p>
-          <h2 className="text-2xl font-semibold text-foreground">
-            {t("pages.dashboard.greeting.hello", { username })} ✨
-          </h2>
-          <p className="text-zinc-600 dark:text-zinc-400">
-            {motivationalSentence}
-          </p>
-        </div>
-      </div>
+    <div className="border-b border-zinc-200 pb-10 dark:border-zinc-800">
+      <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-600">
+        {date}
+      </p>
+      <h1 className="mt-4 font-[family-name:var(--font-display)] text-5xl font-light leading-[1.05] text-zinc-900 dark:text-zinc-50 md:text-6xl lg:text-7xl">
+        {t("pages.dashboard.greeting.hello", { username })}
+      </h1>
+      <p className="mt-5 max-w-2xl text-sm italic leading-relaxed text-zinc-400 dark:text-zinc-600 md:text-base">
+        {motivationalSentence}
+      </p>
     </div>
   );
 }

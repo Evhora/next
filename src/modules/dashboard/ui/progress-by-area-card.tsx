@@ -14,8 +14,8 @@ interface ProgressByAreaCardProps {
   areas: AreaProgress[];
 }
 
-const areaIcons: Record<Dream_DreamAreaOfLife, string> = {
-  [Dream_DreamAreaOfLife.UNSPECIFIED]: "📌",
+const areaIcon: Record<Dream_DreamAreaOfLife, string> = {
+  [Dream_DreamAreaOfLife.UNSPECIFIED]: "·",
   [Dream_DreamAreaOfLife.SPIRITUALITY]: "🧘",
   [Dream_DreamAreaOfLife.FAMILY_AND_RELANTIONSHIP]: "👨‍👩‍👧‍👦",
   [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: "💪",
@@ -27,39 +27,46 @@ export function ProgressByAreaCard({ areas }: ProgressByAreaCardProps) {
   const t = useTranslations();
 
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-      <h3 className="mb-4 text-lg font-semibold text-foreground">
+    <div className="rounded-2xl border border-zinc-200 bg-white px-7 pb-2 pt-7 dark:border-zinc-800 dark:bg-zinc-900">
+      <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-400 dark:text-zinc-600">
         {t("pages.dashboard.progress.progressByArea")}
-      </h3>
-      <div className="space-y-4">
-        {areas.map(({ area, percentage }) => (
-          <div key={area} className="space-y-2">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="text-xl">{areaIcons[area] || "📌"}</span>
-                <span className="text-sm font-medium text-foreground">
-                  {t(
-                    `enums.dream.areaOfLife.${DREAM_AREA_OF_LIFE_LABELS[area]}` as
-                      | "enums.dream.areaOfLife.FAMILY_AND_RELANTIONSHIP"
-                      | "enums.dream.areaOfLife.HEALTH_AND_WELL_BEING"
-                      | "enums.dream.areaOfLife.BUSINESS_AND_FINANCE"
-                      | "enums.dream.areaOfLife.SPIRITUALITY"
-                      | "enums.dream.areaOfLife.LIFESTYLE",
-                  )}
-                </span>
+      </p>
+
+      <div className="mt-6">
+        {areas.map(({ area, percentage }) => {
+          const icon = areaIcon[area] ?? "·";
+          const labelKey =
+            `enums.dream.areaOfLife.${DREAM_AREA_OF_LIFE_LABELS[area]}` as
+              | "enums.dream.areaOfLife.FAMILY_AND_RELANTIONSHIP"
+              | "enums.dream.areaOfLife.HEALTH_AND_WELL_BEING"
+              | "enums.dream.areaOfLife.BUSINESS_AND_FINANCE"
+              | "enums.dream.areaOfLife.SPIRITUALITY"
+              | "enums.dream.areaOfLife.LIFESTYLE";
+
+          return (
+            <div
+              key={area}
+              className="group flex items-center gap-5 border-b border-zinc-100 py-4 last:border-0 dark:border-zinc-800"
+            >
+              <span className="w-5 shrink-0 text-base leading-none">
+                {icon}
+              </span>
+              <span className="w-44 shrink-0 truncate text-sm text-zinc-600 dark:text-zinc-400">
+                {t(labelKey)}
+              </span>
+              <div className="relative flex-1">
+                <div className="h-px w-full bg-zinc-100 dark:bg-zinc-800" />
+                <div
+                  className="absolute inset-y-0 left-0 h-px bg-rose-500 transition-all duration-700 dark:bg-rose-400"
+                  style={{ width: `${Math.min(percentage, 100)}%` }}
+                />
               </div>
-              <span className="text-sm font-semibold text-foreground">
+              <span className="w-10 text-right text-sm font-bold tabular-nums text-zinc-900 dark:text-zinc-50">
                 {percentage}%
               </span>
             </div>
-            <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
-              <div
-                className="h-full bg-foreground transition-all duration-300"
-                style={{ width: `${Math.min(percentage, 100)}%` }}
-              />
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
