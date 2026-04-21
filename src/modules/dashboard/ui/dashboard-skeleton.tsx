@@ -1,26 +1,25 @@
 export function DashboardSkeleton() {
   return (
-    <div className="p-8">
-      <div className="mx-auto max-w-7xl space-y-8">
-        <div className="h-32 w-full animate-pulse rounded-lg bg-zinc-200 dark:bg-zinc-800" />
-        {[0, 1].map((section) => (
-          <div key={section} className="space-y-4">
-            <div className="h-6 w-32 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
-            <div className="grid gap-4 sm:grid-cols-3">
-              {[0, 1, 2].map((card) => (
-                <div
-                  key={card}
-                  className="h-24 animate-pulse rounded-lg bg-zinc-200 dark:bg-zinc-800"
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-        <div className="space-y-4">
-          <div className="h-6 w-32 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
-          <div className="h-24 animate-pulse rounded-lg bg-zinc-200 dark:bg-zinc-800" />
+    <div className="p-8 md:p-10 lg:p-12">
+      <div className="mx-auto max-w-5xl space-y-10">
+        {/* Greeting */}
+        <div className="border-b border-zinc-200 pb-10 dark:border-zinc-800">
+          <div className="h-3 w-48 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
+          <div className="mt-4 h-16 w-3/4 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
+          <div className="mt-5 h-4 w-2/3 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
         </div>
-        <div className="h-64 animate-pulse rounded-lg bg-zinc-200 dark:bg-zinc-800" />
+
+        {/* Stats bento */}
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+            <div className="h-44 animate-pulse rounded-2xl bg-zinc-200 dark:bg-zinc-800" />
+            <div className="h-44 animate-pulse rounded-2xl bg-zinc-200 dark:bg-zinc-800" />
+          </div>
+          <div className="h-44 animate-pulse rounded-2xl bg-zinc-200 dark:bg-zinc-800 lg:h-auto lg:min-h-full" />
+        </div>
+
+        {/* Progress by area */}
+        <div className="h-64 animate-pulse rounded-2xl bg-zinc-200 dark:bg-zinc-800" />
       </div>
     </div>
   );

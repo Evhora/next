@@ -1,19 +1,12 @@
 "use client";
 
+import { Target } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/shared/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/shared/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/shared/ui/dialog";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import {
@@ -33,19 +26,19 @@ import {
 
 import { createDreamAction } from "./actions";
 
+const AREA_ICON: Record<Dream_DreamAreaOfLife, string> = {
+  [Dream_DreamAreaOfLife.UNSPECIFIED]: "·",
+  [Dream_DreamAreaOfLife.SPIRITUALITY]: "🧘",
+  [Dream_DreamAreaOfLife.FAMILY_AND_RELANTIONSHIP]: "👨‍👩‍👧‍👦",
+  [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: "💪",
+  [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: "💼",
+  [Dream_DreamAreaOfLife.LIFESTYLE]: "✨",
+};
+
 interface NewDreamDialogProps {
   trigger: ReactNode;
 }
 
-/**
- * Form for creating a new dream. Posts directly to `createDreamAction` via
- * React 19's `useActionState` so we don't have to manage `loading` / `error`
- * by hand. The dialog closes itself once the action returns success.
- *
- * Area of life is uncontrolled (a hidden input is fine because the user can't
- * skip selecting one — the Select sets it). Other fields are uncontrolled too;
- * this keeps the component small and lets the browser do the validation work.
- */
 export function NewDreamDialog({ trigger }: NewDreamDialogProps) {
   const t = useTranslations();
   const [open, setOpen] = useState(false);
@@ -72,25 +65,34 @@ export function NewDreamDialog({ trigger }: NewDreamDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader className="mb-2">
-          <DialogTitle className="text-lg">
-            {t("pages.dreams.form.title")}
-          </DialogTitle>
-          <DialogDescription className="text-sm text-muted-foreground">
+      <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto border-zinc-200 bg-white p-0 dark:border-zinc-800 dark:bg-zinc-900">
+        {/* Header */}
+        <div className="border-b border-zinc-100 px-7 pb-6 pt-7 dark:border-zinc-800">
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-600">
             {t("pages.dreams.form.description")}
-          </DialogDescription>
-        </DialogHeader>
+          </p>
+          <div className="mt-3 flex items-center gap-3">
+            <Target className="h-7 w-7 text-zinc-900 dark:text-zinc-50" />
+            <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+              {t("pages.dreams.form.title")}
+            </h2>
+          </div>
+        </div>
 
-        <form action={formAction} className="space-y-6">
+        {/* Form */}
+        <form action={formAction} className="px-7 pb-7 pt-6">
           <input
             type="hidden"
             name="areaOfLife"
             value={areaOfLife === "" ? "" : String(areaOfLife)}
           />
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            {/* Area of life — full width */}
             <div className="grid gap-2 sm:col-span-2">
-              <Label htmlFor="area">{t("pages.dreams.form.areaOfLife")}</Label>
+              <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
+                {t("pages.dreams.form.areaOfLife")}
+              </Label>
               <Select
                 value={areaOfLife === "" ? "" : String(areaOfLife)}
                 onValueChange={(value) =>
@@ -105,22 +107,26 @@ export function NewDreamDialog({ trigger }: NewDreamDialogProps) {
                 <SelectContent>
                   {SELECTABLE_DREAM_AREAS_OF_LIFE.map((area) => (
                     <SelectItem key={area} value={String(area)}>
-                      {t(
-                        `enums.dream.areaOfLife.${DREAM_AREA_OF_LIFE_LABELS[area]}` as
-                          | "enums.dream.areaOfLife.FAMILY_AND_RELANTIONSHIP"
-                          | "enums.dream.areaOfLife.HEALTH_AND_WELL_BEING"
-                          | "enums.dream.areaOfLife.BUSINESS_AND_FINANCE"
-                          | "enums.dream.areaOfLife.SPIRITUALITY"
-                          | "enums.dream.areaOfLife.LIFESTYLE",
-                      )}
+                      <span className="flex items-center gap-2">
+                        <span>{AREA_ICON[area]}</span>
+                        {t(
+                          `enums.dream.areaOfLife.${DREAM_AREA_OF_LIFE_LABELS[area]}` as
+                            | "enums.dream.areaOfLife.FAMILY_AND_RELANTIONSHIP"
+                            | "enums.dream.areaOfLife.HEALTH_AND_WELL_BEING"
+                            | "enums.dream.areaOfLife.BUSINESS_AND_FINANCE"
+                            | "enums.dream.areaOfLife.SPIRITUALITY"
+                            | "enums.dream.areaOfLife.LIFESTYLE",
+                        )}
+                      </span>
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
 
+            {/* Title */}
             <div className="grid gap-2">
-              <Label htmlFor="title">
+              <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
                 {t("pages.dreams.form.dreamTitle")} *
               </Label>
               <Input
@@ -132,8 +138,9 @@ export function NewDreamDialog({ trigger }: NewDreamDialogProps) {
               />
             </div>
 
+            {/* Deadline */}
             <div className="grid gap-2">
-              <Label htmlFor="deadline">
+              <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
                 {t("pages.dreams.form.deadlineDate")} *
               </Label>
               <Input
@@ -145,8 +152,9 @@ export function NewDreamDialog({ trigger }: NewDreamDialogProps) {
               />
             </div>
 
+            {/* Action plan — full width */}
             <div className="grid gap-2 sm:col-span-2">
-              <Label htmlFor="action_plan">
+              <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
                 {t("pages.dreams.form.actionPlan")} *
               </Label>
               <Textarea
@@ -159,7 +167,8 @@ export function NewDreamDialog({ trigger }: NewDreamDialogProps) {
             </div>
           </div>
 
-          <DialogFooter className="gap-2 pt-4 sm:gap-0">
+          {/* Footer */}
+          <div className="mt-7 flex justify-end gap-3 border-t border-zinc-100 pt-6 dark:border-zinc-800">
             <Button
               type="button"
               variant="outline"
@@ -172,7 +181,7 @@ export function NewDreamDialog({ trigger }: NewDreamDialogProps) {
                 ? t("pages.dreams.form.creating")
                 : t("pages.dreams.form.create")}
             </Button>
-          </DialogFooter>
+          </div>
         </form>
       </DialogContent>
     </Dialog>
