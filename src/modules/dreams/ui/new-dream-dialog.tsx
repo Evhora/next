@@ -1,12 +1,18 @@
 "use client";
 
-import { Target } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { Briefcase, Heart, Leaf, Sparkles, Target, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/shared/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/shared/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/shared/ui/dialog";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import {
@@ -26,13 +32,13 @@ import {
 
 import { createDreamAction } from "./actions";
 
-const AREA_ICON: Record<Dream_DreamAreaOfLife, string> = {
-  [Dream_DreamAreaOfLife.UNSPECIFIED]: "·",
-  [Dream_DreamAreaOfLife.SPIRITUALITY]: "🧘",
-  [Dream_DreamAreaOfLife.FAMILY_AND_RELANTIONSHIP]: "👨‍👩‍👧‍👦",
-  [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: "💪",
-  [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: "💼",
-  [Dream_DreamAreaOfLife.LIFESTYLE]: "✨",
+const AREA_ICON: Record<Dream_DreamAreaOfLife, LucideIcon | null> = {
+  [Dream_DreamAreaOfLife.UNSPECIFIED]: null,
+  [Dream_DreamAreaOfLife.SPIRITUALITY]: Leaf,
+  [Dream_DreamAreaOfLife.FAMILY_AND_RELANTIONSHIP]: Users,
+  [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: Heart,
+  [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: Briefcase,
+  [Dream_DreamAreaOfLife.LIFESTYLE]: Sparkles,
 };
 
 interface NewDreamDialogProps {
@@ -75,9 +81,9 @@ export function NewDreamDialog({ trigger, onCreated }: NewDreamDialogProps) {
           </p>
           <div className="mt-3 flex items-center gap-3">
             <Target className="h-7 w-7 text-zinc-900 dark:text-zinc-50" />
-            <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+            <DialogTitle className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
               {t("pages.dreams.form.title")}
-            </h2>
+            </DialogTitle>
           </div>
         </div>
 
@@ -110,7 +116,10 @@ export function NewDreamDialog({ trigger, onCreated }: NewDreamDialogProps) {
                   {SELECTABLE_DREAM_AREAS_OF_LIFE.map((area) => (
                     <SelectItem key={area} value={String(area)}>
                       <span className="flex items-center gap-2">
-                        <span>{AREA_ICON[area]}</span>
+                        {(() => {
+                          const I = AREA_ICON[area];
+                          return I ? <I className="h-3.5 w-3.5" /> : null;
+                        })()}
                         {t(
                           `enums.dream.areaOfLife.${DREAM_AREA_OF_LIFE_LABELS[area]}` as
                             | "enums.dream.areaOfLife.FAMILY_AND_RELANTIONSHIP"

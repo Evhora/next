@@ -1,6 +1,14 @@
 "use client";
 
-import { ListChecks } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import {
+  Briefcase,
+  Heart,
+  Leaf,
+  ListChecks,
+  Sparkles,
+  Users,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
@@ -11,6 +19,7 @@ import { Button } from "@/shared/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
 } from "@/shared/ui/dialog";
 import { Input } from "@/shared/ui/input";
@@ -44,13 +53,13 @@ interface NewActionDialogProps {
 
 const NO_DREAM = "__none__";
 
-const AREA_ICON: Record<Dream_DreamAreaOfLife, string> = {
-  0: "·",   // UNSPECIFIED
-  1: "👨‍👩‍👧‍👦", // FAMILY_AND_RELANTIONSHIP
-  2: "💪",  // HEALTH_AND_WELL_BEING
-  3: "💼",  // BUSINESS_AND_FINANCE
-  4: "🧘",  // SPIRITUALITY
-  5: "✨",  // LIFESTYLE
+const AREA_ICON: Record<number, LucideIcon | null> = {
+  0: null, // UNSPECIFIED
+  1: Users, // FAMILY_AND_RELANTIONSHIP
+  2: Heart, // HEALTH_AND_WELL_BEING
+  3: Briefcase, // BUSINESS_AND_FINANCE
+  4: Leaf, // SPIRITUALITY
+  5: Sparkles, // LIFESTYLE
 };
 
 export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
@@ -79,7 +88,9 @@ export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
   }, [state, t]);
 
   const selectedDream =
-    dreamId === NO_DREAM ? null : dreams.find((d) => d.id === dreamId) ?? null;
+    dreamId === NO_DREAM
+      ? null
+      : (dreams.find((d) => d.id === dreamId) ?? null);
   const dreamAreaOfLife =
     selectedDream == null ? "" : String(selectedDream.areaOfLife);
 
@@ -94,9 +105,9 @@ export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
           </p>
           <div className="mt-3 flex items-center gap-3">
             <ListChecks className="h-7 w-7 text-zinc-900 dark:text-zinc-50" />
-            <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+            <DialogTitle className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
               {t("pages.actions.form.title")}
-            </h2>
+            </DialogTitle>
           </div>
         </div>
 
@@ -180,7 +191,10 @@ export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
                   {dreams.map((dream) => (
                     <SelectItem key={dream.id} value={dream.id}>
                       <span className="flex items-center gap-2">
-                        <span>{AREA_ICON[dream.areaOfLife]}</span>
+                        {(() => {
+                          const I = AREA_ICON[dream.areaOfLife];
+                          return I ? <I className="h-3.5 w-3.5" /> : null;
+                        })()}
                         {dream.title || t("pages.dreams.form.untitled")}
                         {` — ${t(
                           `enums.dream.areaOfLife.${DREAM_AREA_OF_LIFE_LABELS[dream.areaOfLife]}` as

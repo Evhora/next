@@ -1,9 +1,18 @@
 "use client";
 
+import type { LucideIcon } from "lucide-react";
+import { Briefcase, Heart, Leaf, Minus, Sparkles, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Dream_DreamAreaOfLife } from "@/modules/dreams/domain/dream";
 import { DREAM_AREA_OF_LIFE_LABELS } from "@/modules/dreams/domain/labels";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/shared/ui/card";
 
 interface AreaProgress {
   area: Dream_DreamAreaOfLife;
@@ -14,60 +23,91 @@ interface ProgressByAreaCardProps {
   areas: AreaProgress[];
 }
 
-const areaIcon: Record<Dream_DreamAreaOfLife, string> = {
-  [Dream_DreamAreaOfLife.UNSPECIFIED]: "·",
-  [Dream_DreamAreaOfLife.SPIRITUALITY]: "🧘",
-  [Dream_DreamAreaOfLife.FAMILY_AND_RELANTIONSHIP]: "👨‍👩‍👧‍👦",
-  [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: "💪",
-  [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: "💼",
-  [Dream_DreamAreaOfLife.LIFESTYLE]: "✨",
+const AREA_ICON: Record<Dream_DreamAreaOfLife, LucideIcon | null> = {
+  [Dream_DreamAreaOfLife.UNSPECIFIED]: null,
+  [Dream_DreamAreaOfLife.SPIRITUALITY]: Leaf,
+  [Dream_DreamAreaOfLife.FAMILY_AND_RELANTIONSHIP]: Users,
+  [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: Heart,
+  [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: Briefcase,
+  [Dream_DreamAreaOfLife.LIFESTYLE]: Sparkles,
+};
+
+const AREA_COLOR: Record<Dream_DreamAreaOfLife, string> = {
+  [Dream_DreamAreaOfLife.UNSPECIFIED]: "text-muted-foreground",
+  [Dream_DreamAreaOfLife.SPIRITUALITY]: "text-green-400",
+  [Dream_DreamAreaOfLife.FAMILY_AND_RELANTIONSHIP]: "text-purple-500",
+  [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: "text-red-500",
+  [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: "text-orange-400",
+  [Dream_DreamAreaOfLife.LIFESTYLE]: "text-yellow-500",
+};
+
+const AREA_BAR: Record<Dream_DreamAreaOfLife, string> = {
+  [Dream_DreamAreaOfLife.UNSPECIFIED]: "bg-primary",
+  [Dream_DreamAreaOfLife.SPIRITUALITY]: "bg-purple-400",
+  [Dream_DreamAreaOfLife.FAMILY_AND_RELANTIONSHIP]: "bg-purple-500",
+  [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: "bg-orange-500",
+  [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: "bg-orange-400",
+  [Dream_DreamAreaOfLife.LIFESTYLE]: "bg-purple-600",
 };
 
 export function ProgressByAreaCard({ areas }: ProgressByAreaCardProps) {
   const t = useTranslations();
 
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white px-7 pb-2 pt-7 dark:border-zinc-800 dark:bg-zinc-900">
-      <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-400 dark:text-zinc-600">
-        {t("pages.dashboard.progress.progressByArea")}
-      </p>
+    <Card>
+      <CardHeader>
+        <CardDescription>
+          {t("pages.dashboard.progress.progressByArea")}
+        </CardDescription>
+        <CardTitle className="sr-only">
+          {t("pages.dashboard.progress.progressByArea")}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-1">
+          {areas.map(({ area, percentage }) => {
+            const Icon = AREA_ICON[area];
+            const iconColor = AREA_COLOR[area];
+            const barColor = AREA_BAR[area];
+            const labelKey =
+              `enums.dream.areaOfLife.${DREAM_AREA_OF_LIFE_LABELS[area]}` as
+                | "enums.dream.areaOfLife.FAMILY_AND_RELANTIONSHIP"
+                | "enums.dream.areaOfLife.HEALTH_AND_WELL_BEING"
+                | "enums.dream.areaOfLife.BUSINESS_AND_FINANCE"
+                | "enums.dream.areaOfLife.SPIRITUALITY"
+                | "enums.dream.areaOfLife.LIFESTYLE";
 
-      <div className="mt-6">
-        {areas.map(({ area, percentage }) => {
-          const icon = areaIcon[area] ?? "·";
-          const labelKey =
-            `enums.dream.areaOfLife.${DREAM_AREA_OF_LIFE_LABELS[area]}` as
-              | "enums.dream.areaOfLife.FAMILY_AND_RELANTIONSHIP"
-              | "enums.dream.areaOfLife.HEALTH_AND_WELL_BEING"
-              | "enums.dream.areaOfLife.BUSINESS_AND_FINANCE"
-              | "enums.dream.areaOfLife.SPIRITUALITY"
-              | "enums.dream.areaOfLife.LIFESTYLE";
-
-          return (
-            <div
-              key={area}
-              className="group flex items-center gap-5 border-b border-zinc-100 py-4 last:border-0 dark:border-zinc-800"
-            >
-              <span className="w-5 shrink-0 text-base leading-none">
-                {icon}
-              </span>
-              <span className="w-44 shrink-0 truncate text-sm text-zinc-600 dark:text-zinc-400">
-                {t(labelKey)}
-              </span>
-              <div className="relative flex-1">
-                <div className="h-px w-full bg-zinc-100 dark:bg-zinc-800" />
-                <div
-                  className="absolute inset-y-0 left-0 h-px bg-rose-500 transition-all duration-700 dark:bg-rose-400"
-                  style={{ width: `${Math.min(percentage, 100)}%` }}
-                />
+            return (
+              <div
+                key={area}
+                className="flex items-center gap-4 border-b py-3 last:border-0"
+              >
+                <span className="flex w-4 shrink-0 items-center justify-center">
+                  {Icon ? (
+                    <Icon className={`h-4 w-4 ${iconColor}`} />
+                  ) : (
+                    <Minus className="h-3 w-3 text-muted-foreground/50" />
+                  )}
+                </span>
+                <span className="w-40 shrink-0 truncate text-sm text-muted-foreground">
+                  {t(labelKey)}
+                </span>
+                <div className="relative flex-1">
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                    <div
+                      className={`h-full rounded-full transition-all duration-700 ${barColor}`}
+                      style={{ width: `${Math.min(percentage, 100)}%` }}
+                    />
+                  </div>
+                </div>
+                <span className="w-10 text-right text-sm font-semibold tabular-nums text-foreground">
+                  {percentage}%
+                </span>
               </div>
-              <span className="w-10 text-right text-sm font-bold tabular-nums text-zinc-900 dark:text-zinc-50">
-                {percentage}%
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+            );
+          })}
+        </div>
+      </CardContent>
+    </Card>
   );
 }

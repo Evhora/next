@@ -1,8 +1,21 @@
 "use client";
 
-import { MoreHorizontalIcon, Trash2 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import {
+  Briefcase,
+  ChevronFirstIcon,
+  ChevronLastIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  Heart,
+  Leaf,
+  MoreHorizontalIcon,
+  Sparkles,
+  Trash2,
+  Users,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { toast } from "sonner";
 
 import { Badge } from "@/shared/ui/badge";
@@ -29,7 +42,11 @@ import {
   TableRow,
 } from "@/shared/ui/table";
 
-import { type Dream, Dream_DreamAreaOfLife, Dream_DreamStatus } from "../domain/dream";
+import {
+  type Dream,
+  Dream_DreamAreaOfLife,
+  Dream_DreamStatus,
+} from "../domain/dream";
 import {
   DREAM_AREA_OF_LIFE_LABELS,
   DREAM_STATUS_LABELS,
@@ -48,25 +65,69 @@ interface DreamsTableProps {
   progress?: Record<string, DreamProgress>;
 }
 
-const AREA_ICON: Record<Dream_DreamAreaOfLife, string> = {
-  [Dream_DreamAreaOfLife.UNSPECIFIED]: "·",
-  [Dream_DreamAreaOfLife.SPIRITUALITY]: "🧘",
-  [Dream_DreamAreaOfLife.FAMILY_AND_RELANTIONSHIP]: "👨‍👩‍👧‍👦",
-  [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: "💪",
-  [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: "💼",
-  [Dream_DreamAreaOfLife.LIFESTYLE]: "✨",
+const AREA_ICON: Record<Dream_DreamAreaOfLife, LucideIcon | null> = {
+  [Dream_DreamAreaOfLife.UNSPECIFIED]: null,
+  [Dream_DreamAreaOfLife.SPIRITUALITY]: Leaf,
+  [Dream_DreamAreaOfLife.FAMILY_AND_RELANTIONSHIP]: Users,
+  [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: Heart,
+  [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: Briefcase,
+  [Dream_DreamAreaOfLife.LIFESTYLE]: Sparkles,
 };
 
-const STATUS_DOT: Record<Dream_DreamStatus, string> = {
-  [Dream_DreamStatus.UNSPECIFIED]: "bg-zinc-300",
-  [Dream_DreamStatus.IN_PROGRESS]: "bg-amber-400",
-  [Dream_DreamStatus.COMPLETED]: "bg-rose-500",
-  [Dream_DreamStatus.PAUSED]: "bg-zinc-400",
-};
+const STATUS_CONFIG: Record<Dream_DreamStatus, { label: string; dot: string }> =
+  {
+    [Dream_DreamStatus.UNSPECIFIED]: { label: "—", dot: "bg-muted-foreground" },
+    [Dream_DreamStatus.IN_PROGRESS]: {
+      label: "In Process",
+      dot: "bg-amber-400",
+    },
+    [Dream_DreamStatus.COMPLETED]: { label: "Done", dot: "bg-emerald-500" },
+    [Dream_DreamStatus.PAUSED]: { label: "Paused", dot: "bg-zinc-400" },
+  };
+
+const PAGE_SIZES = [10, 20, 50] as const;
 
 export function DreamsTable({ dreams, progress = {} }: DreamsTableProps) {
   const t = useTranslations();
   const [isPending, startTransition] = useTransition();
+
+  // Selection
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+
+  // Pagination
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [page, setPage] = useState(1);
+  const totalPages = Math.max(1, Math.ceil(dreams.length / pageSize));
+  const pageDreams = dreams.slice((page - 1) * pageSize, page * pageSize);
+
+  const allPageSelected =
+    pageDreams.length > 0 && pageDreams.every((d) => selected.has(d.id));
+  const somePageSelected =
+    pageDreams.some((d) => selected.has(d.id)) && !allPageSelected;
+
+  const toggleAll = () => {
+    if (allPageSelected) {
+      setSelected((prev) => {
+        const next = new Set(prev);
+        pageDreams.forEach((d) => next.delete(d.id));
+        return next;
+      });
+    } else {
+      setSelected((prev) => {
+        const next = new Set(prev);
+        pageDreams.forEach((d) => next.add(d.id));
+        return next;
+      });
+    }
+  };
+
+  const toggleRow = (id: string) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  };
 
   const handleStatusChange = (id: string, nextStatus: number) => {
     startTransition(async () => {
@@ -84,69 +145,71 @@ export function DreamsTable({ dreams, progress = {} }: DreamsTableProps) {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
-      <Table>
-        <TableHeader>
-          <TableRow className="hover:bg-transparent dark:hover:bg-transparent">
-            <TableHead className="w-[30%] min-w-[12rem] text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
-              {t("pages.dreams.list.title")}
-            </TableHead>
-            <TableHead className="w-[18%] text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
-              {t("pages.dreams.list.area")}
-            </TableHead>
-            <TableHead className="w-[18%] min-w-[8rem] text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
-              {t("pages.dreams.list.status")}
-            </TableHead>
-            <TableHead className="w-[14%] min-w-[6rem] text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
-              {t("pages.dreams.list.progress")}
-            </TableHead>
-            <TableHead className="w-[12%] min-w-[5rem] text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
-              {t("pages.dreams.list.deadline")}
-            </TableHead>
-            <TableHead className="w-[8%]" />
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {dreams.map((dream) => {
-            const dreamProgress = progress[dream.id];
-            const pct =
-              dreamProgress && dreamProgress.total > 0
-                ? Math.round((dreamProgress.completed / dreamProgress.total) * 100)
-                : 0;
+    <div className="overflow-hidden rounded-xl border bg-card shadow-sm">
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow className="bg-muted/40 hover:bg-muted/40">
+              <TableHead className="px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Sonho
+              </TableHead>
+              <TableHead className="hidden px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:table-cell">
+                Área
+              </TableHead>
+              <TableHead className="px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Status
+              </TableHead>
+              <TableHead className="hidden px-3 text-right text-xs font-semibold uppercase tracking-wide text-muted-foreground md:table-cell">
+                Ações
+              </TableHead>
+              <TableHead className="hidden px-3 text-right text-xs font-semibold uppercase tracking-wide text-muted-foreground md:table-cell">
+                Total
+              </TableHead>
+              <TableHead className="hidden px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground lg:table-cell">
+                Prazo
+              </TableHead>
+              <TableHead className="w-10 px-2" />
+            </TableRow>
+          </TableHeader>
 
-            return (
-              <TableRow
-                key={dream.id}
-                className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40"
-              >
-                <TableCell className="font-medium text-zinc-900 dark:text-zinc-50">
-                  {dream.title || t("pages.dreams.form.untitled")}
-                </TableCell>
+          <TableBody>
+            {pageDreams.map((dream) => {
+              const prog = progress[dream.id];
 
-                <TableCell>
-                  <Badge
-                    variant="secondary"
-                    className="inline-flex w-fit items-center gap-1.5 font-normal"
-                  >
-                    <span className="text-sm leading-none">
-                      {AREA_ICON[dream.areaOfLife]}
-                    </span>
-                    {t(
-                      `enums.dream.areaOfLife.${DREAM_AREA_OF_LIFE_LABELS[dream.areaOfLife]}` as
-                        | "enums.dream.areaOfLife.FAMILY_AND_RELANTIONSHIP"
-                        | "enums.dream.areaOfLife.HEALTH_AND_WELL_BEING"
-                        | "enums.dream.areaOfLife.BUSINESS_AND_FINANCE"
-                        | "enums.dream.areaOfLife.SPIRITUALITY"
-                        | "enums.dream.areaOfLife.LIFESTYLE",
-                    )}
-                  </Badge>
-                </TableCell>
+              return (
+                <TableRow
+                  key={dream.id}
+                  data-state={selected.has(dream.id) ? "selected" : undefined}
+                  className="group border-b last:border-0"
+                >
+                  {/* Title */}
+                  <TableCell className="px-3 py-3 font-medium text-foreground">
+                    {dream.title || t("pages.dreams.form.untitled")}
+                  </TableCell>
 
-                <TableCell>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`size-1.5 shrink-0 rounded-full ${STATUS_DOT[dream.status]}`}
-                    />
+                  {/* Area */}
+                  <TableCell className="hidden px-3 sm:table-cell">
+                    <Badge
+                      variant="outline"
+                      className="gap-1.5 font-normal text-sm text-foreground"
+                    >
+                      {(() => {
+                        const I = AREA_ICON[dream.areaOfLife];
+                        return I ? <I className="h-3 w-3" /> : null;
+                      })()}
+                      <span className="truncate">
+                        {t(
+                          `enums.dream.areaOfLife.${DREAM_AREA_OF_LIFE_LABELS[dream.areaOfLife]}` as Parameters<
+                            typeof t
+                          >[0],
+                        )}
+                      </span>
+                    </Badge>
+                  </TableCell>
+
+                  {/* Status */}
+                  <TableCell className="px-3">
                     <Select
                       disabled={isPending}
                       value={String(dream.status)}
@@ -154,89 +217,167 @@ export function DreamsTable({ dreams, progress = {} }: DreamsTableProps) {
                         handleStatusChange(dream.id, Number(v))
                       }
                     >
-                      <SelectTrigger className="h-8 w-full min-w-[7rem] max-w-[9rem] text-xs">
+                      <SelectTrigger className="w-fit border-0 bg-transparent px-2 shadow-none hover:bg-muted focus:ring-0">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        {SELECTABLE_DREAM_STATUSES.map((status) => (
-                          <SelectItem key={status} value={String(status)}>
-                            {t(
-                              `pages.dreams.status.${statusTranslationKey(status)}`,
-                            )}
+                        {SELECTABLE_DREAM_STATUSES.map((s) => (
+                          <SelectItem key={s} value={String(s)}>
+                            <div className="flex items-center gap-2">
+                              <span
+                                className={`size-2 rounded-full ${STATUS_CONFIG[s].dot}`}
+                              />
+                              {statusTranslationKey(s, t)}
+                            </div>
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
-                  </div>
-                </TableCell>
+                  </TableCell>
 
-                <TableCell>
-                  {dreamProgress ? (
-                    <div className="flex min-w-[5rem] items-center gap-2">
-                      <div className="relative flex-1">
-                        <div className="h-px w-full bg-zinc-100 dark:bg-zinc-800" />
-                        <div
-                          className="absolute inset-y-0 left-0 h-px bg-rose-500 transition-all duration-700 dark:bg-rose-400"
-                          style={{ width: `${pct}%` }}
-                        />
-                      </div>
-                      <span className="w-8 text-right text-xs tabular-nums text-zinc-500 dark:text-zinc-400">
-                        {dreamProgress.completed}/{dreamProgress.total}
-                      </span>
-                    </div>
-                  ) : (
-                    <span className="text-muted-foreground">—</span>
-                  )}
-                </TableCell>
+                  {/* Completed actions */}
+                  <TableCell className="hidden px-3 text-right tabular-nums text-muted-foreground md:table-cell">
+                    {prog ? prog.completed : "—"}
+                  </TableCell>
 
-                <TableCell className="text-sm text-zinc-500 dark:text-zinc-400">
-                  {dream.deadline
-                    ? new Date(dream.deadline).toLocaleDateString("pt-BR")
-                    : "—"}
-                </TableCell>
+                  {/* Total actions */}
+                  <TableCell className="hidden px-3 text-right tabular-nums text-muted-foreground md:table-cell">
+                    {prog ? prog.total : "—"}
+                  </TableCell>
 
-                <TableCell className="text-right">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon"
-                        className="size-8"
-                        aria-label={t("pages.dreams.list.actions")}
-                      >
-                        <MoreHorizontalIcon className="size-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem
-                        className="text-destructive focus:text-destructive"
-                        onClick={() => handleDelete(dream.id)}
-                      >
-                        <Trash2 className="size-4 shrink-0" />
-                        {t("pages.dreams.delete")}
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+                  {/* Deadline */}
+                  <TableCell className="hidden px-3 text-sm tabular-nums text-muted-foreground lg:table-cell">
+                    {dream.deadline
+                      ? new Date(dream.deadline).toLocaleDateString("pt-BR")
+                      : "—"}
+                  </TableCell>
+
+                  <TableCell className="text-right">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          className="size-8 opacity-0 transition-opacity group-hover:opacity-100"
+                          aria-label={t("pages.dreams.list.actions")}
+                        >
+                          <MoreHorizontalIcon className="size-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem
+                          className="text-destructive focus:text-destructive"
+                          onClick={() => handleDelete(dream.id)}
+                        >
+                          <Trash2 className="size-4 shrink-0 text-destructive" />
+                          {t("pages.dreams.delete")}
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Footer */}
+      <div className="flex flex-col gap-3 border-t bg-muted/20 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        {/* Selection count */}
+        <p className="text-xs text-muted-foreground">
+          {selected.size} de {dreams.length} linha(s) selecionada(s).
+        </p>
+
+        {/* Pagination controls */}
+        <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <span className="hidden sm:inline">Linhas por página</span>
+            <Select
+              value={String(pageSize)}
+              onValueChange={(v) => {
+                setPageSize(Number(v));
+                setPage(1);
+              }}
+            >
+              <SelectTrigger className="h-7 w-16 text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {PAGE_SIZES.map((s) => (
+                  <SelectItem key={s} value={String(s)}>
+                    {s}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <span className="text-xs text-muted-foreground">
+            Página {page} de {totalPages}
+          </span>
+
+          <div className="flex items-center gap-1">
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-7"
+              onClick={() => setPage(1)}
+              disabled={page === 1}
+              aria-label="Primeira página"
+            >
+              <ChevronFirstIcon className="size-3.5" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-7"
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+              aria-label="Página anterior"
+            >
+              <ChevronLeftIcon className="size-3.5" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-7"
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+              aria-label="Próxima página"
+            >
+              <ChevronRightIcon className="size-3.5" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-7"
+              onClick={() => setPage(totalPages)}
+              disabled={page === totalPages}
+              aria-label="Última página"
+            >
+              <ChevronLastIcon className="size-3.5" />
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
-const statusTranslationKey = (status: Dream_DreamStatus): string => {
+function statusTranslationKey(
+  status: Dream_DreamStatus,
+  t: ReturnType<typeof useTranslations>,
+): string {
   switch (status) {
     case Dream_DreamStatus.IN_PROGRESS:
-      return "inProgress";
+      return t("pages.dreams.status.inProgress");
     case Dream_DreamStatus.PAUSED:
-      return "paused";
+      return t("pages.dreams.status.paused");
     case Dream_DreamStatus.COMPLETED:
-      return "completed";
+      return t("pages.dreams.status.completed");
     default:
-      return DREAM_STATUS_LABELS[status]?.toLowerCase() ?? "unspecified";
+      return DREAM_STATUS_LABELS[status]?.toLowerCase() ?? "—";
   }
-};
+}

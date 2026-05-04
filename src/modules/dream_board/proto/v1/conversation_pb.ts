@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file modules/dream_board/proto/v1/conversation.proto.
  */
 export const file_modules_dream_board_proto_v1_conversation: GenFile = /*@__PURE__*/
-  fileDesc("Ci9tb2R1bGVzL2RyZWFtX2JvYXJkL3Byb3RvL3YxL2NvbnZlcnNhdGlvbi5wcm90bxIcbW9kdWxlcy5kcmVhbV9ib2FyZC5wcm90by52MSLCCgoMQ29udmVyc2F0aW9uEgoKAmlkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSSwoFc3RhdGUYAyABKA4yPC5tb2R1bGVzLmRyZWFtX2JvYXJkLnByb3RvLnYxLkNvbnZlcnNhdGlvbi5Db252ZXJzYXRpb25TdGF0ZRJECghtZXNzYWdlcxgEIAMoCzIyLm1vZHVsZXMuZHJlYW1fYm9hcmQucHJvdG8udjEuQ29udmVyc2F0aW9uLk1lc3NhZ2USGgoSc2VsZWN0ZWRfZHJlYW1faWRzGAUgAygJElAKDnNlbGVjdGVkX3N0eWxlGAYgASgOMjgubW9kdWxlcy5kcmVhbV9ib2FyZC5wcm90by52MS5EcmVhbUJvYXJkLkRyZWFtQm9hcmRTdHlsZRIVCg1waG90b19za2lwcGVkGAcgASgIEhsKDmRyZWFtX2JvYXJkX2lkGAggASgJSACIAQESHgoWc2VsZWN0ZWRfY3VzdG9tX3RpdGxlcxgKIAMoCRIPCgd2ZXJzaW9uGAkgASgDEi4KCmNyZWF0ZWRfYXQYFCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCnVwZGF0ZWRfYXQYFSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjQKC2FyY2hpdmVkX2F0GBYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEgBiAEBEjMKCmRlbGV0ZWRfYXQYFyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSAKIAQEalgIKB01lc3NhZ2USRAoEcm9sZRgBIAEoDjI2Lm1vZHVsZXMuZHJlYW1fYm9hcmQucHJvdG8udjEuQ29udmVyc2F0aW9uLk1lc3NhZ2VSb2xlEgsKA2tleRgCIAEoCRJOCgZwYXJhbXMYAyADKAsyPi5tb2R1bGVzLmRyZWFtX2JvYXJkLnByb3RvLnYxLkNvbnZlcnNhdGlvbi5NZXNzYWdlLlBhcmFtc0VudHJ5EgwKBHRleHQYBCABKAkSKwoHc2VudF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAaLQoLUGFyYW1zRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASK+AgoRQ29udmVyc2F0aW9uU3RhdGUSIgoeQ09OVkVSU0FUSU9OX1NUQVRFX1VOU1BFQ0lGSUVEEAASHwobQ09OVkVSU0FUSU9OX1NUQVRFX0dSRUVUSU5HEAESIAocQ09OVkVSU0FUSU9OX1NUQVRFX0FTS19QSE9UTxACEiEKHUNPTlZFUlNBVElPTl9TVEFURV9BU0tfRFJFQU1TEAMSIAocQ09OVkVSU0FUSU9OX1NUQVRFX0FTS19TVFlMRRAEEh4KGkNPTlZFUlNBVElPTl9TVEFURV9DT05GSVJNEAUSIQodQ09OVkVSU0FUSU9OX1NUQVRFX0dFTkVSQVRJTkcQBhIbChdDT05WRVJTQVRJT05fU1RBVEVfRE9ORRAHEh0KGUNPTlZFUlNBVElPTl9TVEFURV9GQUlMRUQQCCJYCgtNZXNzYWdlUm9sZRIcChhNRVNTQUdFX1JPTEVfVU5TUEVDSUZJRUQQABIUChBNRVNTQUdFX1JPTEVfQk9UEAESFQoRTUVTU0FHRV9ST0xFX1VTRVIQAkIRCg9fZHJlYW1fYm9hcmRfaWRCDgoMX2FyY2hpdmVkX2F0Qg0KC19kZWxldGVkX2F0YgZwcm90bzM", [file_google_protobuf_timestamp, file_modules_dream_board_proto_v1_dream_board]);
+  fileDesc("Ci9tb2R1bGVzL2RyZWFtX2JvYXJkL3Byb3RvL3YxL2NvbnZlcnNhdGlvbi5wcm90bxIcbW9kdWxlcy5kcmVhbV9ib2FyZC5wcm90by52MSKiCgoMQ29udmVyc2F0aW9uEgoKAmlkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSSwoFc3RhdGUYAyABKA4yPC5tb2R1bGVzLmRyZWFtX2JvYXJkLnByb3RvLnYxLkNvbnZlcnNhdGlvbi5Db252ZXJzYXRpb25TdGF0ZRJECghtZXNzYWdlcxgEIAMoCzIyLm1vZHVsZXMuZHJlYW1fYm9hcmQucHJvdG8udjEuQ29udmVyc2F0aW9uLk1lc3NhZ2USGgoSc2VsZWN0ZWRfZHJlYW1faWRzGAUgAygJElAKDnNlbGVjdGVkX3N0eWxlGAYgASgOMjgubW9kdWxlcy5kcmVhbV9ib2FyZC5wcm90by52MS5EcmVhbUJvYXJkLkRyZWFtQm9hcmRTdHlsZRIVCg1waG90b19za2lwcGVkGAcgASgIEhsKDmRyZWFtX2JvYXJkX2lkGAggASgJSACIAQESDwoHdmVyc2lvbhgJIAEoAxIuCgpjcmVhdGVkX2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgp1cGRhdGVkX2F0GBUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBI0CgthcmNoaXZlZF9hdBgWIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBIAYgBARIzCgpkZWxldGVkX2F0GBcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEgCiAEBGpYCCgdNZXNzYWdlEkQKBHJvbGUYASABKA4yNi5tb2R1bGVzLmRyZWFtX2JvYXJkLnByb3RvLnYxLkNvbnZlcnNhdGlvbi5NZXNzYWdlUm9sZRILCgNrZXkYAiABKAkSTgoGcGFyYW1zGAMgAygLMj4ubW9kdWxlcy5kcmVhbV9ib2FyZC5wcm90by52MS5Db252ZXJzYXRpb24uTWVzc2FnZS5QYXJhbXNFbnRyeRIMCgR0ZXh0GAQgASgJEisKB3NlbnRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wGi0KC1BhcmFtc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEivgIKEUNvbnZlcnNhdGlvblN0YXRlEiIKHkNPTlZFUlNBVElPTl9TVEFURV9VTlNQRUNJRklFRBAAEh8KG0NPTlZFUlNBVElPTl9TVEFURV9HUkVFVElORxABEiAKHENPTlZFUlNBVElPTl9TVEFURV9BU0tfUEhPVE8QAhIhCh1DT05WRVJTQVRJT05fU1RBVEVfQVNLX0RSRUFNUxADEiAKHENPTlZFUlNBVElPTl9TVEFURV9BU0tfU1RZTEUQBBIeChpDT05WRVJTQVRJT05fU1RBVEVfQ09ORklSTRAFEiEKHUNPTlZFUlNBVElPTl9TVEFURV9HRU5FUkFUSU5HEAYSGwoXQ09OVkVSU0FUSU9OX1NUQVRFX0RPTkUQBxIdChlDT05WRVJTQVRJT05fU1RBVEVfRkFJTEVEEAgiWAoLTWVzc2FnZVJvbGUSHAoYTUVTU0FHRV9ST0xFX1VOU1BFQ0lGSUVEEAASFAoQTUVTU0FHRV9ST0xFX0JPVBABEhUKEU1FU1NBR0VfUk9MRV9VU0VSEAJCEQoPX2RyZWFtX2JvYXJkX2lkQg4KDF9hcmNoaXZlZF9hdEINCgtfZGVsZXRlZF9hdGIGcHJvdG8z", [file_google_protobuf_timestamp, file_modules_dream_board_proto_v1_dream_board]);
 
 /**
  * A scripted chat that walks the user through creating a DreamBoard. At most
@@ -25,11 +25,15 @@ export const file_modules_dream_board_proto_v1_conversation: GenFile = /*@__PURE
  */
 export type Conversation = Message<"modules.dream_board.proto.v1.Conversation"> & {
   /**
+   * The unique identifier for the Conversation.
+   *
    * @generated from field: string id = 1;
    */
   id: string;
 
   /**
+   * The user ID of the owner.
+   *
    * @generated from field: string user_id = 2;
    */
   userId: string;
@@ -76,38 +80,35 @@ export type Conversation = Message<"modules.dream_board.proto.v1.Conversation"> 
   dreamBoardId?: string;
 
   /**
-   * Free-text dream titles the user typed in this chat (instead of, or in
-   * addition to, picking saved Dreams). Bounded server-side; fed into the
-   * image prompt the same way as titles from owned Dream rows.
+   * Optimistic-concurrency version, bumped by every domain mutator.
    *
-   * @generated from field: repeated string selected_custom_titles = 10;
-   */
-  selectedCustomTitles: string[];
-
-  /**
    * @generated from field: int64 version = 9;
    */
   version: bigint;
 
   /**
+   * The timestamp when the Conversation was created.
+   *
    * @generated from field: google.protobuf.Timestamp created_at = 20;
    */
   createdAt?: Timestamp;
 
   /**
+   * The timestamp when the Conversation was last updated.
+   *
    * @generated from field: google.protobuf.Timestamp updated_at = 21;
    */
   updatedAt?: Timestamp;
 
   /**
-   * Non-null when the chat is no longer active (new chat started, or done).
+   * The timestamp when the Conversation was last archived (new chat started, or done).
    *
    * @generated from field: optional google.protobuf.Timestamp archived_at = 22;
    */
   archivedAt?: Timestamp;
 
   /**
-   * Non-null on explicit delete.
+   * The timestamp when the Conversation was last deleted.
    *
    * @generated from field: optional google.protobuf.Timestamp deleted_at = 23;
    */
@@ -123,11 +124,15 @@ export type Conversation = Message<"modules.dream_board.proto.v1.Conversation"> 
  */
 export type ConversationJson = {
   /**
+   * The unique identifier for the Conversation.
+   *
    * @generated from field: string id = 1;
    */
   id?: string;
 
   /**
+   * The user ID of the owner.
+   *
    * @generated from field: string user_id = 2;
    */
   userId?: string;
@@ -174,38 +179,35 @@ export type ConversationJson = {
   dreamBoardId?: string;
 
   /**
-   * Free-text dream titles the user typed in this chat (instead of, or in
-   * addition to, picking saved Dreams). Bounded server-side; fed into the
-   * image prompt the same way as titles from owned Dream rows.
+   * Optimistic-concurrency version, bumped by every domain mutator.
    *
-   * @generated from field: repeated string selected_custom_titles = 10;
-   */
-  selectedCustomTitles?: string[];
-
-  /**
    * @generated from field: int64 version = 9;
    */
   version?: string;
 
   /**
+   * The timestamp when the Conversation was created.
+   *
    * @generated from field: google.protobuf.Timestamp created_at = 20;
    */
   createdAt?: TimestampJson;
 
   /**
+   * The timestamp when the Conversation was last updated.
+   *
    * @generated from field: google.protobuf.Timestamp updated_at = 21;
    */
   updatedAt?: TimestampJson;
 
   /**
-   * Non-null when the chat is no longer active (new chat started, or done).
+   * The timestamp when the Conversation was last archived (new chat started, or done).
    *
    * @generated from field: optional google.protobuf.Timestamp archived_at = 22;
    */
   archivedAt?: TimestampJson;
 
   /**
-   * Non-null on explicit delete.
+   * The timestamp when the Conversation was last deleted.
    *
    * @generated from field: optional google.protobuf.Timestamp deleted_at = 23;
    */
@@ -255,6 +257,8 @@ export type Conversation_Message = Message<"modules.dream_board.proto.v1.Convers
   text: string;
 
   /**
+   * The timestamp when the message was sent.
+   *
    * @generated from field: google.protobuf.Timestamp sent_at = 5;
    */
   sentAt?: Timestamp;
@@ -296,6 +300,8 @@ export type Conversation_MessageJson = {
   text?: string;
 
   /**
+   * The timestamp when the message was sent.
+   *
    * @generated from field: google.protobuf.Timestamp sent_at = 5;
    */
   sentAt?: TimestampJson;
@@ -309,10 +315,14 @@ export const Conversation_MessageSchema: GenMessage<Conversation_Message, {jsonT
   messageDesc(file_modules_dream_board_proto_v1_conversation, 0, 0);
 
 /**
+ * The state of the Conversation.
+ *
  * @generated from enum modules.dream_board.proto.v1.Conversation.ConversationState
  */
 export enum Conversation_ConversationState {
   /**
+   * No state specified.
+   *
    * @generated from enum value: CONVERSATION_STATE_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
@@ -375,6 +385,8 @@ export enum Conversation_ConversationState {
 }
 
 /**
+ * The state of the Conversation.
+ *
  * @generated from enum modules.dream_board.proto.v1.Conversation.ConversationState
  */
 export type Conversation_ConversationStateJson = "CONVERSATION_STATE_UNSPECIFIED" | "CONVERSATION_STATE_GREETING" | "CONVERSATION_STATE_ASK_PHOTO" | "CONVERSATION_STATE_ASK_DREAMS" | "CONVERSATION_STATE_ASK_STYLE" | "CONVERSATION_STATE_CONFIRM" | "CONVERSATION_STATE_GENERATING" | "CONVERSATION_STATE_DONE" | "CONVERSATION_STATE_FAILED";
@@ -386,26 +398,36 @@ export const Conversation_ConversationStateSchema: GenEnum<Conversation_Conversa
   enumDesc(file_modules_dream_board_proto_v1_conversation, 0, 0);
 
 /**
+ * The role of the message.
+ *
  * @generated from enum modules.dream_board.proto.v1.Conversation.MessageRole
  */
 export enum Conversation_MessageRole {
   /**
+   * No role specified.
+   *
    * @generated from enum value: MESSAGE_ROLE_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
+   * The message is from the bot.
+   *
    * @generated from enum value: MESSAGE_ROLE_BOT = 1;
    */
   BOT = 1,
 
   /**
+   * The message is from the user.
+   *
    * @generated from enum value: MESSAGE_ROLE_USER = 2;
    */
   USER = 2,
 }
 
 /**
+ * The role of the message.
+ *
  * @generated from enum modules.dream_board.proto.v1.Conversation.MessageRole
  */
 export type Conversation_MessageRoleJson = "MESSAGE_ROLE_UNSPECIFIED" | "MESSAGE_ROLE_BOT" | "MESSAGE_ROLE_USER";
