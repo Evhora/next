@@ -1,8 +1,23 @@
-import { Target } from "lucide-react";
+import {
+  AlertCircle,
+  CheckCircle2,
+  Clock,
+  PauseCircle,
+  Target,
+  TrendingUp,
+} from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import { buildCtx } from "@/shared/context";
 import { Button } from "@/shared/ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/shared/ui/card";
 import {
   Empty,
   EmptyContent,
@@ -11,6 +26,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/shared/ui/empty";
+import { Separator } from "@/shared/ui/separator";
 
 import { getDreamProgress } from "../application/get-dream-progress";
 import { listDreamsForUser } from "../application/list-dreams-for-user";
@@ -26,198 +42,270 @@ export async function DreamsPage() {
     getDreamProgress(ctx),
   ]);
 
+  const inProgressCount = dreams.filter(
+    (d) => d.status === Dream_DreamStatus.IN_PROGRESS,
+  ).length;
   const completedCount = dreams.filter(
     (d) => d.status === Dream_DreamStatus.COMPLETED,
+  ).length;
+  const pausedCount = dreams.filter(
+    (d) => d.status === Dream_DreamStatus.PAUSED,
   ).length;
   const progressNumber =
     dreams.length === 0
       ? 0
       : Math.round((completedCount / dreams.length) * 100);
 
-  const size = 148;
-  const strokeWidth = 7;
-  const radius = (size - strokeWidth) / 2;
-  const circumference = radius * 2 * Math.PI;
-  const offset = circumference - (Math.min(progressNumber, 100) / 100) * circumference;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const soon = new Date(today);
+  soon.setDate(soon.getDate() + 30);
+
+  const urgentDreams = dreams
+    .filter((d) => {
+      if (!d.deadline || d.status === Dream_DreamStatus.COMPLETED) return false;
+      return new Date(d.deadline) <= soon;
+    })
+    .sort(
+      (a, b) => new Date(a.deadline).getTime() - new Date(b.deadline).getTime(),
+    )
+    .slice(0, 5);
 
   return (
-    <div className="p-8 md:p-10 lg:p-12">
-      <div className="mx-auto max-w-5xl space-y-10">
-
-        {/* Hero header */}
-        <div
-          className="animate-in fade-in-0 slide-in-from-bottom-2 duration-700"
-          style={{ animationFillMode: "both" }}
-        >
-          <div className="flex items-start justify-between border-b border-zinc-100 pb-10 dark:border-zinc-800">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-600">
-                {t("pages.dreams.description")}
-              </p>
-              <div className="mt-3 flex items-center gap-3">
-                <Target className="h-9 w-9 text-zinc-900 dark:text-zinc-50" />
-                <h1 className="text-5xl font-bold tracking-tight text-zinc-900 md:text-6xl dark:text-zinc-50">
-                  {t("pages.dreams.title")}
-                </h1>
-              </div>
-            </div>
-            <NewDreamDialog
-              trigger={
-                <Button className="shrink-0">
-                  + {t("pages.dreams.newDream")}
-                </Button>
-              }
-            />
+    <div className="flex flex-1 flex-col gap-6 p-6 md:p-8">
+      {/* Page header */}
+      <div
+        className="flex items-center justify-between duration-700 animate-in fade-in slide-in-from-bottom-2"
+        style={{ animationFillMode: "both" }}
+      >
+        <div className="flex items-center gap-3">
+          <Target className="size-7 text-foreground" />
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">
+              {t("pages.dreams.title")}
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              {t("pages.dreams.description")}
+            </p>
           </div>
         </div>
-
-        {/* Stats */}
-        <div
-          className="animate-in fade-in-0 duration-700"
-          style={{ animationDelay: "150ms", animationFillMode: "both" }}
-        >
-          <div className="grid gap-4 lg:grid-cols-2">
-            {/* Left: total / completed + progress bar */}
-            <div className="rounded-2xl border border-zinc-200 bg-white p-7 transition-colors hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700">
-              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-400 dark:text-zinc-600">
-                {t("pages.dreams.title")}
-              </p>
-
-              <div className="mt-7 flex items-end justify-between">
-                <div>
-                  <p className="text-6xl font-bold tabular-nums leading-none text-zinc-900 dark:text-zinc-50">
-                    {dreams.length}
-                  </p>
-                  <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-600">
-                    {t("pages.dreams.stats.totalDreams")}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-6xl font-bold tabular-nums leading-none text-rose-500 dark:text-rose-400">
-                    {completedCount}
-                  </p>
-                  <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-600">
-                    {t("pages.dreams.stats.completedDreams")}
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-7 space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
-                    {t("pages.dreams.stats.progressPercent")}
-                  </span>
-                  <span className="text-[10px] font-bold tabular-nums text-zinc-900 dark:text-zinc-50">
-                    {progressNumber}%
-                  </span>
-                </div>
-                <div className="relative h-px w-full bg-zinc-100 dark:bg-zinc-800">
-                  <div
-                    className="absolute inset-y-0 left-0 bg-rose-500 transition-all duration-700 dark:bg-rose-400"
-                    style={{ width: `${Math.min(progressNumber, 100)}%` }}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Right: circular progress */}
-            {dreams.length > 0 ? (
-              <div className="flex flex-col rounded-2xl border border-zinc-200 bg-white p-7 transition-colors hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700 lg:min-h-full">
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-400 dark:text-zinc-600">
-                  {t("pages.dreams.stats.progressPercent")}
-                </p>
-
-                <div className="flex flex-1 flex-col items-center justify-center py-8">
-                  <div className="relative">
-                    <svg
-                      width={size}
-                      height={size}
-                      className="-rotate-90"
-                      aria-hidden="true"
-                    >
-                      <circle
-                        cx={size / 2}
-                        cy={size / 2}
-                        r={radius}
-                        fill="none"
-                        strokeWidth={strokeWidth}
-                        className="stroke-zinc-100 dark:stroke-zinc-800"
-                      />
-                      <circle
-                        cx={size / 2}
-                        cy={size / 2}
-                        r={radius}
-                        fill="none"
-                        strokeWidth={strokeWidth}
-                        strokeDasharray={circumference}
-                        strokeDashoffset={offset}
-                        strokeLinecap="round"
-                        className="stroke-rose-500 transition-all duration-1000 dark:stroke-rose-400"
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                      <span className="text-4xl font-bold tabular-nums leading-none text-zinc-900 dark:text-zinc-50">
-                        {completedCount}
-                      </span>
-                      <span className="mt-1 text-sm text-zinc-400 dark:text-zinc-600">
-                        / {dreams.length}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mt-8 text-center">
-                    <p className="text-3xl font-bold tabular-nums text-rose-500 dark:text-rose-400">
-                      {progressNumber}%
-                    </p>
-                    <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-600">
-                      {t("pages.dreams.stats.completedDreams")}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-200 bg-zinc-50 p-7 dark:border-zinc-800 dark:bg-zinc-900/50">
-                <Target className="h-12 w-12 text-zinc-200 dark:text-zinc-700" />
-                <p className="mt-4 text-center text-sm text-zinc-400 dark:text-zinc-600">
-                  {t("pages.dreams.empty.message")}
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Table or empty state */}
-        <div
-          className="animate-in fade-in-0 duration-700"
-          style={{ animationDelay: "300ms", animationFillMode: "both" }}
-        >
-          {dreams.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
-              <Empty>
-                <EmptyMedia variant="icon">
-                  <Target />
-                </EmptyMedia>
-                <EmptyHeader>
-                  <EmptyTitle>{t("pages.dreams.empty.message")}</EmptyTitle>
-                  <EmptyDescription>
-                    {t("pages.dreams.description")}
-                  </EmptyDescription>
-                </EmptyHeader>
-                <EmptyContent>
-                  <NewDreamDialog
-                    trigger={
-                      <Button>+ {t("pages.dreams.newDream")}</Button>
-                    }
-                  />
-                </EmptyContent>
-              </Empty>
-            </div>
-          ) : (
-            <DreamsTable dreams={dreams} progress={progress} />
-          )}
-        </div>
-
+        <NewDreamDialog
+          trigger={<Button>+ {t("pages.dreams.newDream")}</Button>}
+        />
       </div>
+
+      <Separator />
+
+      {dreams.length === 0 ? (
+        <Card className="flex-1">
+          <Empty>
+            <EmptyMedia variant="icon">
+              <Target />
+            </EmptyMedia>
+            <EmptyHeader>
+              <EmptyTitle>{t("pages.dreams.empty.message")}</EmptyTitle>
+              <EmptyDescription>
+                {t("pages.dreams.description")}
+              </EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              <NewDreamDialog
+                trigger={<Button>+ {t("pages.dreams.newDream")}</Button>}
+              />
+            </EmptyContent>
+          </Empty>
+        </Card>
+      ) : (
+        <>
+          {/* KPI row */}
+          <div
+            className="grid grid-cols-2 gap-4 duration-700 animate-in fade-in slide-in-from-bottom-2 lg:grid-cols-4"
+            style={{ animationDelay: "150ms", animationFillMode: "both" }}
+          >
+            <Card>
+              <CardHeader>
+                <CardDescription>Total de sonhos</CardDescription>
+                <CardTitle className="text-4xl tabular-nums">
+                  {dreams.length}
+                </CardTitle>
+                <CardAction>
+                  <Target className="size-4 text-muted-foreground" />
+                </CardAction>
+              </CardHeader>
+              <CardContent>
+                <span className="text-xs text-muted-foreground">
+                  {progressNumber}% concluídos
+                </span>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardDescription>Em andamento</CardDescription>
+                <CardTitle className="text-4xl tabular-nums text-amber-500">
+                  {inProgressCount}
+                </CardTitle>
+                <CardAction>
+                  <Clock className="size-4 text-amber-500" />
+                </CardAction>
+              </CardHeader>
+              <CardContent>
+                <ProgressBar
+                  value={inProgressCount}
+                  max={dreams.length}
+                  color="bg-amber-500"
+                />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardDescription>Concluídos</CardDescription>
+                <CardTitle className="text-4xl tabular-nums text-primary">
+                  {completedCount}
+                </CardTitle>
+                <CardAction>
+                  <CheckCircle2 className="size-4 text-primary" />
+                </CardAction>
+              </CardHeader>
+              <CardContent>
+                <ProgressBar
+                  value={completedCount}
+                  max={dreams.length}
+                  color="bg-primary"
+                />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardDescription>Pausados</CardDescription>
+                <CardTitle className="text-4xl tabular-nums text-muted-foreground">
+                  {pausedCount}
+                </CardTitle>
+                <CardAction>
+                  <PauseCircle className="size-4 text-muted-foreground" />
+                </CardAction>
+              </CardHeader>
+              <CardContent>
+                <ProgressBar
+                  value={pausedCount}
+                  max={dreams.length}
+                  color="bg-muted-foreground"
+                />
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Overall progress card */}
+          <Card
+            className="duration-700 animate-in fade-in slide-in-from-bottom-2"
+            style={{ animationDelay: "250ms", animationFillMode: "both" }}
+          >
+            <CardHeader>
+              <CardDescription>Progresso geral</CardDescription>
+              <CardTitle className="text-4xl tabular-nums text-primary">
+                {progressNumber}%
+              </CardTitle>
+              <CardAction>
+                <TrendingUp className="size-4 text-muted-foreground" />
+              </CardAction>
+            </CardHeader>
+            <CardContent>
+              <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                <div
+                  className="h-full rounded-full bg-primary transition-all duration-700"
+                  style={{ width: `${Math.min(progressNumber, 100)}%` }}
+                />
+              </div>
+              <p className="mt-2 text-xs text-muted-foreground">
+                {completedCount} de {dreams.length} sonhos concluídos
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Urgent deadlines */}
+          {urgentDreams.length > 0 && (
+            <Card
+              className="border-amber-200 bg-amber-50/50 duration-700 animate-in fade-in slide-in-from-bottom-2 dark:border-amber-900/40 dark:bg-amber-950/10"
+              style={{ animationDelay: "350ms", animationFillMode: "both" }}
+            >
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="size-4 text-amber-500" />
+                  <CardTitle className="text-sm font-semibold text-amber-700 dark:text-amber-500">
+                    Prazos próximos (30 dias)
+                  </CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {urgentDreams.map((d) => {
+                    const dl = new Date(d.deadline);
+                    const diffDays = Math.ceil(
+                      (dl.getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
+                    );
+                    const overdue = diffDays < 0;
+                    return (
+                      <li
+                        key={d.id}
+                        className="flex items-center justify-between gap-4 rounded-lg border bg-background px-4 py-2.5"
+                      >
+                        <span className="text-sm font-medium leading-none">
+                          {d.title}
+                        </span>
+                        <span
+                          className={`shrink-0 text-xs font-semibold tabular-nums ${
+                            overdue
+                              ? "text-destructive"
+                              : diffDays <= 7
+                                ? "text-amber-600"
+                                : "text-muted-foreground"
+                          }`}
+                        >
+                          {overdue
+                            ? `${Math.abs(diffDays)}d atrasado`
+                            : diffDays === 0
+                              ? "hoje"
+                              : `${diffDays}d`}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Table */}
+          <div
+            className="duration-700 animate-in fade-in slide-in-from-bottom-2"
+            style={{ animationDelay: "400ms", animationFillMode: "both" }}
+          >
+            <DreamsTable dreams={dreams} progress={progress} />
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+function ProgressBar({
+  value,
+  max,
+  color,
+}: {
+  value: number;
+  max: number;
+  color: string;
+}) {
+  const pct = max === 0 ? 0 : Math.round((value / max) * 100);
+  return (
+    <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
+      <div
+        className={`h-full rounded-full transition-all duration-700 ${color}`}
+        style={{ width: `${pct}%` }}
+      />
     </div>
   );
 }

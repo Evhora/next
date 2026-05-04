@@ -185,6 +185,7 @@
       },
       "form": {
         "title": "Nova Ação",
+        "description": "Crie uma nova ação para alcançar seus objetivos.",
         "actionTitle": "Título",
         "actionTitlePlaceholder": "Ex.: Ler 30 minutos",
         "dueDate": "Data",

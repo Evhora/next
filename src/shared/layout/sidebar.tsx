@@ -28,27 +28,27 @@ const navigation = [
   {
     nameKey: "pages.dashboard.sidebar.routes.dashboard",
     href: "/dashboard",
-    icon: <ChartBar className="h-5 w-5" />,
+    icon: <ChartBar className="h-5 w-5 text-purple-500" />,
   },
   {
     nameKey: "pages.dashboard.sidebar.routes.dreamBoard",
     href: "/dashboard/dream-board",
-    icon: <Sparkles className="h-5 w-5" />,
+    icon: <Sparkles className="h-5 w-5 text-purple-400" />,
   },
   {
     nameKey: "pages.dashboard.sidebar.routes.dreams",
     href: "/dashboard/dreams",
-    icon: <Target className="h-5 w-5" />,
+    icon: <Target className="h-5 w-5 text-purple-400" />,
   },
   {
     nameKey: "pages.dashboard.sidebar.routes.actions",
     href: "/dashboard/actions",
-    icon: <ListChecks className="h-5 w-5" />,
+    icon: <ListChecks className="h-5 w-5 text-purple-400" />,
   },
   {
     nameKey: "pages.dashboard.sidebar.routes.progress",
     href: "/dashboard/progress",
-    icon: <ChartLine className="h-5 w-5" />,
+    icon: <ChartLine className="h-5 w-5 text-purple-400" />,
   },
 ];
 

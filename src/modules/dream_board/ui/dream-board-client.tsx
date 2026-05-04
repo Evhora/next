@@ -1,13 +1,19 @@
 "use client";
 
 import type { JsonValue } from "@bufbuild/protobuf";
+import type { LucideIcon } from "lucide-react";
 import {
   AlertTriangle,
   ArrowUp,
+  Camera,
+  Clapperboard,
   Download,
+  Droplets,
   Loader2,
   MessageSquarePlus,
+  Paintbrush,
   Plus,
+  Scissors,
   Sparkles,
   Trash2,
   Upload,
@@ -26,12 +32,12 @@ import {
 import { DreamBoard_DreamBoardStyle } from "@/modules/dream_board/domain/dream-board";
 import { DREAM_BOARD_STYLE_LABELS } from "@/modules/dream_board/domain/labels";
 import { ConversationSchema } from "@/modules/dream_board/proto/v1/conversation_pb";
+import { NewDreamDialog } from "@/modules/dreams";
 import { Dream_DreamAreaOfLife } from "@/modules/dreams/domain/dream";
 import {
   DREAM_AREA_OF_LIFE_LABELS,
   SELECTABLE_DREAM_AREAS_OF_LIFE,
 } from "@/modules/dreams/domain/labels";
-import { NewDreamDialog } from "@/modules/dreams";
 import { fromProtoJson } from "@/shared/proto/json";
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent } from "@/shared/ui/card";
@@ -82,19 +88,18 @@ export interface DreamBoardClientProps {
   selectableStyles: DreamBoard_DreamBoardStyle[];
 }
 
-const STYLE_EMOJIS: Record<DreamBoard_DreamBoardStyle, string> = {
-  [DreamBoard_DreamBoardStyle.UNSPECIFIED]: "✨",
-  [DreamBoard_DreamBoardStyle.PHOTOREAL]: "📸",
-  [DreamBoard_DreamBoardStyle.PAINTERLY]: "🎨",
-  [DreamBoard_DreamBoardStyle.SCRAPBOOK]: "✂️",
-  [DreamBoard_DreamBoardStyle.CINEMATIC]: "🎬",
-  [DreamBoard_DreamBoardStyle.WATERCOLOR]: "💧",
+const STYLE_ICON: Record<DreamBoard_DreamBoardStyle, LucideIcon> = {
+  [DreamBoard_DreamBoardStyle.UNSPECIFIED]: Sparkles,
+  [DreamBoard_DreamBoardStyle.PHOTOREAL]: Camera,
+  [DreamBoard_DreamBoardStyle.PAINTERLY]: Paintbrush,
+  [DreamBoard_DreamBoardStyle.SCRAPBOOK]: Scissors,
+  [DreamBoard_DreamBoardStyle.CINEMATIC]: Clapperboard,
+  [DreamBoard_DreamBoardStyle.WATERCOLOR]: Droplets,
 };
 
 const MAX_LONGEST_EDGE = 768;
 const JPEG_QUALITY = 0.85;
 const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
-
 
 type AreaKey =
   | "enums.dream.areaOfLife.FAMILY_AND_RELANTIONSHIP"
@@ -910,7 +915,10 @@ function InputRow(props: InputRowProps) {
                 animationFillMode: "both",
               }}
             >
-              <span className="text-lg">{STYLE_EMOJIS[s] ?? "✨"}</span>
+              {(() => {
+                const I = STYLE_ICON[s] ?? Sparkles;
+                return <I className="h-5 w-5" />;
+              })()}
               <span className="text-xs font-medium text-foreground">
                 {t(
                   `enums.dreamBoard.style.${DREAM_BOARD_STYLE_LABELS[s]}` as StyleKey,
