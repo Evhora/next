@@ -6,15 +6,15 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Timestamp, TimestampJson } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
-import type { BillingProvider, BillingProviderJson } from "../../../shared/proto/v1/billing-provider_pb";
-import { file_modules_shared_proto_v1_billing_provider } from "../../../shared/proto/v1/billing-provider_pb";
+import type { BillingProvider, BillingProviderJson } from "../../../shared/proto/v1/billing_provider_pb";
+import { file_modules_shared_proto_v1_billing_provider } from "../../../shared/proto/v1/billing_provider_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file modules/billing/proto/v1/price.proto.
  */
 export const file_modules_billing_proto_v1_price: GenFile = /*@__PURE__*/
-  fileDesc("CiRtb2R1bGVzL2JpbGxpbmcvcHJvdG8vdjEvcHJpY2UucHJvdG8SGG1vZHVsZXMuYmlsbGluZy5wcm90by52MSLOAgoFUHJpY2USCgoCaWQYASABKAkSOwoIcHJvdmlkZXIYAiABKA4yKS5tb2R1bGVzLmJpbGxpbmcucHJvdG8udjEuQmlsbGluZ1Byb3ZpZGVyEhIKCnByb2R1Y3RfaWQYAyABKAkSDgoGYWN0aXZlGAQgASgIEhAKCGN1cnJlbmN5GAUgASgJEhgKC3VuaXRfYW1vdW50GAYgASgDSACIAQESFQoIaW50ZXJ2YWwYByABKAlIAYgBARIYChBhbGxvd2VkX3VzZXJfaWRzGAggAygJEi4KCmNyZWF0ZWRfYXQYFCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCnVwZGF0ZWRfYXQYFSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQg4KDF91bml0X2Ftb3VudEILCglfaW50ZXJ2YWxiBnByb3RvMw", [file_google_protobuf_timestamp, file_modules_shared_proto_v1_billing_provider]);
+  fileDesc("CiRtb2R1bGVzL2JpbGxpbmcvcHJvdG8vdjEvcHJpY2UucHJvdG8SGG1vZHVsZXMuYmlsbGluZy5wcm90by52MSLNAgoFUHJpY2USCgoCaWQYASABKAkSOgoIcHJvdmlkZXIYAiABKA4yKC5tb2R1bGVzLnNoYXJlZC5wcm90by52MS5CaWxsaW5nUHJvdmlkZXISEgoKcHJvZHVjdF9pZBgDIAEoCRIOCgZhY3RpdmUYBCABKAgSEAoIY3VycmVuY3kYBSABKAkSGAoLdW5pdF9hbW91bnQYBiABKANIAIgBARIVCghpbnRlcnZhbBgHIAEoCUgBiAEBEhgKEGFsbG93ZWRfdXNlcl9pZHMYCCADKAkSLgoKY3JlYXRlZF9hdBgUIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgVIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCDgoMX3VuaXRfYW1vdW50QgsKCV9pbnRlcnZhbGIGcHJvdG8z", [file_google_protobuf_timestamp, file_modules_shared_proto_v1_billing_provider]);
 
 /**
  * A specific price point for a Product (e.g. monthly R$29).
@@ -32,7 +32,7 @@ export type Price = Message<"modules.billing.proto.v1.Price"> & {
   /**
    * Payment provider.
    *
-   * @generated from field: modules.billing.proto.v1.BillingProvider provider = 2;
+   * @generated from field: modules.shared.proto.v1.BillingProvider provider = 2;
    */
   provider: BillingProvider;
 
@@ -113,7 +113,7 @@ export type PriceJson = {
   /**
    * Payment provider.
    *
-   * @generated from field: modules.billing.proto.v1.BillingProvider provider = 2;
+   * @generated from field: modules.shared.proto.v1.BillingProvider provider = 2;
    */
   provider?: BillingProviderJson;
 

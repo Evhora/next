@@ -3,7 +3,7 @@ syntax = "proto3";
 package modules.billing.proto.v1;
 
 import "google/protobuf/timestamp.proto";
-import "modules/shared/proto/v1/billing-provider.proto";
+import "modules/shared/proto/v1/billing_provider.proto";
 
 // A user's recurring subscription.
 message Subscription {
@@ -12,7 +12,7 @@ message Subscription {
   // Supabase auth user id.
   string user_id = 2;
   // Payment provider.
-  BillingProvider provider = 3;
+  modules.shared.proto.v1.BillingProvider provider = 3;
   // Id of the Price the user is subscribed to.
   string price_id = 4;
   // Current status. Domain-level lifecycle, independent of provider

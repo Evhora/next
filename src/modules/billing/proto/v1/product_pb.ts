@@ -6,15 +6,15 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Timestamp, TimestampJson } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
-import type { BillingProvider, BillingProviderJson } from "../../../shared/proto/v1/billing-provider_pb";
-import { file_modules_shared_proto_v1_billing_provider } from "../../../shared/proto/v1/billing-provider_pb";
+import type { BillingProvider, BillingProviderJson } from "../../../shared/proto/v1/billing_provider_pb";
+import { file_modules_shared_proto_v1_billing_provider } from "../../../shared/proto/v1/billing_provider_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file modules/billing/proto/v1/product.proto.
  */
 export const file_modules_billing_proto_v1_product: GenFile = /*@__PURE__*/
-  fileDesc("CiZtb2R1bGVzL2JpbGxpbmcvcHJvdG8vdjEvcHJvZHVjdC5wcm90bxIYbW9kdWxlcy5iaWxsaW5nLnByb3RvLnYxIusCCgdQcm9kdWN0EgoKAmlkGAEgASgJEjsKCHByb3ZpZGVyGAIgASgOMikubW9kdWxlcy5iaWxsaW5nLnByb3RvLnYxLkJpbGxpbmdQcm92aWRlchIOCgZhY3RpdmUYAyABKAgSDAoEbmFtZRgEIAEoCRITCgtkZXNjcmlwdGlvbhgFIAEoCRIQCghmZWF0dXJlcxgGIAMoCRJBCghtZXRhZGF0YRgHIAMoCzIvLm1vZHVsZXMuYmlsbGluZy5wcm90by52MS5Qcm9kdWN0Lk1ldGFkYXRhRW50cnkSLgoKY3JlYXRlZF9hdBgUIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgVIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAaLwoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBYgZwcm90bzM", [file_google_protobuf_timestamp, file_modules_shared_proto_v1_billing_provider]);
+  fileDesc("CiZtb2R1bGVzL2JpbGxpbmcvcHJvdG8vdjEvcHJvZHVjdC5wcm90bxIYbW9kdWxlcy5iaWxsaW5nLnByb3RvLnYxIuoCCgdQcm9kdWN0EgoKAmlkGAEgASgJEjoKCHByb3ZpZGVyGAIgASgOMigubW9kdWxlcy5zaGFyZWQucHJvdG8udjEuQmlsbGluZ1Byb3ZpZGVyEg4KBmFjdGl2ZRgDIAEoCBIMCgRuYW1lGAQgASgJEhMKC2Rlc2NyaXB0aW9uGAUgASgJEhAKCGZlYXR1cmVzGAYgAygJEkEKCG1ldGFkYXRhGAcgAygLMi8ubW9kdWxlcy5iaWxsaW5nLnByb3RvLnYxLlByb2R1Y3QuTWV0YWRhdGFFbnRyeRIuCgpjcmVhdGVkX2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgp1cGRhdGVkX2F0GBUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBovCg1NZXRhZGF0YUVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAFiBnByb3RvMw", [file_google_protobuf_timestamp, file_modules_shared_proto_v1_billing_provider]);
 
 /**
  * A sellable product in the payment provider's catalog.
@@ -32,7 +32,7 @@ export type Product = Message<"modules.billing.proto.v1.Product"> & {
   /**
    * Payment provider.
    *
-   * @generated from field: modules.billing.proto.v1.BillingProvider provider = 2;
+   * @generated from field: modules.shared.proto.v1.BillingProvider provider = 2;
    */
   provider: BillingProvider;
 
@@ -102,7 +102,7 @@ export type ProductJson = {
   /**
    * Payment provider.
    *
-   * @generated from field: modules.billing.proto.v1.BillingProvider provider = 2;
+   * @generated from field: modules.shared.proto.v1.BillingProvider provider = 2;
    */
   provider?: BillingProviderJson;
 

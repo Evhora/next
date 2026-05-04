@@ -3,14 +3,14 @@ syntax = "proto3";
 package modules.billing.proto.v1;
 
 import "google/protobuf/timestamp.proto";
-import "modules/shared/proto/v1/billing-provider.proto";
+import "modules/shared/proto/v1/billing_provider.proto";
 
 // A sellable product in the payment provider's catalog.
 message Product {
   // Provider-issued product id.
   string id = 1;
   // Payment provider.
-  BillingProvider provider = 2;
+  modules.shared.proto.v1.BillingProvider provider = 2;
   // Whether the product is currently for sale.
   bool active = 3;
   // Display name.

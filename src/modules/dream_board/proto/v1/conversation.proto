@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package modules.dream_board.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+import "modules/dream_board/proto/v1/dream_board.proto";
+
+// A scripted chat that walks the user through creating a DreamBoard. At most
+// one non-archived Conversation exists per user; starting a new chat archives
+// the previous one.
+message Conversation {
+  string id = 1;
+  string user_id = 2;
+  // Position in the state machine — UI renders the matching input widgets.
+  ConversationState state = 3;
+  // Append-only message log. i18n keys + params so the UI owns locale.
+  repeated Message messages = 4;
+  // Selections accumulated as the chat progresses.
+  repeated string selected_dream_ids = 5;
+  DreamBoard.DreamBoardStyle selected_style = 6;
+  // True when the user chose to skip the reference photo — we still generate
+  // a board, just with a random person instead of their face.
+  bool photo_skipped = 7;
+  // Set when the chat finishes and a board is produced.
+  optional string dream_board_id = 8;
+  int64 version = 9;
+  google.protobuf.Timestamp created_at = 20;
+  google.protobuf.Timestamp updated_at = 21;
+  // Non-null when the chat is no longer active (new chat started, or done).
+  optional google.protobuf.Timestamp archived_at = 22;
+  // Non-null on explicit delete.
+  optional google.protobuf.Timestamp deleted_at = 23;
+
+  enum ConversationState {
+    CONVERSATION_STATE_UNSPECIFIED = 0;
+    // Opening greeting; user clicks "Start" to advance.
+    CONVERSATION_STATE_GREETING = 1;
+    // Asking whether to upload a photo. User can upload or skip.
+    CONVERSATION_STATE_ASK_PHOTO = 2;
+    // Asking which Dreams to include.
+    CONVERSATION_STATE_ASK_DREAMS = 3;
+    // Asking which visual style.
+    CONVERSATION_STATE_ASK_STYLE = 4;
+    // Summary + confirm. User can go back or generate.
+    CONVERSATION_STATE_CONFIRM = 5;
+    // Generation in-flight; UI shows a loading bubble.
+    CONVERSATION_STATE_GENERATING = 6;
+    // Board produced; chat ends here and the board is shown.
+    CONVERSATION_STATE_DONE = 7;
+    // Generation failed; user can retry or start over.
+    CONVERSATION_STATE_FAILED = 8;
+  }
+
+  // A single chat bubble. Texts are stored as translation keys so the server
+  // never bakes in the user's locale.
+  message Message {
+    MessageRole role = 1;
+    // i18n key under `pages.dreamBoard.chat.messages.*`. Empty when `text`
+    // is used instead (for user-submitted free text — not used today but
+    // reserved so adding it later doesn't need a proto bump).
+    string key = 2;
+    // Parameters interpolated into the translated string.
+    map<string, string> params = 3;
+    // Fallback verbatim text (used only when `key` is empty).
+    string text = 4;
+    google.protobuf.Timestamp sent_at = 5;
+  }
+
+  enum MessageRole {
+    MESSAGE_ROLE_UNSPECIFIED = 0;
+    MESSAGE_ROLE_BOT = 1;
+    MESSAGE_ROLE_USER = 2;
+  }
+}

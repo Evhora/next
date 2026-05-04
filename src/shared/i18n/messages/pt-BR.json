@@ -315,13 +315,77 @@
     },
     "dreamBoard": {
       "title": "Mural dos Sonhos",
-      "description": "Escolha até dois sonhos por área. Uma imagem será gerada por IA para cada um e você pode baixar seu mural como uma única imagem.",
-      "selectDream": "Sonho {slot}",
-      "noDream": "Nenhum",
-      "loadingImage": "Carregando imagem...",
-      "downloadImage": "Baixar mural",
-      "noImagesYet": "Selecione sonhos nas áreas abaixo para montar seu mural.",
-      "addOpenAIKey": "Configure GEMINI_API_KEY no .env.local para gerar imagens com IA."
+      "description": "Converse com a Evhora para criar um mural que visualiza seus sonhos.",
+      "deleteConfirm": "Excluir este mural? Esta ação não poderá ser desfeita.",
+      "deleteModal": {
+        "title": "Excluir conversa",
+        "description": "Esta ação não pode ser desfeita. Todos os dados desta conversa serão removidos permanentemente.",
+        "cancel": "Cancelar",
+        "confirm": "Sim, excluir"
+      },
+      "sidebar": {
+        "newChat": "Nova conversa",
+        "empty": "Nenhuma conversa ainda.",
+        "untitled": "Nova conversa",
+        "delete": "Excluir"
+      },
+      "chat": {
+        "remaining": "{remaining} de {limit} gerações hoje",
+        "photoHint": "JPEG, PNG ou WebP — até 5 MB.",
+        "composerPlaceholder": "Escolha uma opção abaixo",
+        "actions": {
+          "start": "Começar",
+          "uploadPhoto": "Enviar foto",
+          "replacePhoto": "Trocar foto",
+          "skipPhoto": "Pular",
+          "confirmDreams": "Confirmar sonhos",
+          "newDream": "Novo sonho",
+          "back": "Voltar",
+          "generate": "Gerar mural",
+          "download": "Baixar",
+          "newChat": "Começar nova conversa"
+        },
+        "confirm": {
+          "style": "Estilo: {style}",
+          "dreamsCount": "{count} sonho(s) selecionado(s)",
+          "withPhoto": "Com sua foto",
+          "withoutPhoto": "Sem foto (pessoa genérica)"
+        },
+        "messages": {
+          "greeting": "Oi! Sou a Evhora, sua assistente para visualizar sonhos. Vou te guiar em uma conversa curta para gerar um mural único com IA. Vamos lá?",
+          "askPhoto": "Quer enviar uma foto sua? Assim eu posso colocar você dentro da cena. Se preferir, podemos usar uma pessoa genérica.",
+          "askDreams": "Perfeito. Agora, selecione os sonhos que você quer ver no mural.",
+          "askStyle": "Ótima escolha. Em qual estilo visual você quer o mural?",
+          "confirmSummary": "Tudo pronto. Revise abaixo e clique em \"Gerar mural\" quando estiver satisfeito.",
+          "generating": "Beleza, estou pintando seu mural… Isso leva alguns segundos.",
+          "done": "Prontinho! Seu mural está pronto — você pode vê-lo e baixá-lo abaixo.",
+          "userStart": "Começar",
+          "userPhotoUploaded": "Foto enviada",
+          "userSkipPhoto": "Pular foto",
+          "userChoseDreams": "Escolhi: {titles}",
+          "userChoseStyle": "Estilo escolhido",
+          "userBack": "Voltar",
+          "userGenerate": "Gerar mural",
+          "failed": {
+            "QUOTA_EXCEEDED": "Você atingiu o limite de gerações hoje. Tente novamente amanhã.",
+            "INTEGRATION": "Não consegui gerar a imagem agora. Vamos tentar de novo mais tarde?",
+            "UNKNOWN": "Algo deu errado. Você pode tentar de novo."
+          }
+        },
+        "boardCard": {
+          "styleLabel": "Estilo: {style}"
+        }
+      },
+      "toast": {
+        "photoUploaded": "Foto salva com sucesso.",
+        "photoTooLarge": "A imagem é muito grande. Tente uma até 5 MB.",
+        "photoInvalidFormat": "Formato não suportado. Use JPEG, PNG ou WebP.",
+        "photoReadFailed": "Não foi possível ler a imagem.",
+        "generated": "Mural gerado com sucesso.",
+        "deleted": "Conversa excluída.",
+        "downloadFailed": "Não foi possível baixar a imagem.",
+        "quotaExhausted": "Você atingiu o limite de {limit} gerações hoje. Tente novamente amanhã."
+      }
     },
     "home": {
       "title": "Evhora",
@@ -363,6 +427,16 @@
         "BUSINESS_AND_FINANCE": "Negócios e Finanças",
         "SPIRITUALITY": "Espiritualidade",
         "LIFESTYLE": "Estilo de Vida"
+      }
+    },
+    "dreamBoard": {
+      "style": {
+        "UNSPECIFIED": "Não especificado",
+        "PHOTOREAL": "Fotorrealista",
+        "PAINTERLY": "Pintura a óleo",
+        "SCRAPBOOK": "Scrapbook",
+        "CINEMATIC": "Cinematográfico",
+        "WATERCOLOR": "Aquarela"
       }
     }
   }

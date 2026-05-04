@@ -1,4 +1,4 @@
-import { BillingProvider } from "@/modules/shared/proto/v1/billing-provider_pb";
+import { BillingProvider } from "@/modules/shared/proto/v1/billing_provider_pb";
 
 export { BillingProvider };
 

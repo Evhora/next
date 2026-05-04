@@ -42,6 +42,7 @@ export async function createDreamAction(
     );
     revalidatePath(DREAMS_PATH);
     revalidatePath("/dashboard");
+    revalidatePath("/dashboard/dream-board");
     return ok({ id: dream.id });
   } catch (error) {
     return failFromError(error);

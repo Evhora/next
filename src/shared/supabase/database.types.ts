@@ -259,6 +259,84 @@ export interface Database {
         };
         Relationships: [];
       };
+      dream_boards: {
+        Row: {
+          id: string;
+          user_id: string;
+          data: Json;
+          created_at: string;
+          updated_at: string;
+          deleted_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          data: Json;
+          created_at?: string;
+          updated_at?: string;
+          deleted_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          data?: Json;
+          created_at?: string;
+          updated_at?: string;
+          deleted_at?: string | null;
+        };
+        Relationships: [];
+      };
+      user_photos: {
+        Row: {
+          user_id: string;
+          data: Json;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          data: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          data?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      dream_board_conversations: {
+        Row: {
+          id: string;
+          user_id: string;
+          data: Json;
+          created_at: string;
+          updated_at: string;
+          archived_at: string | null;
+          deleted_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          data: Json;
+          created_at?: string;
+          updated_at?: string;
+          archived_at?: string | null;
+          deleted_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          data?: Json;
+          created_at?: string;
+          updated_at?: string;
+          archived_at?: string | null;
+          deleted_at?: string | null;
+        };
+        Relationships: [];
+      };
       billing_invoices: {
         Row: {
           id: string;

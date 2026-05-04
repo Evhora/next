@@ -20,6 +20,14 @@ import { StripePaymentProvider } from "@/modules/billing/infrastructure/stripe-p
 import { SupabaseBillingRepository } from "@/modules/billing/infrastructure/supabase-billing-repository";
 import { SentenceRepository } from "@/modules/dashboard/domain/sentence-repository";
 import { SupabaseSentenceRepository } from "@/modules/dashboard/infrastructure/supabase-sentence-repository";
+import { DreamBoardImageClient } from "@/modules/dream_board/application/generate-dream-board";
+import { ConversationRepository } from "@/modules/dream_board/domain/conversation-repository";
+import { DreamBoardRepository } from "@/modules/dream_board/domain/dream-board-repository";
+import { UserPhotoRepository } from "@/modules/dream_board/domain/user-photo-repository";
+import { GeminiImageClient } from "@/modules/dream_board/infrastructure/gemini-image-client";
+import { SupabaseConversationRepository } from "@/modules/dream_board/infrastructure/supabase-conversation-repository";
+import { SupabaseDreamBoardRepository } from "@/modules/dream_board/infrastructure/supabase-dream-board-repository";
+import { SupabaseUserPhotoRepository } from "@/modules/dream_board/infrastructure/supabase-user-photo-repository";
 import { DreamRepository } from "@/modules/dreams/domain/dream-repository";
 import { SupabaseDreamRepository } from "@/modules/dreams/infrastructure/supabase-dream-repository";
 
@@ -41,6 +49,10 @@ export interface AppContext {
   sentences: SentenceRepository;
   billing: BillingRepository;
   payments: PaymentProvider;
+  dreamBoards: DreamBoardRepository;
+  userPhotos: UserPhotoRepository;
+  conversations: ConversationRepository;
+  imageClient: DreamBoardImageClient;
 }
 
 /**
@@ -75,6 +87,10 @@ export const buildCtx = cache(async (): Promise<AppContext> => {
     sentences: new SupabaseSentenceRepository(supabase),
     billing: new SupabaseBillingRepository(supabase),
     payments: new StripePaymentProvider(),
+    dreamBoards: new SupabaseDreamBoardRepository(supabase),
+    userPhotos: new SupabaseUserPhotoRepository(supabase),
+    conversations: new SupabaseConversationRepository(supabase),
+    imageClient: new GeminiImageClient(),
   };
 });
 

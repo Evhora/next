@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package modules.dream_board.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// The reference photo a user uploads once so it can be composited into every
+// DreamBoard they generate. Scoped to this module because its only purpose is
+// driving Nano Banana image fusion — not a general profile avatar.
+message UserPhoto {
+  // Owner of the photo. One row per user.
+  string user_id = 1;
+  // Supabase Storage path, e.g. `<user_id>.jpg`. Private bucket; read via
+  // signed URL produced by the repository.
+  string storage_path = 2;
+  // Optimistic-concurrency version, bumped on each replacement.
+  int64 version = 3;
+  // The timestamp when the UserPhoto was first uploaded.
+  google.protobuf.Timestamp created_at = 20;
+  // The timestamp when the UserPhoto was last replaced.
+  google.protobuf.Timestamp updated_at = 21;
+}
