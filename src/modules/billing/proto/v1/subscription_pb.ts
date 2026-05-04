@@ -6,15 +6,15 @@ import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2"
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Timestamp, TimestampJson } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
-import type { BillingProvider, BillingProviderJson } from "../../../shared/proto/v1/billing-provider_pb";
-import { file_modules_shared_proto_v1_billing_provider } from "../../../shared/proto/v1/billing-provider_pb";
+import type { BillingProvider, BillingProviderJson } from "../../../shared/proto/v1/billing_provider_pb";
+import { file_modules_shared_proto_v1_billing_provider } from "../../../shared/proto/v1/billing_provider_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file modules/billing/proto/v1/subscription.proto.
  */
 export const file_modules_billing_proto_v1_subscription: GenFile = /*@__PURE__*/
-  fileDesc("Cittb2R1bGVzL2JpbGxpbmcvcHJvdG8vdjEvc3Vic2NyaXB0aW9uLnByb3RvEhhtb2R1bGVzLmJpbGxpbmcucHJvdG8udjEi0gYKDFN1YnNjcmlwdGlvbhIKCgJpZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEjsKCHByb3ZpZGVyGAMgASgOMikubW9kdWxlcy5iaWxsaW5nLnByb3RvLnYxLkJpbGxpbmdQcm92aWRlchIQCghwcmljZV9pZBgEIAEoCRJJCgZzdGF0dXMYBSABKA4yOS5tb2R1bGVzLmJpbGxpbmcucHJvdG8udjEuU3Vic2NyaXB0aW9uLlN1YnNjcmlwdGlvblN0YXR1cxIyCgl0cmlhbF9lbmQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSACIAQESOwoSY3VycmVudF9wZXJpb2RfZW5kGAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEgBiAEBEhwKFGNhbmNlbF9hdF9wZXJpb2RfZW5kGAggASgIEi4KCmNyZWF0ZWRfYXQYFCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCnVwZGF0ZWRfYXQYFSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEksKDnN0YXR1c19oaXN0b3J5GBYgAygLMjMubW9kdWxlcy5iaWxsaW5nLnByb3RvLnYxLlN1YnNjcmlwdGlvbi5TdGF0dXNDaGFuZ2UaiQEKDFN0YXR1c0NoYW5nZRJJCgZzdGF0dXMYASABKA4yOS5tb2R1bGVzLmJpbGxpbmcucHJvdG8udjEuU3Vic2NyaXB0aW9uLlN1YnNjcmlwdGlvblN0YXR1cxIuCgpjaGFuZ2VkX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCKdAQoSU3Vic2NyaXB0aW9uU3RhdHVzEiMKH1NVQlNDUklQVElPTl9TVEFUVVNfVU5TUEVDSUZJRUQQABIgChxTVUJTQ1JJUFRJT05fU1RBVFVTX1RSSUFMSU5HEAESHgoaU1VCU0NSSVBUSU9OX1NUQVRVU19BQ1RJVkUQAhIgChxTVUJTQ1JJUFRJT05fU1RBVFVTX0lOQUNUSVZFEANCDAoKX3RyaWFsX2VuZEIVChNfY3VycmVudF9wZXJpb2RfZW5kYgZwcm90bzM", [file_google_protobuf_timestamp, file_modules_shared_proto_v1_billing_provider]);
+  fileDesc("Cittb2R1bGVzL2JpbGxpbmcvcHJvdG8vdjEvc3Vic2NyaXB0aW9uLnByb3RvEhhtb2R1bGVzLmJpbGxpbmcucHJvdG8udjEi0QYKDFN1YnNjcmlwdGlvbhIKCgJpZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEjoKCHByb3ZpZGVyGAMgASgOMigubW9kdWxlcy5zaGFyZWQucHJvdG8udjEuQmlsbGluZ1Byb3ZpZGVyEhAKCHByaWNlX2lkGAQgASgJEkkKBnN0YXR1cxgFIAEoDjI5Lm1vZHVsZXMuYmlsbGluZy5wcm90by52MS5TdWJzY3JpcHRpb24uU3Vic2NyaXB0aW9uU3RhdHVzEjIKCXRyaWFsX2VuZBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBIAIgBARI7ChJjdXJyZW50X3BlcmlvZF9lbmQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSAGIAQESHAoUY2FuY2VsX2F0X3BlcmlvZF9lbmQYCCABKAgSLgoKY3JlYXRlZF9hdBgUIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgVIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASSwoOc3RhdHVzX2hpc3RvcnkYFiADKAsyMy5tb2R1bGVzLmJpbGxpbmcucHJvdG8udjEuU3Vic2NyaXB0aW9uLlN0YXR1c0NoYW5nZRqJAQoMU3RhdHVzQ2hhbmdlEkkKBnN0YXR1cxgBIAEoDjI5Lm1vZHVsZXMuYmlsbGluZy5wcm90by52MS5TdWJzY3JpcHRpb24uU3Vic2NyaXB0aW9uU3RhdHVzEi4KCmNoYW5nZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIp0BChJTdWJzY3JpcHRpb25TdGF0dXMSIwofU1VCU0NSSVBUSU9OX1NUQVRVU19VTlNQRUNJRklFRBAAEiAKHFNVQlNDUklQVElPTl9TVEFUVVNfVFJJQUxJTkcQARIeChpTVUJTQ1JJUFRJT05fU1RBVFVTX0FDVElWRRACEiAKHFNVQlNDUklQVElPTl9TVEFUVVNfSU5BQ1RJVkUQA0IMCgpfdHJpYWxfZW5kQhUKE19jdXJyZW50X3BlcmlvZF9lbmRiBnByb3RvMw", [file_google_protobuf_timestamp, file_modules_shared_proto_v1_billing_provider]);
 
 /**
  * A user's recurring subscription.
@@ -39,7 +39,7 @@ export type Subscription = Message<"modules.billing.proto.v1.Subscription"> & {
   /**
    * Payment provider.
    *
-   * @generated from field: modules.billing.proto.v1.BillingProvider provider = 3;
+   * @generated from field: modules.shared.proto.v1.BillingProvider provider = 3;
    */
   provider: BillingProvider;
 
@@ -126,7 +126,7 @@ export type SubscriptionJson = {
   /**
    * Payment provider.
    *
-   * @generated from field: modules.billing.proto.v1.BillingProvider provider = 3;
+   * @generated from field: modules.shared.proto.v1.BillingProvider provider = 3;
    */
   provider?: BillingProviderJson;
 

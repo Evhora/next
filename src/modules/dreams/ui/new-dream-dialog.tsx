@@ -37,9 +37,10 @@ const AREA_ICON: Record<Dream_DreamAreaOfLife, string> = {
 
 interface NewDreamDialogProps {
   trigger: ReactNode;
+  onCreated?: (dreamId: string) => void;
 }
 
-export function NewDreamDialog({ trigger }: NewDreamDialogProps) {
+export function NewDreamDialog({ trigger, onCreated }: NewDreamDialogProps) {
   const t = useTranslations();
   const [open, setOpen] = useState(false);
   const [areaOfLife, setAreaOfLife] = useState<Dream_DreamAreaOfLife | "">("");
@@ -55,6 +56,7 @@ export function NewDreamDialog({ trigger }: NewDreamDialogProps) {
       toast.success(t("pages.dreams.form.created"));
       setOpen(false);
       setAreaOfLife("");
+      onCreated?.(state.data.id);
     } else {
       toast.error(state.message);
     }

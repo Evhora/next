@@ -3,14 +3,14 @@ syntax = "proto3";
 package modules.billing.proto.v1;
 
 import "google/protobuf/timestamp.proto";
-import "modules/shared/proto/v1/billing-provider.proto";
+import "modules/shared/proto/v1/billing_provider.proto";
 
 // A specific price point for a Product (e.g. monthly R$29).
 message Price {
   // Provider-issued price id.
   string id = 1;
   // Payment provider.
-  BillingProvider provider = 2;
+  modules.shared.proto.v1.BillingProvider provider = 2;
   // Id of the owning Product.
   string product_id = 3;
   // Whether the price is currently for sale.

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package modules.billing.proto.v1;
+package modules.shared.proto.v1;
 
 // Payment provider a billing entity (customer/product/price/subscription/invoice) belongs to.
 enum BillingProvider {

@@ -3,14 +3,14 @@ syntax = "proto3";
 package modules.billing.proto.v1;
 
 import "google/protobuf/timestamp.proto";
-import "modules/shared/proto/v1/billing-provider.proto";
+import "modules/shared/proto/v1/billing_provider.proto";
 
 // A billing invoice.
 message Invoice {
   // Provider-issued invoice id.
   string id = 1;
   // Payment provider.
-  BillingProvider provider = 2;
+  modules.shared.proto.v1.BillingProvider provider = 2;
   // Supabase auth user id.
   string user_id = 3;
   // Subscription the invoice belongs to (if any).

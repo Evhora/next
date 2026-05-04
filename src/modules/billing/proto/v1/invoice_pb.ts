@@ -6,15 +6,15 @@ import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2"
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Timestamp, TimestampJson } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
-import type { BillingProvider, BillingProviderJson } from "../../../shared/proto/v1/billing-provider_pb";
-import { file_modules_shared_proto_v1_billing_provider } from "../../../shared/proto/v1/billing-provider_pb";
+import type { BillingProvider, BillingProviderJson } from "../../../shared/proto/v1/billing_provider_pb";
+import { file_modules_shared_proto_v1_billing_provider } from "../../../shared/proto/v1/billing_provider_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file modules/billing/proto/v1/invoice.proto.
  */
 export const file_modules_billing_proto_v1_invoice: GenFile = /*@__PURE__*/
-  fileDesc("CiZtb2R1bGVzL2JpbGxpbmcvcHJvdG8vdjEvaW52b2ljZS5wcm90bxIYbW9kdWxlcy5iaWxsaW5nLnByb3RvLnYxIpsGCgdJbnZvaWNlEgoKAmlkGAEgASgJEjsKCHByb3ZpZGVyGAIgASgOMikubW9kdWxlcy5iaWxsaW5nLnByb3RvLnYxLkJpbGxpbmdQcm92aWRlchIPCgd1c2VyX2lkGAMgASgJEhcKD3N1YnNjcmlwdGlvbl9pZBgEIAEoCRI/CgZzdGF0dXMYBSABKA4yLy5tb2R1bGVzLmJpbGxpbmcucHJvdG8udjEuSW52b2ljZS5JbnZvaWNlU3RhdHVzEhIKCmFtb3VudF9kdWUYBiABKAMSEwoLYW1vdW50X3BhaWQYByABKAMSEAoIY3VycmVuY3kYCCABKAkSDgoGbnVtYmVyGAkgASgJEhoKEmhvc3RlZF9pbnZvaWNlX3VybBgKIAEoCRITCgtpbnZvaWNlX3BkZhgLIAEoCRIuCgpjcmVhdGVkX2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgp1cGRhdGVkX2F0GBUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBJGCg5zdGF0dXNfaGlzdG9yeRgWIAMoCzIuLm1vZHVsZXMuYmlsbGluZy5wcm90by52MS5JbnZvaWNlLlN0YXR1c0NoYW5nZRp/CgxTdGF0dXNDaGFuZ2USPwoGc3RhdHVzGAEgASgOMi8ubW9kdWxlcy5iaWxsaW5nLnByb3RvLnYxLkludm9pY2UuSW52b2ljZVN0YXR1cxIuCgpjaGFuZ2VkX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCK2AQoNSW52b2ljZVN0YXR1cxIeChpJTlZPSUNFX1NUQVRVU19VTlNQRUNJRklFRBAAEhgKFElOVk9JQ0VfU1RBVFVTX0RSQUZUEAESFwoTSU5WT0lDRV9TVEFUVVNfT1BFThACEhcKE0lOVk9JQ0VfU1RBVFVTX1BBSUQQAxIgChxJTlZPSUNFX1NUQVRVU19VTkNPTExFQ1RJQkxFEAQSFwoTSU5WT0lDRV9TVEFUVVNfVk9JRBAFYgZwcm90bzM", [file_google_protobuf_timestamp, file_modules_shared_proto_v1_billing_provider]);
+  fileDesc("CiZtb2R1bGVzL2JpbGxpbmcvcHJvdG8vdjEvaW52b2ljZS5wcm90bxIYbW9kdWxlcy5iaWxsaW5nLnByb3RvLnYxIpoGCgdJbnZvaWNlEgoKAmlkGAEgASgJEjoKCHByb3ZpZGVyGAIgASgOMigubW9kdWxlcy5zaGFyZWQucHJvdG8udjEuQmlsbGluZ1Byb3ZpZGVyEg8KB3VzZXJfaWQYAyABKAkSFwoPc3Vic2NyaXB0aW9uX2lkGAQgASgJEj8KBnN0YXR1cxgFIAEoDjIvLm1vZHVsZXMuYmlsbGluZy5wcm90by52MS5JbnZvaWNlLkludm9pY2VTdGF0dXMSEgoKYW1vdW50X2R1ZRgGIAEoAxITCgthbW91bnRfcGFpZBgHIAEoAxIQCghjdXJyZW5jeRgIIAEoCRIOCgZudW1iZXIYCSABKAkSGgoSaG9zdGVkX2ludm9pY2VfdXJsGAogASgJEhMKC2ludm9pY2VfcGRmGAsgASgJEi4KCmNyZWF0ZWRfYXQYFCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCnVwZGF0ZWRfYXQYFSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEkYKDnN0YXR1c19oaXN0b3J5GBYgAygLMi4ubW9kdWxlcy5iaWxsaW5nLnByb3RvLnYxLkludm9pY2UuU3RhdHVzQ2hhbmdlGn8KDFN0YXR1c0NoYW5nZRI/CgZzdGF0dXMYASABKA4yLy5tb2R1bGVzLmJpbGxpbmcucHJvdG8udjEuSW52b2ljZS5JbnZvaWNlU3RhdHVzEi4KCmNoYW5nZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIrYBCg1JbnZvaWNlU3RhdHVzEh4KGklOVk9JQ0VfU1RBVFVTX1VOU1BFQ0lGSUVEEAASGAoUSU5WT0lDRV9TVEFUVVNfRFJBRlQQARIXChNJTlZPSUNFX1NUQVRVU19PUEVOEAISFwoTSU5WT0lDRV9TVEFUVVNfUEFJRBADEiAKHElOVk9JQ0VfU1RBVFVTX1VOQ09MTEVDVElCTEUQBBIXChNJTlZPSUNFX1NUQVRVU19WT0lEEAViBnByb3RvMw", [file_google_protobuf_timestamp, file_modules_shared_proto_v1_billing_provider]);
 
 /**
  * A billing invoice.
@@ -32,7 +32,7 @@ export type Invoice = Message<"modules.billing.proto.v1.Invoice"> & {
   /**
    * Payment provider.
    *
-   * @generated from field: modules.billing.proto.v1.BillingProvider provider = 2;
+   * @generated from field: modules.shared.proto.v1.BillingProvider provider = 2;
    */
   provider: BillingProvider;
 
@@ -139,7 +139,7 @@ export type InvoiceJson = {
   /**
    * Payment provider.
    *
-   * @generated from field: modules.billing.proto.v1.BillingProvider provider = 2;
+   * @generated from field: modules.shared.proto.v1.BillingProvider provider = 2;
    */
   provider?: BillingProviderJson;
 

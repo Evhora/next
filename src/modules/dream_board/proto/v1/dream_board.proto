@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package modules.dream_board.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// A generated vision-board image fusing the user's photo into a scene that
+// represents one or more of their Dreams.
+message DreamBoard {
+  // The unique identifier for the DreamBoard.
+  string id = 1;
+  // The user ID of the owner.
+  string user_id = 2;
+  // IDs of the Dreams composed into this board (not validated as UUIDs here
+  // so the proto layer stays schema-only; zod enforces at the app boundary).
+  repeated string dream_ids = 3;
+  // Visual style the image was rendered in.
+  DreamBoardStyle style = 4;
+  // Supabase Storage path for the generated PNG, e.g. `<user_id>/<id>.png`.
+  // Bucket is private; UI consumes signed URLs produced by the repository.
+  string storage_path = 5;
+  // Optimistic-concurrency version, bumped by every domain mutator.
+  int64 version = 6;
+  // The timestamp when the DreamBoard was created.
+  google.protobuf.Timestamp created_at = 20;
+  // The timestamp when the DreamBoard was last updated.
+  google.protobuf.Timestamp updated_at = 21;
+  // The timestamp when the DreamBoard was deleted.
+  optional google.protobuf.Timestamp deleted_at = 22;
+
+  // Rendering styles the user can pick from. The set is a closed enum — the
+  // server builds the prompt so users can never push a free-text style.
+  enum DreamBoardStyle {
+    // No style specified.
+    DREAM_BOARD_STYLE_UNSPECIFIED = 0;
+    // Photorealistic composition.
+    DREAM_BOARD_STYLE_PHOTOREAL = 1;
+    // Painterly / oil-painting composition.
+    DREAM_BOARD_STYLE_PAINTERLY = 2;
+    // Scrapbook / collage composition.
+    DREAM_BOARD_STYLE_SCRAPBOOK = 3;
+    // Cinematic / dramatic lighting composition.
+    DREAM_BOARD_STYLE_CINEMATIC = 4;
+    // Watercolor composition.
+    DREAM_BOARD_STYLE_WATERCOLOR = 5;
+  }
+}

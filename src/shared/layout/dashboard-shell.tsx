@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/shared/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/shared/ui/sidebar";
 import { Sidebar } from "./sidebar";
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
@@ -12,10 +8,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <Sidebar />
       <SidebarInset>
-        <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4 md:hidden">
-          <SidebarTrigger />
-        </header>
-        <main className="flex-1 overflow-y-auto">{children}</main>
+        <main className="flex-1 overflow-y-auto flex flex-col">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

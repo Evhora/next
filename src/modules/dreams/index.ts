@@ -39,3 +39,5 @@ export {
 export { updateDreamStatus } from "./application/update-dream-status";
 
 export { SupabaseDreamRepository } from "./infrastructure/supabase-dream-repository";
+
+export { NewDreamDialog } from "./ui/new-dream-dialog";

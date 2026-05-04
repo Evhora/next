@@ -6,15 +6,15 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Timestamp, TimestampJson } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
-import type { BillingProvider, BillingProviderJson } from "../../../shared/proto/v1/billing-provider_pb";
-import { file_modules_shared_proto_v1_billing_provider } from "../../../shared/proto/v1/billing-provider_pb";
+import type { BillingProvider, BillingProviderJson } from "../../../shared/proto/v1/billing_provider_pb";
+import { file_modules_shared_proto_v1_billing_provider } from "../../../shared/proto/v1/billing_provider_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file modules/billing/proto/v1/customer.proto.
  */
 export const file_modules_billing_proto_v1_customer: GenFile = /*@__PURE__*/
-  fileDesc("Cidtb2R1bGVzL2JpbGxpbmcvcHJvdG8vdjEvY3VzdG9tZXIucHJvdG8SGG1vZHVsZXMuYmlsbGluZy5wcm90by52MSLiAQoIQ3VzdG9tZXISCgoCaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRI7Cghwcm92aWRlchgDIAEoDjIpLm1vZHVsZXMuYmlsbGluZy5wcm90by52MS5CaWxsaW5nUHJvdmlkZXISHAoUcHJvdmlkZXJfY3VzdG9tZXJfaWQYBCABKAkSLgoKY3JlYXRlZF9hdBgUIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgVIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBiBnByb3RvMw", [file_google_protobuf_timestamp, file_modules_shared_proto_v1_billing_provider]);
+  fileDesc("Cidtb2R1bGVzL2JpbGxpbmcvcHJvdG8vdjEvY3VzdG9tZXIucHJvdG8SGG1vZHVsZXMuYmlsbGluZy5wcm90by52MSLhAQoIQ3VzdG9tZXISCgoCaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRI6Cghwcm92aWRlchgDIAEoDjIoLm1vZHVsZXMuc2hhcmVkLnByb3RvLnYxLkJpbGxpbmdQcm92aWRlchIcChRwcm92aWRlcl9jdXN0b21lcl9pZBgEIAEoCRIuCgpjcmVhdGVkX2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgp1cGRhdGVkX2F0GBUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcGIGcHJvdG8z", [file_google_protobuf_timestamp, file_modules_shared_proto_v1_billing_provider]);
 
 /**
  * Ties a Supabase auth user to an external payment provider customer
@@ -40,7 +40,7 @@ export type Customer = Message<"modules.billing.proto.v1.Customer"> & {
   /**
    * Payment provider.
    *
-   * @generated from field: modules.billing.proto.v1.BillingProvider provider = 3;
+   * @generated from field: modules.shared.proto.v1.BillingProvider provider = 3;
    */
   provider: BillingProvider;
 
@@ -90,7 +90,7 @@ export type CustomerJson = {
   /**
    * Payment provider.
    *
-   * @generated from field: modules.billing.proto.v1.BillingProvider provider = 3;
+   * @generated from field: modules.shared.proto.v1.BillingProvider provider = 3;
    */
   provider?: BillingProviderJson;
 
