@@ -53,6 +53,8 @@ import {
   SELECTABLE_DREAM_STATUSES,
 } from "../domain/labels";
 
+import { ConfirmDeleteDialog } from "@/shared/ui/confirm-delete-dialog";
+
 import { deleteDreamAction, updateDreamStatusAction } from "./actions";
 
 export interface DreamProgress {
@@ -91,43 +93,11 @@ export function DreamsTable({ dreams, progress = {} }: DreamsTableProps) {
   const t = useTranslations();
   const [isPending, startTransition] = useTransition();
 
-  // Selection
-  const [selected, setSelected] = useState<Set<string>>(new Set());
-
   // Pagination
   const [pageSize, setPageSize] = useState<number>(10);
   const [page, setPage] = useState(1);
   const totalPages = Math.max(1, Math.ceil(dreams.length / pageSize));
   const pageDreams = dreams.slice((page - 1) * pageSize, page * pageSize);
-
-  const allPageSelected =
-    pageDreams.length > 0 && pageDreams.every((d) => selected.has(d.id));
-  const somePageSelected =
-    pageDreams.some((d) => selected.has(d.id)) && !allPageSelected;
-
-  const toggleAll = () => {
-    if (allPageSelected) {
-      setSelected((prev) => {
-        const next = new Set(prev);
-        pageDreams.forEach((d) => next.delete(d.id));
-        return next;
-      });
-    } else {
-      setSelected((prev) => {
-        const next = new Set(prev);
-        pageDreams.forEach((d) => next.add(d.id));
-        return next;
-      });
-    }
-  };
-
-  const toggleRow = (id: string) => {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
-  };
 
   const handleStatusChange = (id: string, nextStatus: number) => {
     startTransition(async () => {
@@ -137,7 +107,6 @@ export function DreamsTable({ dreams, progress = {} }: DreamsTableProps) {
   };
 
   const handleDelete = (id: string) => {
-    if (!window.confirm(t("pages.dreams.deleteConfirm"))) return;
     startTransition(async () => {
       const result = await deleteDreamAction(id);
       if (!result.ok) toast.error(result.message);
@@ -180,7 +149,6 @@ export function DreamsTable({ dreams, progress = {} }: DreamsTableProps) {
               return (
                 <TableRow
                   key={dream.id}
-                  data-state={selected.has(dream.id) ? "selected" : undefined}
                   className="group border-b last:border-0"
                 >
                   {/* Title */}
@@ -266,13 +234,19 @@ export function DreamsTable({ dreams, progress = {} }: DreamsTableProps) {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem
-                          className="text-destructive focus:text-destructive"
-                          onClick={() => handleDelete(dream.id)}
-                        >
-                          <Trash2 className="size-4 shrink-0 text-destructive" />
-                          {t("pages.dreams.delete")}
-                        </DropdownMenuItem>
+                        <ConfirmDeleteDialog
+                          description={t("pages.dreams.deleteConfirm")}
+                          onConfirm={() => handleDelete(dream.id)}
+                          trigger={
+                            <DropdownMenuItem
+                              className="text-destructive focus:text-destructive"
+                              onSelect={(e) => e.preventDefault()}
+                            >
+                              <Trash2 className="size-4 shrink-0 text-destructive" />
+                              {t("pages.dreams.delete")}
+                            </DropdownMenuItem>
+                          }
+                        />
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
@@ -287,7 +261,7 @@ export function DreamsTable({ dreams, progress = {} }: DreamsTableProps) {
       <div className="flex flex-col gap-3 border-t bg-muted/20 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
         {/* Selection count */}
         <p className="text-xs text-muted-foreground">
-          {selected.size} de {dreams.length} linha(s) selecionada(s).
+          {dreams.length} linha(s) no total.
         </p>
 
         {/* Pagination controls */}

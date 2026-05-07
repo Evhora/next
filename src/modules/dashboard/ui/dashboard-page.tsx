@@ -1,5 +1,4 @@
 import {
-  CheckCircle2,
   LayoutDashboard,
   ListChecks,
   Target,
@@ -7,7 +6,6 @@ import {
   Zap,
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
@@ -139,7 +137,7 @@ async function DashboardContent() {
         <Card>
           <CardHeader>
             <CardDescription>
-              {t("pages.dashboard.progress.todayActions")}
+              {t("pages.dashboard.learning.todayActions")}
             </CardDescription>
             <CardTitle className="text-4xl tabular-nums text-orange-500">
               {summary.todayActions.completed}
@@ -159,7 +157,7 @@ async function DashboardContent() {
             />
             <p className="mt-2 text-xs text-muted-foreground">
               {summary.todayActions.progress}%{" "}
-              {t("pages.dashboard.progress.completed", {
+              {t("pages.dashboard.learning.completed", {
                 completed: summary.todayActions.completed,
                 total: summary.todayActions.total,
               }).toLowerCase()}
@@ -186,84 +184,6 @@ async function DashboardContent() {
             <p className="mt-2 text-xs text-muted-foreground">
               {summary.dreams.completed} de {summary.dreams.total} sonhos
             </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Domain cards */}
-      <div
-        className="grid gap-4 duration-700 animate-in fade-in slide-in-from-bottom-2 lg:grid-cols-2"
-        style={{ animationDelay: "300ms", animationFillMode: "both" }}
-      >
-        <Card>
-          <CardHeader>
-            <CardDescription>{t("pages.dreams.title")}</CardDescription>
-            <CardTitle className="text-4xl tabular-nums">
-              {summary.dreams.total}
-            </CardTitle>
-            <CardAction>
-              <Link
-                href="/dashboard/dreams"
-                className="text-xs text-muted-foreground underline-offset-4 hover:underline"
-              >
-                Ver todos
-              </Link>
-            </CardAction>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-1.5 text-muted-foreground">
-                <CheckCircle2 className="size-3.5 text-purple-500" />
-                {summary.dreams.completed} concluídos
-              </span>
-              <span className="font-semibold tabular-nums text-purple-500">
-                {summary.dreams.progressPercent}%
-              </span>
-            </div>
-            <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-muted">
-              <div
-                className="h-full rounded-full bg-purple-500 transition-all duration-700"
-                style={{
-                  width: `${Math.min(summary.dreams.progressPercent, 100)}%`,
-                }}
-              />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardDescription>{t("pages.actions.title")}</CardDescription>
-            <CardTitle className="text-4xl tabular-nums">
-              {summary.actions.total}
-            </CardTitle>
-            <CardAction>
-              <Link
-                href="/dashboard/actions"
-                className="text-xs text-muted-foreground underline-offset-4 hover:underline"
-              >
-                Ver todos
-              </Link>
-            </CardAction>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-1.5 text-muted-foreground">
-                <CheckCircle2 className="size-3.5 text-purple-400" />
-                {summary.actions.completed} concluídas
-              </span>
-              <span className="font-semibold tabular-nums text-purple-400">
-                {summary.actions.progressPercent}%
-              </span>
-            </div>
-            <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-muted">
-              <div
-                className="h-full rounded-full bg-purple-400 transition-all duration-700"
-                style={{
-                  width: `${Math.min(summary.actions.progressPercent, 100)}%`,
-                }}
-              />
-            </div>
           </CardContent>
         </Card>
       </div>
