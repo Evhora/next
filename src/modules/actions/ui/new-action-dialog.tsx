@@ -134,6 +134,9 @@ export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
                 required
                 placeholder={t("pages.actions.form.actionTitlePlaceholder")}
               />
+              <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                {t("pages.actions.form.actionTitleHint")}
+              </p>
             </div>
 
             {/* Recurrence */}
@@ -165,6 +168,9 @@ export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
                   ))}
                 </SelectContent>
               </Select>
+              <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                {t("pages.actions.form.recurrenceHint")}
+              </p>
             </div>
 
             {/* Due date */}
@@ -173,6 +179,9 @@ export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
                 {t("pages.actions.form.dueDate")}
               </Label>
               <Input id="dueDate" name="dueDate" type="date" />
+              <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                {t("pages.actions.form.dueDateHint")}
+              </p>
             </div>
 
             {/* Dream — full width */}
@@ -209,6 +218,9 @@ export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
                   ))}
                 </SelectContent>
               </Select>
+              <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                {t("pages.actions.form.dreamHint")}
+              </p>
             </div>
           </div>
 

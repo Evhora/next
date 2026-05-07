@@ -3,6 +3,10 @@
 import type { LucideIcon } from "lucide-react";
 import {
   Briefcase,
+  ChevronFirstIcon,
+  ChevronLastIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   Heart,
   Leaf,
   MoreHorizontalIcon,
@@ -11,7 +15,7 @@ import {
   Users,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { toast } from "sonner";
 
 import { Dream_DreamAreaOfLife } from "@/modules/dreams/domain/dream";
@@ -47,6 +51,8 @@ import {
   SELECTABLE_ACTION_STATUSES,
 } from "../domain/labels";
 
+import { ConfirmDeleteDialog } from "@/shared/ui/confirm-delete-dialog";
+
 import { deleteActionAction, updateActionStatusAction } from "./actions";
 
 interface ActionsTableProps {
@@ -69,9 +75,15 @@ const STATUS_DOT: Record<Action_ActionStatus, string> = {
   [Action_ActionStatus.COMPLETED]: "bg-rose-500",
 };
 
+const PAGE_SIZES = [10, 20, 50] as const;
+
 export function ActionsTable({ actions }: ActionsTableProps) {
   const t = useTranslations();
   const [isPending, startTransition] = useTransition();
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [page, setPage] = useState(1);
+  const totalPages = Math.max(1, Math.ceil(actions.length / pageSize));
+  const pageActions = actions.slice((page - 1) * pageSize, page * pageSize);
 
   const handleStatusChange = (id: string, status: Action_ActionStatus) => {
     startTransition(async () => {
@@ -81,7 +93,6 @@ export function ActionsTable({ actions }: ActionsTableProps) {
   };
 
   const handleDelete = (id: string) => {
-    if (!window.confirm(t("pages.actions.deleteConfirm"))) return;
     startTransition(async () => {
       const result = await deleteActionAction(id);
       if (!result.ok) toast.error(result.message);
@@ -114,7 +125,7 @@ export function ActionsTable({ actions }: ActionsTableProps) {
           </TableHeader>
 
           <TableBody>
-            {actions.map((action) => {
+            {pageActions.map((action) => {
               const recurrenceKey = ACTION_RECURRENCE_LABELS[action.recurrence];
               const hasArea =
                 action.dreamAreaOfLife !== Dream_DreamAreaOfLife.UNSPECIFIED;
@@ -234,13 +245,19 @@ export function ActionsTable({ actions }: ActionsTableProps) {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem
-                          className="text-destructive focus:text-destructive"
-                          onClick={() => handleDelete(action.id)}
-                        >
-                          <Trash2 className="size-4 shrink-0 text-destructive" />
-                          {t("pages.actions.delete")}
-                        </DropdownMenuItem>
+                        <ConfirmDeleteDialog
+                          description={t("pages.actions.deleteConfirm")}
+                          onConfirm={() => handleDelete(action.id)}
+                          trigger={
+                            <DropdownMenuItem
+                              className="text-destructive focus:text-destructive"
+                              onSelect={(e) => e.preventDefault()}
+                            >
+                              <Trash2 className="size-4 shrink-0 text-destructive" />
+                              {t("pages.actions.delete")}
+                            </DropdownMenuItem>
+                          }
+                        />
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
@@ -249,6 +266,81 @@ export function ActionsTable({ actions }: ActionsTableProps) {
             })}
           </TableBody>
         </Table>
+      </div>
+
+      {/* Footer */}
+      <div className="flex flex-col gap-3 border-t bg-muted/20 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-xs text-muted-foreground">
+          {actions.length} linha(s) no total.
+        </p>
+        <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <span className="hidden sm:inline">Linhas por página</span>
+            <Select
+              value={String(pageSize)}
+              onValueChange={(v) => {
+                setPageSize(Number(v));
+                setPage(1);
+              }}
+            >
+              <SelectTrigger className="h-7 w-16 text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {PAGE_SIZES.map((s) => (
+                  <SelectItem key={s} value={String(s)}>
+                    {s}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <span className="text-xs text-muted-foreground">
+            Página {page} de {totalPages}
+          </span>
+          <div className="flex items-center gap-1">
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-7"
+              onClick={() => setPage(1)}
+              disabled={page === 1}
+              aria-label="Primeira página"
+            >
+              <ChevronFirstIcon className="size-3.5" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-7"
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+              aria-label="Página anterior"
+            >
+              <ChevronLeftIcon className="size-3.5" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-7"
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+              aria-label="Próxima página"
+            >
+              <ChevronRightIcon className="size-3.5" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-7"
+              onClick={() => setPage(totalPages)}
+              disabled={page === totalPages}
+              aria-label="Última página"
+            >
+              <ChevronLastIcon className="size-3.5" />
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

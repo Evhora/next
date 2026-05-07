@@ -456,7 +456,7 @@ export function DreamBoardClient({
             </div>
             <div className="px-4 pb-6 sm:px-6 sm:pb-8">
               <div
-                className="mx-auto w-full max-w-2xl duration-700 animate-in fade-in slide-in-from-bottom-4"
+                className="mx-auto w-full duration-700 animate-in fade-in slide-in-from-bottom-4"
                 style={{ animationDelay: "420ms", animationFillMode: "both" }}
               >
                 {composer}

@@ -57,10 +57,10 @@ export function ProgressByAreaCard({ areas }: ProgressByAreaCardProps) {
     <Card>
       <CardHeader>
         <CardDescription>
-          {t("pages.dashboard.progress.progressByArea")}
+          {t("pages.dashboard.learning.progressByArea")}
         </CardDescription>
         <CardTitle className="sr-only">
-          {t("pages.dashboard.progress.progressByArea")}
+          {t("pages.dashboard.learning.progressByArea")}
         </CardTitle>
       </CardHeader>
       <CardContent>

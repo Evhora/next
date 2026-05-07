@@ -133,6 +133,9 @@ export function NewDreamDialog({ trigger, onCreated }: NewDreamDialogProps) {
                   ))}
                 </SelectContent>
               </Select>
+              <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                {t("pages.dreams.form.areaOfLifeHint")}
+              </p>
             </div>
 
             {/* Title */}
@@ -147,6 +150,9 @@ export function NewDreamDialog({ trigger, onCreated }: NewDreamDialogProps) {
                 type="text"
                 placeholder={t("pages.dreams.form.enterDreamTitle")}
               />
+              <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                {t("pages.dreams.form.dreamTitleHint")}
+              </p>
             </div>
 
             {/* Deadline */}
@@ -161,6 +167,9 @@ export function NewDreamDialog({ trigger, onCreated }: NewDreamDialogProps) {
                 type="date"
                 min={today}
               />
+              <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                {t("pages.dreams.form.deadlineHint")}
+              </p>
             </div>
 
             {/* Action plan — full width */}
@@ -175,6 +184,9 @@ export function NewDreamDialog({ trigger, onCreated }: NewDreamDialogProps) {
                 rows={4}
                 placeholder={t("pages.dreams.form.describeActionPlan")}
               />
+              <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                {t("pages.dreams.form.actionPlanHint")}
+              </p>
             </div>
           </div>
 

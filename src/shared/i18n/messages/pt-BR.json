@@ -133,7 +133,11 @@
         "create": "Criar Sonho",
         "creating": "Criando...",
         "untitled": "Sonho Sem Título",
-        "deadlineLabel": "Prazo:"
+        "deadlineLabel": "Prazo:",
+        "areaOfLifeHint": "Escolha a área da sua vida que este sonho impacta.",
+        "dreamTitleHint": "Use um título claro para lembrar seu objetivo.",
+        "deadlineHint": "Defina uma data realista para manter o foco.",
+        "actionPlanHint": "Liste os passos necessários para realizar esse sonho."
       },
       "status": {
         "inProgress": "Em Progresso",
@@ -195,7 +199,12 @@
         "dream": "Vincular a um sonho",
         "selectDream": "Nenhum (ação avulsa)",
         "create": "Criar ação",
-        "creating": "Criando..."
+        "creating": "Criando...",
+        "created": "Ação criada com sucesso!",
+        "actionTitleHint": "Descreva a ação de forma clara e objetiva.",
+        "recurrenceHint": "Com que frequência você vai realizar esta ação?",
+        "dueDateHint": "Deixe em branco para ações sem prazo definido.",
+        "dreamHint": "Vincular a um sonho ajuda a acompanhar seu progresso."
       }
     },
     "pricing": {
