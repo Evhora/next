@@ -7,6 +7,7 @@ import { failFromError, ok, type ActionResult } from "@/shared/result";
 
 import { createDream } from "../application/create-dream";
 import { deleteDream } from "../application/delete-dream";
+import { updateDreamDetails } from "../application/update-dream-details";
 import { updateDreamStatus } from "../application/update-dream-status";
 
 /**
@@ -56,6 +57,22 @@ export async function updateDreamStatusAction(
   try {
     const ctx = await buildCtx();
     await updateDreamStatus({ id, status }, ctx);
+    revalidatePath(DREAMS_PATH);
+    revalidatePath("/dashboard");
+    return ok(undefined);
+  } catch (error) {
+    return failFromError(error);
+  }
+}
+
+export async function updateDreamDetailsAction(
+  id: string,
+  deadline: string,
+  actionPlan: string,
+): Promise<ActionResult> {
+  try {
+    const ctx = await buildCtx();
+    await updateDreamDetails({ id, deadline, actionPlan }, ctx);
     revalidatePath(DREAMS_PATH);
     revalidatePath("/dashboard");
     return ok(undefined);

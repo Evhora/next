@@ -159,7 +159,10 @@
         "actions": "Ações"
       },
       "deleteConfirm": "Tem certeza que deseja excluir este sonho?",
-      "delete": "Excluir"
+      "delete": "Excluir",
+      "details": {
+        "description": "Detalhes do sonho."
+      }
     },
     "actions": {
       "title": "Ações",
@@ -205,6 +208,9 @@
         "recurrenceHint": "Com que frequência você vai realizar esta ação?",
         "dueDateHint": "Deixe em branco para ações sem prazo definido.",
         "dreamHint": "Vincular a um sonho ajuda a acompanhar seu progresso."
+      },
+      "details": {
+        "description": "Detalhes da ação."
       }
     },
     "pricing": {
@@ -562,7 +568,8 @@
         "HEALTH_AND_WELL_BEING": "Saúde e Bem-estar",
         "BUSINESS_AND_FINANCE": "Negócios e Finanças",
         "SPIRITUALITY": "Espiritualidade",
-        "LIFESTYLE": "Estilo de Vida"
+        "LIFESTYLE": "Estilo de Vida",
+        "TRAINING_AND_EDUCATION": "Capacitação e Educação"
       }
     },
     "dreamBoard": {

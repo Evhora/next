@@ -49,10 +49,20 @@ export const updateActionStatusSchema = z.object({
   status: statusSchema,
 });
 
+export const updateActionDetailsSchema = z.object({
+  id: z.string().uuid(),
+  recurrence: recurrenceSchema,
+  dueDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Due date must be ISO date (YYYY-MM-DD).")
+    .nullable(),
+});
+
 export const deleteActionSchema = z.object({
   id: z.string().uuid(),
 });
 
 export type CreateActionCmd = z.infer<typeof createActionSchema>;
 export type UpdateActionStatusCmd = z.infer<typeof updateActionStatusSchema>;
+export type UpdateActionDetailsCmd = z.infer<typeof updateActionDetailsSchema>;
 export type DeleteActionCmd = z.infer<typeof deleteActionSchema>;

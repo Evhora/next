@@ -47,8 +47,11 @@ export interface DreamOption {
 }
 
 interface NewActionDialogProps {
-  trigger: ReactNode;
+  trigger?: ReactNode;
   dreams: DreamOption[];
+  lockedDreamId?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 const NO_DREAM = "__none__";
@@ -62,13 +65,25 @@ const AREA_ICON: Record<number, LucideIcon | null> = {
   5: Sparkles, // LIFESTYLE
 };
 
-export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
+export function NewActionDialog({
+  trigger,
+  dreams,
+  lockedDreamId,
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
+}: NewActionDialogProps) {
   const t = useTranslations();
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = controlledOnOpenChange ?? setInternalOpen;
   const [recurrence, setRecurrence] = useState<Action_ActionRecurrence>(
     Action_ActionRecurrence.ONCE,
   );
-  const [dreamId, setDreamId] = useState<string>(NO_DREAM);
+  const [dreamId, setDreamId] = useState<string>(lockedDreamId ?? NO_DREAM);
+
+  useEffect(() => {
+    if (open && lockedDreamId) setDreamId(lockedDreamId);
+  }, [open, lockedDreamId]);
 
   const [state, formAction, isPending] = useActionState(
     createActionAction,
@@ -81,11 +96,11 @@ export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
       toast.success(t("pages.actions.form.created"));
       setOpen(false);
       setRecurrence(Action_ActionRecurrence.ONCE);
-      setDreamId(NO_DREAM);
+      setDreamId(lockedDreamId ?? NO_DREAM);
     } else {
       toast.error(state.message);
     }
-  }, [state, t]);
+  }, [state, t, lockedDreamId]);
 
   const selectedDream =
     dreamId === NO_DREAM
@@ -96,7 +111,7 @@ export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto border-zinc-200 bg-white p-0 dark:border-zinc-800 dark:bg-zinc-900">
         {/* Header */}
         <div className="border-b border-zinc-100 px-7 pb-6 pt-7 dark:border-zinc-800">
@@ -189,7 +204,11 @@ export function NewActionDialog({ trigger, dreams }: NewActionDialogProps) {
               <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
                 {t("pages.actions.form.dream")}
               </Label>
-              <Select value={dreamId} onValueChange={setDreamId}>
+              <Select
+                value={dreamId}
+                onValueChange={setDreamId}
+                disabled={Boolean(lockedDreamId)}
+              >
                 <SelectTrigger id="dream-select" className="w-full">
                   <SelectValue
                     placeholder={t("pages.actions.form.selectDream")}

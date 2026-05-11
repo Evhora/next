@@ -26,6 +26,8 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/shared/ui/empty";
+import { listActionsForUser } from "@/modules/actions";
+import type { Action } from "@/modules/actions";
 import { Separator } from "@/shared/ui/separator";
 
 import { getDreamProgress } from "../application/get-dream-progress";
@@ -37,10 +39,17 @@ import { NewDreamDialog } from "./new-dream-dialog";
 
 export async function DreamsPage() {
   const [t, ctx] = await Promise.all([getTranslations(), buildCtx()]);
-  const [dreams, progress] = await Promise.all([
+  const [dreams, progress, actions] = await Promise.all([
     listDreamsForUser(ctx),
     getDreamProgress(ctx),
+    listActionsForUser(ctx),
   ]);
+
+  const actionsByDream: Record<string, Action[]> = {};
+  for (const action of actions) {
+    if (!action.dreamId) continue;
+    (actionsByDream[action.dreamId] ??= []).push(action);
+  }
 
   const inProgressCount = dreams.filter(
     (d) => d.status === Dream_DreamStatus.IN_PROGRESS,
@@ -282,7 +291,11 @@ export async function DreamsPage() {
             className="duration-700 animate-in fade-in slide-in-from-bottom-2"
             style={{ animationDelay: "400ms", animationFillMode: "both" }}
           >
-            <DreamsTable dreams={dreams} progress={progress} />
+            <DreamsTable
+              dreams={dreams}
+              progress={progress}
+              actionsByDream={actionsByDream}
+            />
           </div>
         </>
       )}

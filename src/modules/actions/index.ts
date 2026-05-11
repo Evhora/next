@@ -7,10 +7,12 @@ export {
   Action_ActionRecurrence,
   Action_ActionStatus,
   ActionSchema,
+  actionWithDetails,
   actionWithStatus,
   newAction,
   softDeleteAction,
   type Action,
+  type ActionDetailsPatch,
   type NewActionCmd,
 } from "./domain/action";
 export type { ActionRepository } from "./domain/action-repository";
@@ -30,11 +32,16 @@ export { listActionsForUser } from "./application/list-actions-for-user";
 export {
   createActionSchema,
   deleteActionSchema,
+  updateActionDetailsSchema,
   updateActionStatusSchema,
   type CreateActionCmd,
   type DeleteActionCmd,
+  type UpdateActionDetailsCmd,
   type UpdateActionStatusCmd,
 } from "./application/schemas";
+export { updateActionDetails } from "./application/update-action-details";
 export { updateActionStatus } from "./application/update-action-status";
 
 export { SupabaseActionRepository } from "./infrastructure/supabase-action-repository";
+
+export { NewActionDialog, type DreamOption } from "./ui/new-action-dialog";

@@ -24,6 +24,7 @@ const AREA_ICON: Record<Dream_DreamAreaOfLife, LucideIcon | null> = {
   [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: Heart,
   [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: Briefcase,
   [Dream_DreamAreaOfLife.LIFESTYLE]: Sparkles,
+  [Dream_DreamAreaOfLife.TRAINING_AND_EDUCATION]: null,
 };
 
 const AREA_COLOR: Record<Dream_DreamAreaOfLife, string> = {
@@ -33,6 +34,7 @@ const AREA_COLOR: Record<Dream_DreamAreaOfLife, string> = {
   [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: "text-red-500",
   [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: "text-orange-400",
   [Dream_DreamAreaOfLife.LIFESTYLE]: "text-yellow-500",
+  [Dream_DreamAreaOfLife.TRAINING_AND_EDUCATION]: "text-purple-500",
 };
 
 const AREA_BAR: Record<Dream_DreamAreaOfLife, string> = {
@@ -42,6 +44,7 @@ const AREA_BAR: Record<Dream_DreamAreaOfLife, string> = {
   [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: "bg-orange-500",
   [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: "bg-orange-400",
   [Dream_DreamAreaOfLife.LIFESTYLE]: "bg-purple-600",
+  [Dream_DreamAreaOfLife.TRAINING_AND_EDUCATION]: "bg-purple-500",
 };
 
 export function ProgressByAreaCard({ areas }: ProgressByAreaCardProps) {

@@ -40,10 +40,19 @@ export const updateDreamStatusSchema = z.object({
     ),
 });
 
+export const updateDreamDetailsSchema = z.object({
+  id: z.string().uuid(),
+  deadline: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Deadline must be an ISO date (YYYY-MM-DD)."),
+  actionPlan: z.string().trim().min(1, "Action plan is required.").max(5000),
+});
+
 export const deleteDreamSchema = z.object({
   id: z.string().uuid(),
 });
 
 export type CreateDreamCmd = z.infer<typeof createDreamSchema>;
 export type UpdateDreamStatusCmd = z.infer<typeof updateDreamStatusSchema>;
+export type UpdateDreamDetailsCmd = z.infer<typeof updateDreamDetailsSchema>;
 export type DeleteDreamCmd = z.infer<typeof deleteDreamSchema>;

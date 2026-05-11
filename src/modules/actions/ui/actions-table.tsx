@@ -53,6 +53,7 @@ import {
 
 import { ConfirmDeleteDialog } from "@/shared/ui/confirm-delete-dialog";
 
+import { ActionDetailsDialog } from "./action-details-dialog";
 import { deleteActionAction, updateActionStatusAction } from "./actions";
 
 interface ActionsTableProps {
@@ -66,6 +67,7 @@ const AREA_ICON: Record<Dream_DreamAreaOfLife, LucideIcon | null> = {
   [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: Heart,
   [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: Briefcase,
   [Dream_DreamAreaOfLife.LIFESTYLE]: Sparkles,
+  [Dream_DreamAreaOfLife.TRAINING_AND_EDUCATION]: null,
 };
 
 const STATUS_DOT: Record<Action_ActionStatus, string> = {
@@ -82,8 +84,11 @@ export function ActionsTable({ actions }: ActionsTableProps) {
   const [isPending, startTransition] = useTransition();
   const [pageSize, setPageSize] = useState<number>(10);
   const [page, setPage] = useState(1);
+  const [detailsActionId, setDetailsActionId] = useState<string | null>(null);
   const totalPages = Math.max(1, Math.ceil(actions.length / pageSize));
   const pageActions = actions.slice((page - 1) * pageSize, page * pageSize);
+  const detailsAction =
+    actions.find((a) => a.id === detailsActionId) ?? null;
 
   const handleStatusChange = (id: string, status: Action_ActionStatus) => {
     startTransition(async () => {
@@ -133,7 +138,8 @@ export function ActionsTable({ actions }: ActionsTableProps) {
               return (
                 <TableRow
                   key={action.id}
-                  className="group border-b last:border-0"
+                  onClick={() => setDetailsActionId(action.id)}
+                  className="group cursor-pointer border-b last:border-0"
                 >
                   {/* Title */}
                   <TableCell className="px-3 py-3 font-medium text-foreground">
@@ -141,7 +147,10 @@ export function ActionsTable({ actions }: ActionsTableProps) {
                   </TableCell>
 
                   {/* Status */}
-                  <TableCell className="px-3">
+                  <TableCell
+                    className="px-3"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <Select
                       disabled={isPending}
                       value={String(action.status)}
@@ -231,7 +240,10 @@ export function ActionsTable({ actions }: ActionsTableProps) {
                       : "—"}
                   </TableCell>
 
-                  <TableCell className="text-right">
+                  <TableCell
+                    className="text-right"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
@@ -342,6 +354,13 @@ export function ActionsTable({ actions }: ActionsTableProps) {
           </div>
         </div>
       </div>
+
+      <ActionDetailsDialog
+        action={detailsAction}
+        onOpenChange={(open) => {
+          if (!open) setDetailsActionId(null);
+        }}
+      />
     </div>
   );
 }

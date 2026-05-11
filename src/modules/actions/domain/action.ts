@@ -64,6 +64,24 @@ export function actionWithStatus(
   });
 }
 
+export interface ActionDetailsPatch {
+  recurrence: Action_ActionRecurrence;
+  dueDate: string | null;
+}
+
+export function actionWithDetails(
+  action: Action,
+  patch: ActionDetailsPatch,
+): Action {
+  return create(ActionSchema, {
+    ...action,
+    recurrence: patch.recurrence,
+    dueDate: patch.dueDate ?? undefined,
+    version: action.version + 1n,
+    updatedAt: timestampNow(),
+  });
+}
+
 export function softDeleteAction(action: Action): Action {
   const now = timestampNow();
   return create(ActionSchema, {
