@@ -259,6 +259,39 @@ export interface Database {
         };
         Relationships: [];
       };
+      discovery_sessions: {
+        Row: {
+          id: string;
+          user_id: string;
+          status: string;
+          version: number;
+          data: Json;
+          started_at: string;
+          completed_at: string | null;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          status?: string;
+          version?: number;
+          data: Json;
+          started_at?: string;
+          completed_at?: string | null;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          status?: string;
+          version?: number;
+          data?: Json;
+          started_at?: string;
+          completed_at?: string | null;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       dream_boards: {
         Row: {
           id: string;

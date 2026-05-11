@@ -20,6 +20,12 @@ import { StripePaymentProvider } from "@/modules/billing/infrastructure/stripe-p
 import { SupabaseBillingRepository } from "@/modules/billing/infrastructure/supabase-billing-repository";
 import { SentenceRepository } from "@/modules/dashboard/domain/sentence-repository";
 import { SupabaseSentenceRepository } from "@/modules/dashboard/infrastructure/supabase-sentence-repository";
+import { LlmClient } from "@/modules/discovery/domain/llm-client";
+import { SessionRepository } from "@/modules/discovery/domain/session-repository";
+import { VoiceTranscriber } from "@/modules/discovery/domain/voice-transcriber";
+import { NoopVoiceTranscriber } from "@/modules/discovery/infrastructure/noop-voice-transcriber";
+import { OpenRouterLlmClient } from "@/modules/discovery/infrastructure/openrouter-llm-client";
+import { SupabaseSessionRepository } from "@/modules/discovery/infrastructure/supabase-session-repository";
 import { DreamBoardImageClient } from "@/modules/dream_board/application/generate-dream-board";
 import { ConversationRepository } from "@/modules/dream_board/domain/conversation-repository";
 import { DreamBoardRepository } from "@/modules/dream_board/domain/dream-board-repository";
@@ -54,6 +60,9 @@ export interface AppContext {
   userPhotos: UserPhotoRepository;
   conversations: ConversationRepository;
   imageClient: DreamBoardImageClient;
+  discoverySessions: SessionRepository;
+  discoveryLlm: LlmClient;
+  voiceTranscriber: VoiceTranscriber;
 }
 
 /**
@@ -97,6 +106,9 @@ export const buildCtx = cache(async (): Promise<AppContext> => {
     userPhotos: new SupabaseUserPhotoRepository(supabase),
     conversations: new SupabaseConversationRepository(supabase),
     imageClient: new GeminiImageClient(),
+    discoverySessions: new SupabaseSessionRepository(supabase),
+    discoveryLlm: new OpenRouterLlmClient(),
+    voiceTranscriber: new NoopVoiceTranscriber(),
   };
 });
 
