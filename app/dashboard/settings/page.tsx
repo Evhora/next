@@ -1,3 +1,5 @@
-import { SettingsPage } from "@/modules/settings/ui/settings-page";
+import { redirect } from "next/navigation";
 
-export default SettingsPage;
+export default function SettingsRedirect() {
+  redirect("/dashboard/account");
+}
