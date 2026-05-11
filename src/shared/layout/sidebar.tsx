@@ -52,7 +52,11 @@ const navigation = [
   },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  user: { name: string; email: string; avatar: string };
+}
+
+export function Sidebar({ user }: SidebarProps) {
   const pathname = usePathname();
   const t = useTranslations();
   const { setOpenMobile, isMobile } = useSidebar();
@@ -101,13 +105,7 @@ export function Sidebar() {
       </SidebarContent>
 
       <SidebarFooter>
-        <SidebarUser
-          user={{
-            name: "John Doe",
-            email: "john.doe@example.com",
-            avatar: "https://github.com/shadcn.png",
-          }}
-        />
+        <SidebarUser user={user} />
       </SidebarFooter>
     </ShadcnSidebar>
   );

@@ -1,10 +1,4 @@
-import {
-  LayoutDashboard,
-  ListChecks,
-  Target,
-  TrendingUp,
-  Zap,
-} from "lucide-react";
+import { LayoutDashboard, ListChecks, Target, TrendingUp } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -130,37 +124,6 @@ async function DashboardContent() {
             <p className="mt-2 text-xs text-muted-foreground">
               {summary.actions.progressPercent}%{" "}
               {t("pages.actions.stats.completedActions").toLowerCase()}
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardDescription>
-              {t("pages.dashboard.learning.todayActions")}
-            </CardDescription>
-            <CardTitle className="text-4xl tabular-nums text-orange-500">
-              {summary.todayActions.completed}
-              <span className="text-xl font-normal text-muted-foreground">
-                /{summary.todayActions.total}
-              </span>
-            </CardTitle>
-            <CardAction>
-              <Zap className="size-4 text-orange-500" />
-            </CardAction>
-          </CardHeader>
-          <CardContent>
-            <ProgressBar
-              value={summary.todayActions.completed}
-              max={summary.todayActions.total}
-              color="bg-orange-500"
-            />
-            <p className="mt-2 text-xs text-muted-foreground">
-              {summary.todayActions.progress}%{" "}
-              {t("pages.dashboard.learning.completed", {
-                completed: summary.todayActions.completed,
-                total: summary.todayActions.total,
-              }).toLowerCase()}
             </p>
           </CardContent>
         </Card>

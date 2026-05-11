@@ -288,6 +288,65 @@
         "error": "Não foi possível carregar as faturas"
       }
     },
+    "account": {
+      "title": "Minha conta",
+      "description": "Gerencie suas informações pessoais e preferências de segurança.",
+      "header": {
+        "subscriber": "Assinante",
+        "freePlan": "Plano gratuito"
+      },
+      "sections": {
+        "personalInfo": "Informações pessoais",
+        "security": "Segurança"
+      },
+      "changeName": {
+        "title": "Alterar nome",
+        "description": "Atualize seu nome e sobrenome.",
+        "firstName": "Nome",
+        "lastName": "Sobrenome",
+        "update": "Atualizar nome",
+        "updating": "Atualizando...",
+        "success": "Nome atualizado com sucesso!",
+        "error": "Erro ao atualizar nome"
+      },
+      "changePhone": {
+        "title": "Alterar telefone",
+        "description": "Atualize seu número de telefone. Deixe vazio para removê-lo.",
+        "phoneNumber": "Número de telefone",
+        "update": "Atualizar telefone",
+        "updating": "Atualizando...",
+        "success": "Telefone atualizado com sucesso!",
+        "error": "Erro ao atualizar telefone"
+      },
+      "changePassword": {
+        "title": "Alterar senha",
+        "description": "Atualize a senha da sua conta. Certifique-se de que tenha pelo menos 6 caracteres.",
+        "newPassword": "Nova senha",
+        "confirmPassword": "Confirmar nova senha",
+        "update": "Atualizar senha",
+        "updating": "Atualizando...",
+        "success": "Senha atualizada com sucesso!",
+        "error": "Erro ao atualizar senha",
+        "passwordMinLength": "A senha deve ter pelo menos 6 caracteres"
+      },
+      "avatar": {
+        "title": "Foto de perfil",
+        "description": "Faça upload de uma foto para personalizar seu perfil.",
+        "upload": "Escolher foto",
+        "uploading": "Enviando...",
+        "change": "Alterar",
+        "hint": "JPEG, PNG ou WebP — até 2 MB.",
+        "success": "Foto atualizada com sucesso!",
+        "invalidFormat": "Formato não suportado. Use JPEG, PNG ou WebP.",
+        "tooLarge": "A imagem é muito grande. Use uma até 2 MB."
+      },
+      "security": {
+        "sessionsTitle": "Sessões ativas",
+        "sessionsDescription": "Encerre todas as sessões abertas em outros dispositivos.",
+        "signOutEverywhere": "Sair de todos os dispositivos",
+        "signingOut": "Saindo..."
+      }
+    },
     "settings": {
       "title": "Configurações",
       "description": "Gerencie suas configurações de conta e preferências aqui.",

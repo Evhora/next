@@ -6,13 +6,7 @@ import { useTranslations } from "next-intl";
 
 import { Dream_DreamAreaOfLife } from "@/modules/dreams/domain/dream";
 import { DREAM_AREA_OF_LIFE_LABELS } from "@/modules/dreams/domain/labels";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/shared/ui/card";
+import { Card, CardContent } from "@/shared/ui/card";
 
 interface AreaProgress {
   area: Dream_DreamAreaOfLife;
@@ -55,14 +49,6 @@ export function ProgressByAreaCard({ areas }: ProgressByAreaCardProps) {
 
   return (
     <Card>
-      <CardHeader>
-        <CardDescription>
-          {t("pages.dashboard.learning.progressByArea")}
-        </CardDescription>
-        <CardTitle className="sr-only">
-          {t("pages.dashboard.learning.progressByArea")}
-        </CardTitle>
-      </CardHeader>
       <CardContent>
         <div className="space-y-1">
           {areas.map(({ area, percentage }) => {

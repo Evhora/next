@@ -30,10 +30,6 @@ import { SupabaseDreamBoardRepository } from "@/modules/dream_board/infrastructu
 import { SupabaseUserPhotoRepository } from "@/modules/dream_board/infrastructure/supabase-user-photo-repository";
 import { DreamRepository } from "@/modules/dreams/domain/dream-repository";
 import { SupabaseDreamRepository } from "@/modules/dreams/infrastructure/supabase-dream-repository";
-import { LearningEntryRepository } from "@/modules/learning/domain/learning-entry-repository";
-import { LearningGoalRepository } from "@/modules/learning/domain/learning-goal-repository";
-import { SupabaseLearningEntryRepository } from "@/modules/learning/infrastructure/supabase-learning-entry-repository";
-import { SupabaseLearningGoalRepository } from "@/modules/learning/infrastructure/supabase-learning-goal-repository";
 
 import { UnauthorizedError } from "./errors";
 import { createClient } from "./supabase/server";
@@ -42,6 +38,7 @@ export interface CurrentUser {
   id: string;
   email: string | null;
   displayName: string;
+  avatarUrl: string | null;
 }
 
 export interface AppContext {
@@ -57,8 +54,6 @@ export interface AppContext {
   userPhotos: UserPhotoRepository;
   conversations: ConversationRepository;
   imageClient: DreamBoardImageClient;
-  learningGoals: LearningGoalRepository;
-  learningEntries: LearningEntryRepository;
 }
 
 /**
@@ -86,7 +81,12 @@ export const buildCtx = cache(async (): Promise<AppContext> => {
     "User";
 
   return {
-    user: { id: user.id, email: user.email ?? null, displayName },
+    user: {
+      id: user.id,
+      email: user.email ?? null,
+      displayName,
+      avatarUrl: (user.user_metadata?.avatar_url as string | undefined) ?? null,
+    },
     userId: user.id,
     dreams: new SupabaseDreamRepository(supabase),
     actions: new SupabaseActionRepository(supabase),
@@ -97,8 +97,6 @@ export const buildCtx = cache(async (): Promise<AppContext> => {
     userPhotos: new SupabaseUserPhotoRepository(supabase),
     conversations: new SupabaseConversationRepository(supabase),
     imageClient: new GeminiImageClient(),
-    learningGoals: new SupabaseLearningGoalRepository(supabase),
-    learningEntries: new SupabaseLearningEntryRepository(supabase),
   };
 });
 
