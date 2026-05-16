@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package modules.discovery.proto.v1;
+
+import "modules/discovery/proto/v1/session.proto";
+
+message Question {
+  string id = 1;
+  Phase phase = 2;
+  string prompt = 3;
+  string placeholder = 4;
+  string follow_up_hint = 5;
+  int32 order = 6;
+}

@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package modules.discovery.proto.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message DreamArcheologySession {
+  string id = 1;
+  string user_id = 2;
+  repeated Answer answers = 3;
+  repeated DreamCandidate candidates = 4;
+  string selected_candidate_id = 5;
+  google.protobuf.Timestamp started_at = 6;
+  optional google.protobuf.Timestamp completed_at = 7;
+  Phase current_phase = 8;
+  string current_question_id = 9;
+  SessionStatus status = 10;
+  int64 version = 11;
+  google.protobuf.Timestamp updated_at = 12;
+}
+
+message Answer {
+  string question_id = 1;
+  Phase phase = 2;
+  string question_text = 3;
+  string text = 4;
+  string voice_url = 5;
+  int64 duration_ms = 6;
+  bool skipped = 7;
+  google.protobuf.Timestamp answered_at = 8;
+}
+
+message DreamCandidate {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  int32 area_of_life = 4;
+  float confidence = 5;
+  repeated EvidenceQuote evidence = 6;
+  string pattern_summary = 7;
+}
+
+message EvidenceQuote {
+  string question_id = 1;
+  Phase phase = 2;
+  string user_quote = 3;
+  string why_relevant = 4;
+}
+
+enum Phase {
+  PHASE_UNSPECIFIED = 0;
+  PHASE_CHILDHOOD = 1;
+  PHASE_ENVY = 2;
+  PHASE_ENERGY = 3;
+  PHASE_MONEY = 4;
+  PHASE_PAIN = 5;
+  PHASE_DEATH = 6;
+}
+
+enum SessionStatus {
+  SESSION_STATUS_UNSPECIFIED = 0;
+  SESSION_STATUS_IN_PROGRESS = 1;
+  SESSION_STATUS_SYNTHESIZING = 2;
+  SESSION_STATUS_COMPLETED = 3;
+  SESSION_STATUS_ABANDONED = 4;
+}

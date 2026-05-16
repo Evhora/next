@@ -2,8 +2,8 @@
 
 import {
   ChartBar,
-  ChartLine,
   Command,
+  Compass,
   ListChecks,
   Sparkles,
   Target,
@@ -46,9 +46,10 @@ const navigation = [
     icon: <ListChecks className="h-5 w-5 text-purple-400" />,
   },
   {
-    nameKey: "pages.dashboard.sidebar.routes.progress",
-    href: "/dashboard/progress",
-    icon: <ChartLine className="h-5 w-5 text-purple-400" />,
+    nameKey: "pages.dashboard.sidebar.routes.discovery",
+    href: "/dashboard/discovery",
+    icon: <Compass className="h-5 w-5 text-purple-400" />,
+    isNew: true,
   },
 ];
 
@@ -96,6 +97,11 @@ export function Sidebar({ user }: SidebarProps) {
                   <Link href={item.href} onClick={closeMobile}>
                     {item.icon}
                     <span>{t(item.nameKey)}</span>
+                    {item.isNew && (
+                      <span className="ml-auto text-[10px] font-semibold uppercase tracking-wide bg-primary text-primary-foreground rounded-full px-1.5 py-0.5 leading-none">
+                        Novo
+                      </span>
+                    )}
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

@@ -100,7 +100,7 @@
           "dreamBoard": "Mural dos Sonhos",
           "dreams": "Sonhos",
           "actions": "Ações",
-          "progress": "Progresso"
+          "discovery": "Arqueologia dos Sonhos"
         },
         "userNavigation": {
           "account": "Minha conta",
@@ -454,6 +454,73 @@
         "deleted": "Conversa excluída.",
         "downloadFailed": "Não foi possível baixar a imagem.",
         "quotaExhausted": "Você atingiu o limite de {limit} gerações hoje. Tente novamente amanhã."
+      }
+    },
+    "discovery": {
+      "header": {
+        "answersCount": "{count} respostas",
+        "restart": "Recomeçar",
+        "restartTooltip": "Recomeçar do zero"
+      },
+      "resumeHint": "Continuando de onde você parou — {count} respostas salvas",
+      "error": {
+        "title": "Algo deu errado"
+      },
+      "question": {
+        "placeholder": "Escreva sua resposta...",
+        "skip": "Pular",
+        "continue": "Continuar"
+      },
+      "reveal": {
+        "title": "Seus sonhos emergem",
+        "subtitle": "Selecione os que ressoam com você — pode ser um, dois ou todos",
+        "confidence": "Confiança",
+        "showEvidence": "Ver evidências ({count})",
+        "hideEvidence": "Ocultar evidências",
+        "addAll": "Adicionar todos os sonhos",
+        "selectAtLeastOne": "Selecione pelo menos um",
+        "addOne": "Adicionar 1 sonho",
+        "addMany": "Adicionar {count} sonhos",
+        "areaGeneral": "Geral"
+      },
+      "paywall": {
+        "title": "Você está indo fundo",
+        "description": "As perguntas mais poderosas — e a síntese dos seus sonhos — estão disponíveis no plano completo. Você já revelou muito sobre si mesmo. Vamos terminar o trabalho?",
+        "unlock": "Desbloquear por completo",
+        "back": "Voltar ao início"
+      },
+      "shadowSaved": {
+        "title": "Seu sonho foi salvo",
+        "description": "Os outros dois candidatos foram guardados nas sombras. Voltaremos a eles em 90 dias — às vezes o sonho certo precisa de um pouco mais de tempo para emergir.",
+        "subtext": "Por agora, seu caminho está traçado. Hora de agir.",
+        "viewDream": "Ver meu sonho",
+        "startNew": "Iniciar nova descoberta"
+      },
+      "restartDialog": {
+        "title": "Recomeçar a descoberta?",
+        "descriptionWithAnswersOne": "Sua <strong>1 resposta</strong> será descartada e não poderá ser recuperada. Uma nova sessão começará do zero.",
+        "descriptionWithAnswersMany": "Suas <strong>{count} respostas</strong> serão descartadas e não poderão ser recuperadas. Uma nova sessão começará do zero.",
+        "descriptionEmpty": "Uma nova sessão começará do zero. Esta ação não pode ser desfeita.",
+        "keep": "Manter respostas",
+        "restarting": "Recomeçando…",
+        "confirm": "Sim, recomeçar"
+      },
+      "resumeBanner": {
+        "ready": "Seus sonhos estão prontos — ",
+        "seeCandidates": "veja seus candidatos",
+        "continue": "Continue sua descoberta — ",
+        "answersProgress": "{count}/{target} respostas",
+        "continueLabel": "Continuar",
+        "dismiss": "Dispensar"
+      },
+      "synthesisLoader": {
+        "phrases": [
+          "Analisando padrões nas suas respostas...",
+          "Conectando os fios da sua história...",
+          "Identificando o que faz seus olhos brilharem...",
+          "Escutando o que você não disse...",
+          "Mapeando seus sonhos mais profundos..."
+        ]
       }
     },
     "home": {
