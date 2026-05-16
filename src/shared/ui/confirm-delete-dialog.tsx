@@ -14,12 +14,14 @@ import {
 } from "./dialog";
 
 interface ConfirmDeleteDialogProps {
-  trigger: ReactNode;
+  trigger?: ReactNode;
   title?: string;
   description: string;
   confirmLabel?: string;
   cancelLabel?: string;
   onConfirm: () => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function ConfirmDeleteDialog({
@@ -29,8 +31,12 @@ export function ConfirmDeleteDialog({
   confirmLabel = "Sim, excluir",
   cancelLabel = "Cancelar",
   onConfirm,
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
 }: ConfirmDeleteDialogProps) {
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = controlledOnOpenChange ?? setInternalOpen;
 
   const handleConfirm = () => {
     onConfirm();
@@ -39,7 +45,7 @@ export function ConfirmDeleteDialog({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
       <DialogContent className="max-w-sm gap-0 overflow-hidden p-0">
         <div className="flex flex-col items-center gap-4 px-6 pb-2 pt-8 text-center">
           <DialogHeader className="space-y-1.5">

@@ -8,10 +8,12 @@ export {
   Dream_DreamAreaOfLife,
   Dream_DreamStatus,
   DreamSchema,
+  dreamWithDetails,
   dreamWithStatus,
   newDream,
   softDeleteDream,
   type Dream,
+  type DreamDetailsPatch,
   type NewDreamCmd,
 } from "./domain/dream";
 export type { DreamRepository } from "./domain/dream-repository";
@@ -31,11 +33,14 @@ export { listDreamsForUser } from "./application/list-dreams-for-user";
 export {
   createDreamSchema,
   deleteDreamSchema,
+  updateDreamDetailsSchema,
   updateDreamStatusSchema,
   type CreateDreamCmd,
   type DeleteDreamCmd,
+  type UpdateDreamDetailsCmd,
   type UpdateDreamStatusCmd,
 } from "./application/schemas";
+export { updateDreamDetails } from "./application/update-dream-details";
 export { updateDreamStatus } from "./application/update-dream-status";
 
 export { SupabaseDreamRepository } from "./infrastructure/supabase-dream-repository";

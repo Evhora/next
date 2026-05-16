@@ -55,5 +55,7 @@ message Dream {
     DREAM_AREA_OF_LIFE_SPIRITUALITY = 4;
     // The Dream is related to the lifestyle.
     DREAM_AREA_OF_LIFE_LIFESTYLE = 5;
+    // The Dream is related to training and education (linked to a learning goal).
+    DREAM_AREA_OF_LIFE_TRAINING_AND_EDUCATION = 6;
   }
 }

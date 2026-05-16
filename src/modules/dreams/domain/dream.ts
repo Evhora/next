@@ -61,6 +61,26 @@ export function dreamWithStatus(
   });
 }
 
+export interface DreamDetailsPatch {
+  deadline: string;
+  actionPlan: string;
+}
+
+export function dreamWithDetails(
+  dream: Dream,
+  patch: DreamDetailsPatch,
+): Dream {
+  const actionPlan = patch.actionPlan.trim();
+  if (!actionPlan) throw new Error("Dream action plan is required.");
+  return create(DreamSchema, {
+    ...dream,
+    deadline: patch.deadline,
+    actionPlan,
+    version: dream.version + 1n,
+    updatedAt: timestampNow(),
+  });
+}
+
 export function softDeleteDream(dream: Dream): Dream {
   const now = timestampNow();
   return create(DreamSchema, {

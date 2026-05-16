@@ -7,6 +7,7 @@ import { failFromError, ok, type ActionResult } from "@/shared/result";
 
 import { createAction } from "../application/create-action";
 import { deleteAction } from "../application/delete-action";
+import { updateActionDetails } from "../application/update-action-details";
 import { updateActionStatus } from "../application/update-action-status";
 
 const ACTIONS_PATH = "/dashboard/actions";
@@ -53,6 +54,23 @@ export async function updateActionStatusAction(
   try {
     const ctx = await buildCtx();
     await updateActionStatus({ id, status }, ctx);
+    revalidatePath(ACTIONS_PATH);
+    revalidatePath("/dashboard/dreams");
+    revalidatePath("/dashboard");
+    return ok(undefined);
+  } catch (error) {
+    return failFromError(error);
+  }
+}
+
+export async function updateActionDetailsAction(
+  id: string,
+  recurrence: number,
+  dueDate: string | null,
+): Promise<ActionResult> {
+  try {
+    const ctx = await buildCtx();
+    await updateActionDetails({ id, recurrence, dueDate }, ctx);
     revalidatePath(ACTIONS_PATH);
     revalidatePath("/dashboard/dreams");
     revalidatePath("/dashboard");

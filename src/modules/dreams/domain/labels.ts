@@ -37,6 +37,7 @@ export const DREAM_AREA_OF_LIFE_LABELS: Record<Dream_DreamAreaOfLife, string> =
     [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: "BUSINESS_AND_FINANCE",
     [Dream_DreamAreaOfLife.SPIRITUALITY]: "SPIRITUALITY",
     [Dream_DreamAreaOfLife.LIFESTYLE]: "LIFESTYLE",
+    [Dream_DreamAreaOfLife.TRAINING_AND_EDUCATION]: "TRAINING_AND_EDUCATION",
   };
 
 export const SELECTABLE_DREAM_AREAS_OF_LIFE: readonly Dream_DreamAreaOfLife[] =
@@ -46,6 +47,7 @@ export const SELECTABLE_DREAM_AREAS_OF_LIFE: readonly Dream_DreamAreaOfLife[] =
     Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE,
     Dream_DreamAreaOfLife.SPIRITUALITY,
     Dream_DreamAreaOfLife.LIFESTYLE,
+    Dream_DreamAreaOfLife.TRAINING_AND_EDUCATION,
   ] as const;
 
 export const isDreamAreaOfLife = (

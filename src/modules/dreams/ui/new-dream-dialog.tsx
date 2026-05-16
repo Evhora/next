@@ -1,7 +1,15 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import { Briefcase, Heart, Leaf, Sparkles, Target, Users } from "lucide-react";
+import {
+  BookOpen,
+  Briefcase,
+  Heart,
+  Leaf,
+  Sparkles,
+  Target,
+  Users,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
@@ -39,6 +47,7 @@ const AREA_ICON: Record<Dream_DreamAreaOfLife, LucideIcon | null> = {
   [Dream_DreamAreaOfLife.HEALTH_AND_WELL_BEING]: Heart,
   [Dream_DreamAreaOfLife.BUSINESS_AND_FINANCE]: Briefcase,
   [Dream_DreamAreaOfLife.LIFESTYLE]: Sparkles,
+  [Dream_DreamAreaOfLife.TRAINING_AND_EDUCATION]: BookOpen,
 };
 
 interface NewDreamDialogProps {
@@ -126,7 +135,8 @@ export function NewDreamDialog({ trigger, onCreated }: NewDreamDialogProps) {
                             | "enums.dream.areaOfLife.HEALTH_AND_WELL_BEING"
                             | "enums.dream.areaOfLife.BUSINESS_AND_FINANCE"
                             | "enums.dream.areaOfLife.SPIRITUALITY"
-                            | "enums.dream.areaOfLife.LIFESTYLE",
+                            | "enums.dream.areaOfLife.LIFESTYLE"
+                            | "enums.dream.areaOfLife.CAPACITACAO_E_EDUCACAO",
                         )}
                       </span>
                     </SelectItem>
