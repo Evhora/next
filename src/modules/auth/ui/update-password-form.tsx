@@ -22,6 +22,8 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { ComponentPropsWithoutRef, useState } from "react";
 
+import { isValidPassword } from "@/modules/account/application/schemas";
+
 interface UpdatePasswordFormProps extends ComponentPropsWithoutRef<"div"> {
   redirectTo?: string;
 }
@@ -41,6 +43,12 @@ export function UpdatePasswordForm({
     const supabase = createClient();
     setIsLoading(true);
     setError(null);
+
+    if (!isValidPassword(password)) {
+      setError(t("pages.auth.updatePassword.passwordInvalid"));
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const { error } = await supabase.auth.updateUser({ password });

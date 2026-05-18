@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { useTransition, useState } from "react";
 
 import { Button } from "@/shared/ui/button";
+import { FieldDescription } from "@/shared/ui/field";
 import {
   Card,
   CardContent,
@@ -58,7 +59,7 @@ export function ChangePasswordForm() {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
-              minLength={6}
+              minLength={8}
             />
           </div>
           <div className="space-y-2">
@@ -70,9 +71,12 @@ export function ChangePasswordForm() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              minLength={6}
+              minLength={8}
             />
           </div>
+          <FieldDescription>
+            {t("pages.account.changePassword.passwordRequirements")}
+          </FieldDescription>
           {error && (
             <div className="rounded-lg bg-red-50 p-3 text-sm text-red-800 dark:bg-red-900/20 dark:text-red-400">
               {error}

@@ -36,6 +36,18 @@ export function LoginForm({ className, ...props }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  const getLoginErrorMessage = (error: unknown) => {
+    if (error instanceof Error) {
+      const message = error.message.toLowerCase();
+      if (message.includes("invalid login credentials")) {
+        return t("pages.auth.login.invalidCredentials");
+      }
+      return error.message;
+    }
+
+    return t("common.error");
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const supabase = createClient();
@@ -52,7 +64,7 @@ export function LoginForm({ className, ...props }: Props) {
       router.push("/dashboard");
       router.refresh();
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      setError(getLoginErrorMessage(error));
     } finally {
       setIsLoading(false);
     }
