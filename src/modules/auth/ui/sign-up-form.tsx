@@ -160,9 +160,6 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
                     />
                   </Field>
                 </Field>
-                {/*<FieldDescription>
-                  {t("pages.auth.signUp.passwordRequirements")}
-                </FieldDescription> */}
               </Field>
 
               {error && <FieldError>{error}</FieldError>}

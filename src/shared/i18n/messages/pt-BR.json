@@ -46,8 +46,8 @@
         "emailPlaceholder": "m@exemplo.com",
         "password": "Senha",
         "confirmPassword": "Confirmar senha",
-        "passwordRequirements": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial",
-        "passwordInvalid": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial",
+        "passwordRequirements": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial",
+        "passwordInvalid": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial",
         "passwordsDoNotMatch": "As senhas não coincidem",
         "firstNameRequired": "O nome é obrigatório",
         "createAccount": "Criar conta",
@@ -78,8 +78,8 @@
         "confirmPassword": "Confirmar nova senha",
         "update": "Atualizar senha",
         "description": "Digite sua nova senha abaixo.",
-        "passwordRequirements": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial",
-        "passwordInvalid": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial"
+        "passwordRequirements": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial",
+        "passwordInvalid": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial"
       }
     },
     "dashboard": {
@@ -332,7 +332,7 @@
       },
       "changePassword": {
         "title": "Alterar senha",
-        "description": "Atualize a senha da sua conta. Certifique-se de que tenha pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial.",
+        "description": "Atualize a senha da sua conta. Certifique-se de que tenha pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.",
         "newPassword": "Nova senha",
         "confirmPassword": "Confirmar nova senha",
         "update": "Atualizar senha",
@@ -340,7 +340,7 @@
         "success": "Senha atualizada com sucesso!",
         "error": "Erro ao atualizar senha",
         "passwordMinLength": "A senha deve ter pelo menos 8 caracteres",
-        "passwordRequirements": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial"
+        "passwordRequirements": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial"
       },
       "avatar": {
         "title": "Foto de perfil",
@@ -372,9 +372,9 @@
         "updating": "Atualizando...",
         "success": "Senha atualizada com sucesso!",
         "error": "Erro ao atualizar senha",
-        "description": "Atualize a senha da sua conta. Certifique-se de que tenha pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial.",
+        "description": "Atualize a senha da sua conta. Certifique-se de que tenha pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.",
         "passwordMinLength": "A senha deve ter pelo menos 8 caracteres",
-        "passwordInvalid": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial"
+        "passwordInvalid": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial"
       },
       "changeName": {
         "title": "Alterar Nome",
