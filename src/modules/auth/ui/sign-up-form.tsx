@@ -23,6 +23,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ComponentPropsWithoutRef, useState } from "react";
 
+import { isValidPassword } from "@/modules/account/application/schemas";
+
 interface SignUpFormProps extends ComponentPropsWithoutRef<"div"> {
   redirectTo?: string;
 }
@@ -47,6 +49,12 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
 
     if (password !== repeatPassword) {
       setError(t("pages.auth.signUp.passwordsDoNotMatch"));
+      setIsLoading(false);
+      return;
+    }
+
+    if (!isValidPassword(password)) {
+      setError(t("pages.auth.signUp.passwordInvalid"));
       setIsLoading(false);
       return;
     }
@@ -152,9 +160,6 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
                     />
                   </Field>
                 </Field>
-                <FieldDescription>
-                  {t("pages.auth.signUp.passwordRequirements")}
-                </FieldDescription>
               </Field>
 
               {error && <FieldError>{error}</FieldError>}

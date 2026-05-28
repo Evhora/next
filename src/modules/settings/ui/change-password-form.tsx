@@ -11,6 +11,7 @@ import {
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import { createClient } from "@/shared/supabase/client";
+import { isValidPassword } from "@/modules/account/application/schemas";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -34,8 +35,8 @@ export function ChangePasswordForm() {
       return;
     }
 
-    if (newPassword.length < 6) {
-      setError(t("pages.settings.changePassword.passwordMinLength"));
+    if (!isValidPassword(newPassword)) {
+      setError(t("pages.settings.changePassword.passwordInvalid"));
       setIsLoading(false);
       return;
     }
@@ -86,7 +87,7 @@ export function ChangePasswordForm() {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
-              minLength={6}
+              minLength={8}
             />
           </div>
           <div className="space-y-2">
@@ -99,7 +100,7 @@ export function ChangePasswordForm() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              minLength={6}
+              minLength={8}
             />
           </div>
           {error && (
