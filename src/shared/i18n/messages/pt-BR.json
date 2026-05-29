@@ -35,6 +35,7 @@
         "signUp": "Cadastre-se",
         "enterEmailBelow": "Digite seu e-mail abaixo para entrar na sua conta",
         "invalidCredentials": "E-mail ou senha inválidos",
+        "passwordInvalid": "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial",
         "termsOfService": "Ao entrar, você concorda com os <terms>Termos de Serviço</terms> e a <privacy>Política de Privacidade</privacy>."
       },
       "signUp": {
