@@ -24,6 +24,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ComponentPropsWithoutRef, useState } from "react";
 
+import { getPasswordValidationErrors } from "@/modules/account/application/schemas";
+
 interface Props extends ComponentPropsWithoutRef<"div"> {
   redirectTo?: string;
 }
@@ -33,6 +35,9 @@ export function LoginForm({ className, ...props }: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [passwordValidationError, setPasswordValidationError] = useState<
+    string | null
+  >(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -50,9 +55,17 @@ export function LoginForm({ className, ...props }: Props) {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    const passwordErrors = getPasswordValidationErrors(password);
+    if (passwordErrors.length > 0) {
+      setPasswordValidationError(t("pages.auth.login.passwordInvalid"));
+      setError(null);
+      return;
+    }
+
     const supabase = createClient();
     setIsLoading(true);
     setError(null);
+    setPasswordValidationError(null);
 
     try {
       const { error } = await supabase.auth.signInWithPassword({
@@ -101,7 +114,7 @@ export function LoginForm({ className, ...props }: Props) {
                 </FieldContent>
               </Field>
 
-              <Field>
+              <Field data-invalid={Boolean(passwordValidationError)}>
                 <div className="flex items-center justify-between">
                   <FieldLabel htmlFor="password">
                     {t("pages.auth.login.password")}
@@ -118,10 +131,20 @@ export function LoginForm({ className, ...props }: Props) {
                     id="password"
                     type="password"
                     required
+                    minLength={8}
+                    aria-invalid={Boolean(passwordValidationError)}
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      if (passwordValidationError) {
+                        setPasswordValidationError(null);
+                      }
+                    }}
                   />
                 </FieldContent>
+                {passwordValidationError && (
+                  <FieldError>{passwordValidationError}</FieldError>
+                )}
               </Field>
 
               {error && <FieldError>{error}</FieldError>}
