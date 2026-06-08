@@ -5,12 +5,13 @@ export const PASSWORD_REQUIREMENTS_MESSAGE =
 
 export const MIN_PASSWORD_LENGTH = 8;
 
-export type PasswordValidationError =
-  | "minLength"
-  | "missingUppercase"
-  | "missingLowercase"
-  | "missingNumber"
-  | "missingSpecialCharacter";
+export enum PasswordValidationError {
+  MinLength = "passwordMinLengthError",
+  MissingUppercase = "passwordMissingUppercaseError",
+  MissingLowercase = "passwordMissingLowercaseError",
+  MissingNumber = "passwordMissingNumberError",
+  MissingSpecialCharacter = "passwordMissingSpecialCharacterError",
+}
 
 export function isValidPassword(password: string): boolean {
   return getPasswordValidationErrors(password).length === 0;
@@ -22,19 +23,19 @@ export function getPasswordValidationErrors(
   const errors: PasswordValidationError[] = [];
 
   if (password.length < MIN_PASSWORD_LENGTH) {
-    errors.push("minLength");
+    errors.push(PasswordValidationError.MinLength);
   }
   if (!/[A-Z]/.test(password)) {
-    errors.push("missingUppercase");
+    errors.push(PasswordValidationError.MissingUppercase);
   }
   if (!/[a-z]/.test(password)) {
-    errors.push("missingLowercase");
+    errors.push(PasswordValidationError.MissingLowercase);
   }
   if (!/\d/.test(password)) {
-    errors.push("missingNumber");
+    errors.push(PasswordValidationError.MissingNumber);
   }
   if (!/[^\p{L}\p{N}\s]/u.test(password)) {
-    errors.push("missingSpecialCharacter");
+    errors.push(PasswordValidationError.MissingSpecialCharacter);
   }
 
   return errors;

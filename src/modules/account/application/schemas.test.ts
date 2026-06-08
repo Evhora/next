@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 
-import { getPasswordValidationErrors, isValidPassword } from "./schemas";
+import {
+  getPasswordValidationErrors,
+  isValidPassword,
+  PasswordValidationError,
+} from "./schemas";
 
 describe("password validation", () => {
   it("accepts a valid password", () => {
@@ -10,43 +14,47 @@ describe("password validation", () => {
 
   it("rejects a password missing a numeric character", () => {
     expect(isValidPassword("ValidPass!")).toBe(false);
-    expect(getPasswordValidationErrors("ValidPass!")).toContain("missingNumber");
+    expect(getPasswordValidationErrors("ValidPass!")).toContain(
+      PasswordValidationError.MissingNumber,
+    );
   });
 
   it("rejects a password missing a lowercase letter", () => {
     expect(isValidPassword("VALID123!")).toBe(false);
     expect(getPasswordValidationErrors("VALID123!")).toContain(
-      "missingLowercase",
+      PasswordValidationError.MissingLowercase,
     );
   });
 
   it("rejects a password missing an uppercase letter", () => {
     expect(isValidPassword("valid123!")).toBe(false);
     expect(getPasswordValidationErrors("valid123!")).toContain(
-      "missingUppercase",
+      PasswordValidationError.MissingUppercase,
     );
   });
 
   it("rejects a password missing a special character", () => {
     expect(isValidPassword("Valid1234")).toBe(false);
     expect(getPasswordValidationErrors("Valid1234")).toContain(
-      "missingSpecialCharacter",
+      PasswordValidationError.MissingSpecialCharacter,
     );
   });
 
   it("rejects a password shorter than 8 characters", () => {
     expect(isValidPassword("Va1!abc")).toBe(false);
-    expect(getPasswordValidationErrors("Va1!abc")).toContain("minLength");
+    expect(getPasswordValidationErrors("Va1!abc")).toContain(
+      PasswordValidationError.MinLength,
+    );
   });
 
   it("returns multiple validation failures", () => {
     expect(isValidPassword("abcdefg")).toBe(false);
     expect(getPasswordValidationErrors("abcdefg")).toEqual(
       expect.arrayContaining([
-        "minLength",
-        "missingUppercase",
-        "missingNumber",
-        "missingSpecialCharacter",
+        PasswordValidationError.MinLength,
+        PasswordValidationError.MissingUppercase,
+        PasswordValidationError.MissingNumber,
+        PasswordValidationError.MissingSpecialCharacter,
       ]),
     );
   });
